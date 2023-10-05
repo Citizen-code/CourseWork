@@ -1,5 +1,4 @@
-const sequelize = require('./index');
-const {DataTypes} = require('sequelize')
+const {sequelize,DataTypes} = require('./index');
 module.exports = sequelize.define('users', {
     id: {
       type: DataTypes.UUID,

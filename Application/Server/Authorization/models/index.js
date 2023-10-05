@@ -1,4 +1,4 @@
-const {Sequelize} = require("sequelize")
+const {Sequelize,DataTypes} = require("sequelize")
 
 let sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -11,4 +11,7 @@ let sequelize = new Sequelize(
         logging: false
     },
 )
-module.exports = sequelize
+module.exports = {
+    sequelize,
+    DataTypes
+}

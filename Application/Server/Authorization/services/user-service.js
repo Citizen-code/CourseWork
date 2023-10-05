@@ -19,13 +19,7 @@ class UserService{
             activationLink:activationLink
         })
         await mailService.sendActivationMail(email,`${process.env.API_URL}/api/activate/${activationLink}`)
-        const {refreshToken,accessToken} = tokenService.generateToken({id:user.id})
-        await tokenService.saveToken(refreshToken,user.id,userData)
-
-        return{
-            accessToken,
-            refreshToken
-        }
+        return await tokenService.createToken({id:user.id},user.id,userData)
     }
 
     async activation(activationLink){
@@ -61,26 +55,16 @@ class UserService{
         return token
     }
 
-    async refresh(_refreshToken,userData){
-        if(!_refreshToken){
+    async refresh(refreshToken,userData){
+        if(!refreshToken){
             throw ApiError.UnauthorizeError()
         }
-        const token = await tokenService.findToken(_refreshToken)
-        if(!token){
-            throw ApiError.UnauthorizeError()
-        }
-        const isCorrect = await tokenService.validateRefreshToken(token)
-        if(!isCorrect){
+        const refresh_sessions = await tokenService.validateRefreshToken(refreshToken)
+        if(!refresh_sessions){
             throw ApiError.UnauthorizeError()
         }
 
-        const {refreshToken,accessToken} = tokenService.generateToken({id:token.userId})
-        await tokenService.saveToken(refreshToken,token.userId,userData)
-
-        return{
-            accessToken,
-            refreshToken
-        }
+        return await tokenService.createToken({id:refresh_sessions.userId},refresh_sessions.userId,userData)
     }
 }
 

@@ -1,5 +1,6 @@
 const Router = require("express").Router
 const UserController = require('../controllers/user-controller')
+const authMiddleWare = require('../middlewares/auth-middleware')
 let router = Router()
 let {body} = require('express-validator')
 
@@ -12,6 +13,6 @@ router.post('/logout',UserController.logout)
 router.get('/refresh',UserController.refresh)
 router.get('/activate/:link',UserController.activate)
 
-router.get('/users',UserController.getUsers)
+router.get('/users',authMiddleWare,UserController.getUsers)
 
 module.exports = router

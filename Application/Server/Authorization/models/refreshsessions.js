@@ -1,5 +1,4 @@
-const sequelize = require('./index');
-const {DataTypes} = require('sequelize')
+const {sequelize,DataTypes} = require('./index');
 module.exports = sequelize.define('refreshsessions', {
     id: {
       autoIncrement: true,
@@ -16,7 +15,7 @@ module.exports = sequelize.define('refreshsessions', {
       }
     },
     refreshToken: {
-      type: DataTypes.UUID,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     ua: {
@@ -29,10 +28,6 @@ module.exports = sequelize.define('refreshsessions', {
     },
     ip: {
       type: DataTypes.STRING(15),
-      allowNull: true
-    },
-    expiresIn: {
-      type: DataTypes.BIGINT,
       allowNull: true
     },
     createdAt:{

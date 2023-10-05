@@ -2,10 +2,16 @@ const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const {refresh_sessions} = require('../models/init-models')
 class TokenService{
-    generateToken(payload){
-        let accessToken = jwt.sign(payload,process.env.JWT_ACCESS_SECRET)
-        let refreshToken = uuid.v4()
+    async createToken(payload,userId,userData){
+        const tokens = this.generateToken(payload)
+        await this.saveToken(tokens.refreshToken,userId,userData)
+        return tokens
+    }
 
+    generateToken(payload){
+        let accessToken = jwt.sign(payload,process.env.JWT_ACCESS_SECRET,{expiresIn:'30m'})
+        let refreshToken = jwt.sign(payload,process.env.JWT_REFRESH_SECRET,{expiresIn:'30d'})
+        
         return{
             accessToken,
             refreshToken
@@ -18,33 +24,34 @@ class TokenService{
             refreshToken:refreshToken,
             ua:data.ua,
             fingerprint:data.fingerprint,
-            ip:data.ip,
-            expiresIn:process.env.REFRESH_MAX_AGE
+            ip:data.ip
         })
-    }
-
-    async removeToken(refreshToken){
-        const token = await refresh_sessions.destroy({where:{refreshToken}})
-        return token
     }
 
     validateAccessToken(token){
         const data = jwt.verify(token,process.env.JWT_ACCESS_SECRET)
         return data
     }
-
-    async validateRefreshToken(token){
-        let expiresDate = token.createdAt.getTime() + (token.expiresIn / 1000)
-        let nowDate = new Date().getTime()
-        if(expiresDate < nowDate){
-            await this.removeToken(token.refreshToken)
-            return false
-        }
-        return true
+    verifyRefreshToken(token){
+        const data = jwt.verify(token,process.env.JWT_REFRESH_SECRET)
+        return data
+    }
+    async validateRefreshToken(refreshToken){
+        const data = this.verifyRefreshToken(refreshToken);
+        const refresh_sessions = await this.findRefreshSessions(refreshToken)
+        await this.removeToken(refreshToken)
+        if(!refresh_sessions || !data) return false
+        return refresh_sessions
+        
     }
 
-    async findToken(refreshToken){
+    async findRefreshSessions(refreshToken){
         const token = await refresh_sessions.findOne({where:{refreshToken}})
+        return token
+    }
+
+    async removeToken(refreshToken){
+        const token = await refresh_sessions.destroy({where:{refreshToken}})
         return token
     }
 }

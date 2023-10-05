@@ -8,7 +8,7 @@ CREATE TABLE users(
 CREATE TABLE refreshSessions (
     "id" SERIAL PRIMARY KEY,
     "userId" uuid REFERENCES users(id) ON DELETE CASCADE,
-    "refreshToken" uuid NOT NULL,
+    "refreshToken" TEXT NOT NULL,
     "ua" character varying(200) NULL,
     "fingerprint" character varying(200) NULL,
     "ip" character varying(15) NULL,
