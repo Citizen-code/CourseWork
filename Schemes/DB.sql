@@ -10,7 +10,7 @@ CREATE TABLE client(
 
 CREATE TABLE "authorization_client"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"client_id" UUID REFERENCES "client"("id")
+	"client_id" UUID REFERENCES "client"("id"),
 	"password" TEXT NOT NULL,
 	"is_activated" BOOL DEFAULT FALSE
 );
@@ -27,21 +27,14 @@ CREATE TABLE "engine"(
 
 CREATE TABLE "car"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"client_id" UUID REFERENCES "client"("id")
-	"number" TEXT NOT NULL, --- Я хз какой длинный номер должен быть "VARCHAR(?)"
-	"name" TEXT NOT NULL,
+	"client_id" UUID REFERENCES "client"("id"),
+	"number" VARCHAR(20) NOT NULL,
+	"name" VARCHAR(200) NOT NULL,
 	"release_year" DATE NULL,
 	"mileage" BIGINT NULL,
 	"vin" VARCHAR(17) NULL,
 	"color" VARCHAR(20) NULL,
-	"engine_id" UUID REFERENCES "engine"("id")
-);
-
-CREATE TABLE "authorization_employee"(
-	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"employee_id" UUID REFERENCES "employee"("id")
-	"login" TEXT NOT NULL,
-	"password" TEXT NOT NULL
+	"engine_id" INT REFERENCES "engine"("id")
 );
 
 CREATE TABLE "employee"(
@@ -51,6 +44,13 @@ CREATE TABLE "employee"(
 	"lastname" VARCHAR(20) NULL,
 	"photo_id" INT REFERENCES "photo"("id")
 );
+CREATE TABLE "authorization_employee"(
+	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	"employee_id" UUID REFERENCES "employee"("id"),
+	"login" TEXT NOT NULL,
+	"password" TEXT NOT NULL
+);
+
 
 CREATE TABLE "order"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -61,7 +61,6 @@ CREATE TABLE "order"(
 
 CREATE TABLE "service"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
 	"name" VARCHAR(150) NOT NULL,
 	"date_add" DATE DEFAULT CURRENT_DATE,
 	"prise" DECIMAL NOT NULL,
@@ -74,32 +73,17 @@ CREATE TABLE "list_services"(
 	"service_id" UUID REFERENCES "service"("id")
 );
 
-CREATE TABLE "сonsumable_part"(
+CREATE TABLE "consumable_part"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
+	"brand" VARCHAR(50) NOT NULL,
+	"article" VARCHAR(50) NOT NULL,
 	"name" VARCHAR(150) NOT NULL,
-	"date_add" DATE DEFAULT CURRENT_DATE,
 	"prise" DECIMAL NOT NULL,
-	"is_hourly" BOOL DEFAULT FALSE
+	"measure_unit" VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE "list_сonsumable_parts"(
+CREATE TABLE "list_consumable_parts"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"order_id" UUID REFERENCES "order"("id"),
-	"service_id" UUID REFERENCES "service"("id")
-);
-
-CREATE TABLE "service"(
-	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
-	"name" VARCHAR(150) NOT NULL,
-	"date_add" DATE DEFAULT CURRENT_DATE,
-	"prise" DECIMAL NOT NULL,
-	"is_hourly" BOOL DEFAULT FALSE
-);
-
-CREATE TABLE "list_services"(
-	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
-	"service_id" UUID REFERENCES "service"("id")
+	"consumable_part_id" UUID REFERENCES "consumable_part"("id")
 );
