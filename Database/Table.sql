@@ -30,7 +30,7 @@ CREATE TABLE "car"(
 	"client_id" UUID REFERENCES "client"("id"),
 	"number" VARCHAR(20) NOT NULL,
 	"name" VARCHAR(200) NOT NULL,
-	"release_year" DATE NULL,
+	"release_year" INT NULL,
 	"mileage" BIGINT NULL,
 	"vin" VARCHAR(17) NULL,
 	"color" VARCHAR(20) NULL,
