@@ -1,37 +1,38 @@
 const {sequelize,DataTypes} = require('./index');
 
-module.exports = sequelize.define('users', {
+module.exports = sequelize.define('service', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    email: {
-      type: DataTypes.STRING(100),
+    name: {
+      type: DataTypes.STRING(150),
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING(100),
+    date_add: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+      defaultValue: sequelize.Sequelize.literal('CURRENT_DATE')
+    },
+    prise: {
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
-    isActivate: {
+    is_hourly: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
-    },
-    activationLink: {
-      type: DataTypes.STRING(100),
-      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'service',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "users_pkey",
+        name: "service_pkey",
         unique: true,
         fields: [
           { name: "id" },

@@ -1,37 +1,36 @@
 const {sequelize,DataTypes} = require('./index');
 
-module.exports = sequelize.define('users', {
+module.exports = sequelize.define('authorization_employee', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    email: {
-      type: DataTypes.STRING(100),
+    employee_id: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: 'employee',
+        key: 'id'
+      }
+    },
+    login: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
     password: {
-      type: DataTypes.STRING(100),
-      allowNull: false
-    },
-    isActivate: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    activationLink: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'authorization_employee',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "users_pkey",
+        name: "authorization_employee_pkey",
         unique: true,
         fields: [
           { name: "id" },

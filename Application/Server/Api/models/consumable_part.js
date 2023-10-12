@@ -1,37 +1,40 @@
 const {sequelize,DataTypes} = require('./index');
 
-module.exports = sequelize.define('users', {
+module.exports = sequelize.define('consumable_part', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    email: {
-      type: DataTypes.STRING(100),
+    brand: {
+      type: DataTypes.STRING(50),
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING(100),
+    article: {
+      type: DataTypes.STRING(50),
       allowNull: false
     },
-    isActivate: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
+    name: {
+      type: DataTypes.STRING(150),
+      allowNull: false
     },
-    activationLink: {
-      type: DataTypes.STRING(100),
+    prise: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    measure_unit: {
+      type: DataTypes.STRING(10),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'users',
+    tableName: 'consumable_part',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "users_pkey",
+        name: "consumable_part_pkey",
         unique: true,
         fields: [
           { name: "id" },

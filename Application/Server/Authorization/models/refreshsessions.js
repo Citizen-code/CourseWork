@@ -1,4 +1,5 @@
 const {sequelize,DataTypes} = require('./index');
+
 module.exports = sequelize.define('refreshsessions', {
     id: {
       autoIncrement: true,
