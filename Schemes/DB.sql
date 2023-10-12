@@ -1,4 +1,4 @@
-CREATE TABLE client(
+CREATE TABLE "client"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"surname" VARCHAR(20) NOT NULL,
 	"firstname" VARCHAR(20) NOT NULL,
@@ -70,7 +70,8 @@ CREATE TABLE "service"(
 CREATE TABLE "list_services"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"order_id" UUID REFERENCES "order"("id"),
-	"service_id" UUID REFERENCES "service"("id")
+	"service_id" UUID REFERENCES "service"("id"),
+	"time" DECIMAL NULL
 );
 
 CREATE TABLE "consumable_part"(
