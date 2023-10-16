@@ -16,7 +16,7 @@ CREATE TABLE "authorization_client"(
 );
 
 CREATE TABLE "photo"(
-	"id" SERIAL PRIMARY KEY,
+	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"photo" bytea NOT NULL
 );
 
@@ -33,8 +33,9 @@ CREATE TABLE "car"(
 	"release_year" INT NULL,
 	"mileage" BIGINT NULL,
 	"vin" VARCHAR(17) NULL,
-	"color" VARCHAR(20) NULL,
-	"engine_id" INT REFERENCES "engine"("id")
+	"color" VARCHAR(50) NULL,
+	"engine_id" INT REFERENCES "engine"("id"),
+	"photo_id" UUID REFERENCES "photo"("id") NULL
 );
 
 CREATE TABLE "employee"(
@@ -42,7 +43,7 @@ CREATE TABLE "employee"(
 	"surname" VARCHAR(20) NOT NULL,
 	"firstname" VARCHAR(20) NOT NULL,
 	"lastname" VARCHAR(20) NULL,
-	"photo_id" INT REFERENCES "photo"("id")
+	"photo_id" UUID REFERENCES "photo"("id") NULL
 );
 CREATE TABLE "authorization_employee"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -51,12 +52,17 @@ CREATE TABLE "authorization_employee"(
 	"password" TEXT NOT NULL
 );
 
+CREATE TABLE "status_order"(
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(50) NOT NULL
+);
 
 CREATE TABLE "order"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"date" DATE DEFAULT CURRENT_DATE,
 	"client_id" UUID REFERENCES "client"("id"),
-	"employee_id" UUID REFERENCES "employee"("id")
+	"employee_id" UUID REFERENCES "employee"("id"),
+	"status_id" INT REFERENCES "status_order"("id")
 );
 
 CREATE TABLE "service"(
@@ -64,7 +70,8 @@ CREATE TABLE "service"(
 	"name" VARCHAR(150) NOT NULL,
 	"date_add" DATE DEFAULT CURRENT_DATE,
 	"prise" DECIMAL NOT NULL,
-	"is_hourly" BOOL DEFAULT FALSE
+	"is_hourly" BOOL DEFAULT FALSE,
+	"is_active" BOOL DEFAULT TRUE
 );
 
 CREATE TABLE "list_services"(
@@ -80,11 +87,12 @@ CREATE TABLE "consumable_part"(
 	"article" VARCHAR(50) NOT NULL,
 	"name" VARCHAR(150) NOT NULL,
 	"prise" DECIMAL NOT NULL,
-	"measure_unit" VARCHAR(10) NOT NULL
+	"measure_unit" VARCHAR(10) NOT NULL,
+	"photo_id" UUID REFERENCES "photo"("id") NULL
 );
 
 CREATE TABLE "list_consumable_parts"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
-	"consumable_part_id" UUID REFERENCES "consumable_part"("id")
+	"order_id" UUID REFERENCES "order"("id") NOT NULL,
+	"consumable_part_id" UUID REFERENCES "consumable_part"("id") NOT NULL
 );
