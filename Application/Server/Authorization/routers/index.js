@@ -1,18 +1,19 @@
 const Router = require("express").Router
-const UserController = require('../controllers/user-controller')
+const ClientController = require('../controllers/client-controller')
 const authMiddleWare = require('../middlewares/auth-middleware')
 let router = Router()
 let {body} = require('express-validator')
 
 router.post('/registration',
     body('email').isEmail(),
-    body('password').isLength({max:32,min:3}),
-    UserController.registration)
-router.post('/login',UserController.login)
-router.post('/logout',UserController.logout)
-router.get('/refresh',UserController.refresh)
-router.get('/activate/:link',UserController.activate)
+    body('password').isLength({max:32,min:3}),//Дописать валидацию фио
+    body('birth_date').isDate(),
+    ClientController.registration)
+router.post('/login',ClientController.login)
+router.post('/logout',ClientController.logout)
+router.get('/refresh',ClientController.refresh)
+router.get('/activate/:link',ClientController.activate)
 
-router.get('/users',authMiddleWare,UserController.getUsers)
+router.get('/client',authMiddleWare,ClientController.getClient)//Удалить
 
 module.exports = router

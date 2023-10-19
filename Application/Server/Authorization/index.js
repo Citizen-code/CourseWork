@@ -11,7 +11,7 @@ let app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use("/api", router)
+app.use("/auth", router)
 app.use(errorMiddleWare)
 
 let start = async () => {

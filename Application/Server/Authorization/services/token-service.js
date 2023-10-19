@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
-const {refresh_sessions} = require('../models/init-models')
+const {refresh_session} = require('../models/init-models')
 class TokenService{
-    async createToken(payload,userId,userData){
+    async createToken(payload,userId){
         const tokens = this.generateToken(payload)
-        await this.saveToken(tokens.refreshToken,userId,userData)
+        await this.saveToken(tokens.refreshToken,userId)
         return tokens
     }
 
@@ -18,13 +18,10 @@ class TokenService{
         }
     }
 
-    async saveToken(refreshToken,userId, data){
-        await refresh_sessions.create({
-            userId:userId,
-            refreshToken:refreshToken,
-            ua:data.ua,
-            fingerprint:data.fingerprint,
-            ip:data.ip
+    async saveToken(refreshToken,userId){
+        await refresh_session.create({
+            client_id:userId,
+            refreshToken:refreshToken
         })
     }
 
@@ -46,12 +43,12 @@ class TokenService{
     }
 
     async findRefreshSessions(refreshToken){
-        const token = await refresh_sessions.findOne({where:{refreshToken}})
+        const token = await refresh_session.findOne({where:{refreshToken}})
         return token
     }
 
     async removeToken(refreshToken){
-        const token = await refresh_sessions.destroy({where:{refreshToken}})
+        const token = await refresh_session.destroy({where:{refreshToken}})
         return token
     }
 }

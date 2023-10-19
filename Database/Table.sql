@@ -15,6 +15,12 @@ CREATE TABLE "authorization_client"(
 	"is_activated" BOOL DEFAULT FALSE
 );
 
+CREATE TABLE "refresh_session"(
+	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	"client_id" UUID REFERENCES "client"("id") NOT NULL,
+	"refreshToken" VARCHAR(300) NOT NULL
+);
+
 CREATE TABLE "photo"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"photo" bytea NOT NULL

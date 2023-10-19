@@ -1,18 +1,19 @@
 const {validationResult} = require('express-validator')
-const UserService = require('../services/user-service')
-const {users, refresh_sessions} = require('../models/init-models')
-const userService = require('../services/user-service')
+const ClientService = require('../services/client-service')
+const {clients, refresh_session} = require('../models/init-models')
 const ApiError = require('../exception/error')
 
-class UserController{
+class ClientController{
     async registration(req,res,next){
         try{
             let errors = validationResult(req)
             if(!errors.isEmpty()){
                 throw ApiError.BadRequest('Ошибка при валидации', errors.array())
             } 
-            let {email,password} = req.body
-            let data = await UserService.registration(email,password,{})
+
+            let {email,password, surname, firstname, lastname, birth_date, phone} = req.body
+            let data = await ClientService.registration(email,password, surname, firstname, lastname, birth_date, phone)
+
             res.cookie('refreshToken',data.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})
             return res.json(data)
         }catch(e){
@@ -23,8 +24,8 @@ class UserController{
     async login(req,res,next){
         try{
             const {email, password} = req.body
-            const data = await userService.login(email, password, {})
-            res.cookie('refreshToken',data.refreshToken,{maxAge:process.env.REFRESH_MAX_AGE,httpOnly:true})
+            const data = await ClientService.login(email, password)
+            res.cookie('refreshToken', data.refreshToken,{maxAge:process.env.REFRESH_MAX_AGE,httpOnly:true})
             return res.json(data)
         }catch(e){
             next(e)
@@ -34,7 +35,7 @@ class UserController{
     async logout(req,res,next){
         try{
             const {refreshToken} = req.cookies
-            const token = await userService.logout(refreshToken)
+            const token = await ClientService.logout(refreshToken)
             res.clearCookie('refreshToken')
             return res.json(token)
         }catch(e){
@@ -45,7 +46,7 @@ class UserController{
     async refresh(req,res,next){
         try{
             const {refreshToken} = req.cookies
-            const data = await userService.refresh(refreshToken,{})
+            const data = await ClientService.refresh(refreshToken)
             res.cookie('refreshToken',data.refreshToken,{maxAge:process.env.REFRESH_MAX_AGE,httpOnly:true})
             return res.json(data)
         }catch(e){
@@ -56,20 +57,20 @@ class UserController{
     async activate(req,res,next){
         try{
             const activationLink = req.params.link
-            await userService.activation(activationLink)
+            await ClientService.activation(activationLink)
             return res.redirect(process.env.CLIENT_URL)
         }catch(e){
             next(e)
         }
     } 
 
-    async getUsers(req,res,next){
+    async getClient(req,res,next){
         try{
-            return res.json(await users.findAll({include:{model:refresh_sessions, as:'refreshsessions'}}))
+            return res.json(await clients.findAll({include:{model:refresh_session, as:'refresh_session'}}))
         }catch(e){
             next(e)
         }
     } 
 
 }
-module.exports = new UserController()
+module.exports = new ClientController()
