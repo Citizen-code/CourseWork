@@ -14,6 +14,8 @@ router.post('/logout',ClientController.logout)
 router.get('/refresh',ClientController.refresh)
 router.get('/activate/:link',ClientController.activate)
 
+router.get('/validate',ClientController.validate)
+
 router.get('/client',authMiddleWare,ClientController.getClient)//Удалить
 
 module.exports = router

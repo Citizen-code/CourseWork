@@ -1,6 +1,7 @@
 const {validationResult} = require('express-validator')
 const ClientService = require('../services/client-service')
 const {clients, refresh_session} = require('../models/init-models')
+const tokenService = require('../services/token-service')
 const ApiError = require('../exception/error')
 
 class ClientController{
@@ -61,6 +62,22 @@ class ClientController{
             return res.redirect(process.env.CLIENT_URL)
         }catch(e){
             next(e)
+        }
+    } 
+
+    async validate(req,res,next){
+        try{
+            const authorizationHeader = req.headers.authorization
+            if(!authorizationHeader) return next(ApiError.UnauthorizeError())
+    
+            const accessToken = authorizationHeader.split(' ')[1]
+            if(!accessToken) return next(ApiError.UnauthorizeError())
+            const userData = tokenService.validateAccessToken(accessToken)
+
+            if(!userData) return next(ApiError.UnauthorizeError())
+            return res.json(userData)
+        }catch(e){
+            return next(ApiError.UnauthorizeError())
         }
     } 
 
