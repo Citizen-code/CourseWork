@@ -2,14 +2,14 @@ require("dotenv").config()
 const express = require("express")
 const {sequelize} = require('./models/init-models')
 const router = require("./router/index")
-//const errorMiddleWare = require('./middlewares/error-middleware')
+const errorMiddleWare = require('./middlewares/error-middleware')
 let PORT = process.env.PORT || 5001
 
 let app = express()
 
 app.use(express.json())
 app.use("/api", router)
-//app.use(errorMiddleWare)
+app.use(errorMiddleWare)
 
 let start = async () => {
     try{

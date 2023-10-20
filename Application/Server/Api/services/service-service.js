@@ -2,8 +2,8 @@ const {service} = require('../models/init-models')
 
 class ServiceService{
 
-    async findAll(option,active){
-        if(!active){
+    async findAll(option,all){
+        if(!all){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
         }
@@ -11,7 +11,7 @@ class ServiceService{
     }
 
     async findOne(option,active){
-        if(!active){
+        if(!all){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
         }
