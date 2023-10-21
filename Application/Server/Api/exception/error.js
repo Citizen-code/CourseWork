@@ -7,6 +7,9 @@ module.exports = class ApiError extends Error{
         this.status = status,
         this.errors = errors
     }
+    static Forbidden(){
+        return new ApiError(403, 'Доступ запрещён')
+    }
 
     static UnauthorizeError(){
         return new ApiError(401,'Пользователь не авторизован')
