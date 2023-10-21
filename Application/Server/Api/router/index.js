@@ -61,7 +61,11 @@ router.get('/order/calendar/:year/:month',
     query('include').default(false).isBoolean(),
     OrderController.get_orders_in_month);
 
-router.post('/order');
+router.post('/order',
+    body('client_id').isUUID(),
+    body('employee_id').isUUID(),
+    body('date').isDate(),
+    OrderController.add_order);
 
 router.delete('/order/:id', 
     param('id').isUUID(),

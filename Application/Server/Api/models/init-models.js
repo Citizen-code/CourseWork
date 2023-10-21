@@ -11,6 +11,7 @@ var list_services = require("./list_services");
 var order = require("./order");
 var photo = require("./photo");
 var service = require("./service");
+var status_order = require("./status_order");
 
 authorization_client.belongsTo(client, { as: "client", foreignKey: "client_id"});
 client.hasMany(authorization_client, { as: "authorization_clients", foreignKey: "client_id"});
@@ -34,9 +35,12 @@ employee.belongsTo(photo, { as: "photo", foreignKey: "photo_id"});
 photo.hasMany(employee, { as: "employees", foreignKey: "photo_id"});
 list_services.belongsTo(service, { as: "service", foreignKey: "service_id"});
 service.hasMany(list_services, { as: "list_services", foreignKey: "service_id"});
+order.belongsTo(status_order, { as: "status", foreignKey: "status_id"});
+status_order.hasMany(order, { as: "orders", foreignKey: "status_id"});
 
 module.exports = {
   sequelize,
+  status_order,
   authorization_client,
   authorization_employee,
   car,

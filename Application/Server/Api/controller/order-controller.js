@@ -1,6 +1,7 @@
 const {sequelize,Op} = require('../models/init-models')
-const {findOne, findAll} = require('../services/order-service')
+const {findOne, findAll, create} = require('../services/order-service')
 const validateService = require('../services/validate-service')
+const ApiError = require('../exception/error')
 class OrderController{
 
     async get_order(req,res,next){
@@ -22,7 +23,7 @@ class OrderController{
 
             const {include} = req.query;
             
-            res.json(await findAll({},include))
+            res.json(await findAll({order:[['date', 'ASC']]},include))
         }catch(e){
             next(e)
         }
@@ -41,7 +42,8 @@ class OrderController{
                         sequelize.where(sequelize.fn("date_part",'year',sequelize.col('date')), year),
                         sequelize.where(sequelize.fn("date_part",'month',sequelize.col('date')), month)
                     ]
-                }
+                },
+                order:[['date', 'ASC']]
             },include))
         }catch(e){
             next(e)
@@ -55,12 +57,27 @@ class OrderController{
             const {id} = req.params
 
             let order = (await findOne({where:{id}},true)) 
-            if(order.dataValues.list_services.isEmpty){
-                return res.json({s:1})
+            if(order.list_services.length != 0){
+                throw ApiError.BadRequest("Заказ не должен содержать услуги")
             }
-            
+
             await order.destroy({where:{id:order.dataValues.id}})
-            res.json({s:100})
+
+            res.json({message:"успешно"})
+        }catch(e){
+            next(e)
+        }
+    }
+
+    async add_order(req,res,next){
+        try{
+            validateService.validate(req)
+
+            const {client_id, employee_id, date} = req.body
+            
+            await create({client_id, employee_id, date})
+
+            res.json({message:"успешно"})
         }catch(e){
             next(e)
         }

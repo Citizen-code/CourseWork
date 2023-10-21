@@ -27,6 +27,14 @@ module.exports = sequelize.define('order', {
         model: 'employee',
         key: 'id'
       }
+    },
+    status_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'status_order',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
