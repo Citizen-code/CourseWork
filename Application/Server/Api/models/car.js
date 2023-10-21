@@ -9,14 +9,15 @@ module.exports = sequelize.define('car', {
   },
   client_id: {
     type: DataTypes.UUID,
-    allowNull: true,
+    allowNull: false,
     references: {
       model: 'client',
       key: 'id'
-    }
+    },
+    unique: "car_client_id_key"
   },
   number: {
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING(20),
     allowNull: false
   },
   name: {
@@ -41,7 +42,7 @@ module.exports = sequelize.define('car', {
   },
   engine_id: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
     references: {
       model: 'engine',
       key: 'id'
@@ -61,6 +62,13 @@ module.exports = sequelize.define('car', {
   schema: 'public',
   timestamps: false,
   indexes: [
+    {
+      name: "car_client_id_key",
+      unique: true,
+      fields: [
+        { name: "client_id" },
+      ]
+    },
     {
       name: "car_pkey",
       unique: true,

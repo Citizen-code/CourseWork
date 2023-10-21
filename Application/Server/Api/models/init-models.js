@@ -12,7 +12,7 @@ var service = require("./service");
 var status_order = require("./status_order");
 
 car.belongsTo(client, { as: "client", foreignKey: "client_id"});
-client.hasMany(car, { as: "cars", foreignKey: "client_id"});
+client.hasOne(car, { as: "car", foreignKey: "client_id"});
 order.belongsTo(client, { as: "client", foreignKey: "client_id"});
 client.hasMany(order, { as: "orders", foreignKey: "client_id"});
 list_consumable_parts.belongsTo(consumable_part, { as: "consumable_part", foreignKey: "consumable_part_id"});
