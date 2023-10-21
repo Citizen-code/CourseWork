@@ -29,7 +29,13 @@ class ClientService{
         })
 
         //await mailService.sendActivationMail(email,`${process.env.API_URL}/api/activate/${activationLink}`)
-        return await tokenService.createToken({id:client.id},client.id)
+        const {refreshToken,accessToken} = tokenService.generateToken({id:client.id, type:"client"})
+        await tokenService.saveClientToken(refreshToken,client.id)
+
+        return{
+            accessToken,
+            refreshToken
+        }
     }
 
     async activation(activationLink){
@@ -51,8 +57,8 @@ class ClientService{
             throw ApiError.BadRequest('Неверный пароль')
         }
 
-        const {refreshToken,accessToken} = tokenService.generateToken({id:client.id})
-        await tokenService.saveToken(refreshToken,client.id)
+        const {refreshToken,accessToken} = tokenService.generateToken({id:client.id, type:"client"})
+        await tokenService.saveClientToken(refreshToken,client.id)
 
         return{
             accessToken,
@@ -61,20 +67,22 @@ class ClientService{
     }
 
     async logout(refreshToken){
-        const token = await tokenService.removeToken(refreshToken)
+        const token = await tokenService.removeClientToken(refreshToken)
         return token
     }
 
-    async refresh(refreshToken){
-        if(!refreshToken){
+    async refresh(refreshTokenOld){
+        const payload = tokenService.validateRefreshToken(refreshTokenOld)
+        if(!payload){
             throw ApiError.UnauthorizeError()
         }
-        const refresh_sessions = await tokenService.validateRefreshToken(refreshToken)
-        if(!refresh_sessions){
-            throw ApiError.UnauthorizeError()
-        }
+        const {refreshToken,accessToken} = tokenService.generateToken({id:payload.id, type:"client"})
+        await tokenService.saveClientToken(refreshToken, payload.id)
 
-        return await tokenService.createToken({id:refresh_sessions.client_id},refresh_sessions.client_id)
+        return{
+            accessToken,
+            refreshToken
+        }
     }
 }
 

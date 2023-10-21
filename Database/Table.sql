@@ -15,7 +15,7 @@ CREATE TABLE "authorization_client"(
 	"is_activated" BOOL DEFAULT FALSE
 );
 
-CREATE TABLE "refresh_session"(
+CREATE TABLE "refresh_session_client"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"client_id" UUID REFERENCES "client"("id") NOT NULL,
 	"refreshToken" VARCHAR(300) NOT NULL
@@ -53,9 +53,15 @@ CREATE TABLE "employee"(
 );
 CREATE TABLE "authorization_employee"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"employee_id" UUID REFERENCES "employee"("id"),
+	"employee_id" UUID REFERENCES "employee"("id") NOT NULL,
 	"login" TEXT NOT NULL,
 	"password" TEXT NOT NULL
+);
+
+CREATE TABLE "refresh_session_employee"(
+	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	"employee_id" UUID REFERENCES "employee"("id") NOT NULL,
+	"refreshToken" VARCHAR(300) NOT NULL
 );
 
 CREATE TABLE "status_order"(
@@ -66,9 +72,9 @@ CREATE TABLE "status_order"(
 CREATE TABLE "order"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"date" DATE DEFAULT CURRENT_DATE,
-	"client_id" UUID REFERENCES "client"("id"),
-	"employee_id" UUID REFERENCES "employee"("id"),
-	"status_id" INT REFERENCES "status_order"("id")
+	"client_id" UUID REFERENCES "client"("id") NOT NULL,
+	"employee_id" UUID REFERENCES "employee"("id") NOT NULL,
+	"status_id" INT REFERENCES "status_order"("id") NOT NULL
 );
 
 CREATE TABLE "service"(
@@ -82,8 +88,8 @@ CREATE TABLE "service"(
 
 CREATE TABLE "list_services"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"order_id" UUID REFERENCES "order"("id"),
-	"service_id" UUID REFERENCES "service"("id"),
+	"order_id" UUID REFERENCES "order"("id") NOT NULL,
+	"service_id" UUID REFERENCES "service"("id") NOT NULL,
 	"time" DECIMAL NULL
 );
 

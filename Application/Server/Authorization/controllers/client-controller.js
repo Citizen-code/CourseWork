@@ -1,4 +1,4 @@
-const ClientService = require('../services/client-service')
+const clientService = require('../services/client-service')
 const tokenService = require('../services/token-service')
 const ApiError = require('../exception/error')
 const validateService = require('../services/validate-service')
@@ -9,7 +9,7 @@ class ClientController{
             validateService.validate(req)
 
             let {email,password, surname, firstname, lastname, birth_date, phone} = req.body
-            let data = await ClientService.registration(email,password, surname, firstname, lastname, birth_date, phone)
+            let data = await clientService.registration(email,password, surname, firstname, lastname, birth_date, phone)
 
             res.cookie('refreshToken',data.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})
             return res.json(data)
@@ -23,7 +23,7 @@ class ClientController{
             validateService.validate(req)
 
             const {email, password} = req.body
-            const data = await ClientService.login(email, password)
+            const data = await clientService.login(email, password)
 
             res.cookie('refreshToken', data.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})
             return res.json(data)
@@ -37,7 +37,7 @@ class ClientController{
             validateService.validate(req)
 
             const {refreshToken} = req.cookies
-            const token = await ClientService.logout(refreshToken)
+            const token = await clientService.logout(refreshToken)
 
             res.clearCookie('refreshToken')
             return res.json(token)
@@ -51,7 +51,7 @@ class ClientController{
             validateService.validate(req)
 
             const {refreshToken} = req.cookies
-            const data = await ClientService.refresh(refreshToken)
+            const data = await clientService.refresh(refreshToken)
 
             res.cookie('refreshToken',data.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})
             return res.json(data)
@@ -65,7 +65,7 @@ class ClientController{
             validateService.validate(req)
 
             const activationLink = req.params.link
-            await ClientService.activation(activationLink)
+            await clientService.activation(activationLink)
 
             return res.redirect(process.env.CLIENT_URL)//Заменить
         }catch(e){
@@ -77,11 +77,9 @@ class ClientController{
         try{
             const authorizationHeader = req.headers.authorization
             if(!authorizationHeader) return next(ApiError.UnauthorizeError())
-    
             const accessToken = authorizationHeader.split(' ')[1]
             if(!accessToken) return next(ApiError.UnauthorizeError())
             const userData = tokenService.validateAccessToken(accessToken)
-
             if(!userData) return next(ApiError.UnauthorizeError())
             return res.json(userData)
         }catch(e){

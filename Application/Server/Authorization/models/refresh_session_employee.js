@@ -1,6 +1,6 @@
 const {sequelize,DataTypes} = require('./index');
 
-module.exports = sequelize.define('authorization_employee', {
+module.exports = sequelize.define('refresh_session_employee', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -9,28 +9,24 @@ module.exports = sequelize.define('authorization_employee', {
     },
     employee_id: {
       type: DataTypes.UUID,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'employee',
         key: 'id'
       }
     },
-    login: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    password: {
-      type: DataTypes.TEXT,
+    refreshToken: {
+      type: DataTypes.STRING(300),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'authorization_employee',
+    tableName: 'refresh_session_employee',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "authorization_employee_pkey",
+        name: "refresh_session_employee_pkey",
         unique: true,
         fields: [
           { name: "id" },
