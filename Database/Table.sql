@@ -81,7 +81,7 @@ CREATE TABLE "service"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"name" VARCHAR(150) NOT NULL,
 	"date_add" DATE DEFAULT CURRENT_DATE,
-	"prise" DECIMAL NOT NULL,
+	"price" DECIMAL NOT NULL,
 	"is_hourly" BOOL DEFAULT FALSE,
 	"is_active" BOOL DEFAULT TRUE
 );

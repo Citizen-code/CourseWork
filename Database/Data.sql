@@ -568,7 +568,7 @@ INSERT INTO "order" ("id", "date", "client_id", "employee_id", "status_id") VALU
 	('60e493f3-2c10-487e-9793-f5525ebc60f7', '2023-02-16', 'd79193db-2c73-45a7-943d-b5bf63825213', '12845c26-9f30-451c-a413-cd49cb0aac92', '1'),
 	('663bb62f-d27f-4199-92a8-cf88b54b0c72', '2023-02-09', 'afc78eb3-6324-4ceb-aca6-d7c2c3e7a9a6', '124b47df-04a4-4b2d-a0ec-5a191f60a9db', '1');
 
-INSERT INTO "service" ("id", "name", "date_add", "prise", "is_hourly") VALUES
+INSERT INTO "service" ("id", "name", "date_add", "price", "is_hourly") VALUES
 	('94eb8eee-3f89-4f8e-9124-7d2dc4f2b180', 'Замена масла в двигателе', '2023-10-11', '660', 'true'),
 	('2a32d4e1-b2d8-413e-994f-326cde8228d3', 'Замена масла в двигателе с полной промывкой системы', '2023-10-11', '880', 'true'),
 	('469724d5-cea8-4faf-ad45-590ce10700ef', 'Замена опоры двигателя', '2023-10-11', '1000', 'true'),
