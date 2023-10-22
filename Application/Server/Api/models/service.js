@@ -14,7 +14,7 @@ module.exports = sequelize.define('service', {
   date_add: {
     type: DataTypes.DATEONLY,
     allowNull: true,
-    defaultValue: Sequelize.Sequelize.literal('CURRENT_DATE')
+    defaultValue: sequelize.Sequelize.literal('CURRENT_DATE')
   },
   prise: {
     type: DataTypes.DECIMAL,

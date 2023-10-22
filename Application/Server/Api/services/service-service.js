@@ -10,7 +10,7 @@ class ServiceService{
         return await service.findAll(option)
     }
 
-    async findOne(option,active){
+    async findOne(option,all){
         if(!all){
             if(!option.where) option.where = {} 
             option.where.is_active = true 

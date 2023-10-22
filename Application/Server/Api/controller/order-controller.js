@@ -10,8 +10,15 @@ class OrderController{
 
             const {id} = req.params
             const {include} = req.query;
+            const user = req.user;
             
-            res.json(await findOne({where:{id}},include))
+            const option = {
+                where:[
+                    {id},
+                    user.type === 'client'?{client_id:user.id}:undefined
+                ]
+            }
+            res.json(await findOne(option, include))
         }catch(e){
             next(e)
         }
@@ -22,8 +29,13 @@ class OrderController{
             validateService.validate(req)
 
             const {include} = req.query;
+            const user = req.user;
             
-            res.json(await findAll({order:[['date', 'ASC']]},include))
+            const option = {
+                where:user.type === 'client'?{client_id:user.id}:undefined,
+                order:[['date', 'ASC']]
+            }
+            res.json(await findAll(option,include))
         }catch(e){
             next(e)
         }
@@ -55,13 +67,26 @@ class OrderController{
             validateService.validate(req)
 
             const {id} = req.params
+            const user = req.user;
 
-            let order = (await findOne({where:{id}},true)) 
+            let option = {
+                where:[
+                    {id},
+                    user.type === 'client'?{client_id:user.id}:undefined
+                ]
+            }
+            let order = (await findOne(option,true)) 
+            if(!order){
+                throw ApiError.BadRequest("Заказ не найден");
+            }
+            if(order.status_id == 4){
+                throw ApiError.BadRequest("Заказ уже отменен");
+            }
             if(order.list_services.length != 0){
                 throw ApiError.BadRequest("Заказ не должен содержать услуги")
             }
-
-            await order.destroy({where:{id:order.dataValues.id}})
+            
+            await order.update({status_id:4})
 
             res.json({message:"успешно"})
         }catch(e){
@@ -73,9 +98,14 @@ class OrderController{
         try{
             validateService.validate(req)
 
-            const {client_id, employee_id, date} = req.body
-            
-            await create({client_id, employee_id, date})
+            const {employee_id, date} = req.body
+            const user = req.user;
+
+            await create({
+                client_id: user.id,
+                employee_id, 
+                date
+            })
 
             res.json({message:"успешно"})
         }catch(e){

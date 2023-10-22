@@ -1,3 +1,4 @@
+const ApiError = require('../exception/error');
 const {findOne,findAll} = require('../services/client-service')
 const validateService = require('../services/validate-service')
 class ClientController{
@@ -7,8 +8,18 @@ class ClientController{
 
             const {id} = req.params
             const {include} = req.query;
-            
-            res.json(await findOne({where:{id}},include))
+            const user = req.user;
+
+            if(user.type == 'client'){
+                if(user.id != id){
+                    throw ApiError.Forbidden()
+                }    
+            }
+            let option = {
+                where:{id}
+            }
+
+            res.json(await findOne(option,include))
         }catch(e){
            next(e)
         }

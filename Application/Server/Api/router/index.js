@@ -4,7 +4,6 @@ const ClientController = require('../controller/client-controller');
 const OrderController = require('../controller/order-controller');
 const ServiceController = require('../controller/service-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
-const accessMiddleWare = require('../middlewares/access-middleware');
 let router = Router();
 
 //Клиент
@@ -12,7 +11,6 @@ router.get('/client/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee','client']),
-    accessMiddleWare('client'),
     ClientController.get_client);
 
 router.get('/client',
@@ -24,8 +22,7 @@ router.get('/client',
 router.get('/car/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
-    authMiddleWare(['employee','client']),
-    accessMiddleWare('client'));
+    authMiddleWare(['employee','client']));
 
 router.get('/car');
 
@@ -59,12 +56,12 @@ router.put('/service/:id',
 router.get('/order/:id', 
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
-    //authMiddleWare(['employee']),
+    authMiddleWare(['employee','client']),
     OrderController.get_order);
 
 router.get('/order',
     query('include').default(false).isBoolean(),
-    authMiddleWare(['employee']),
+    authMiddleWare(['employee','client']),
     OrderController.get_orders);
 
 router.get('/order/calendar/:year/:month',
@@ -75,15 +72,14 @@ router.get('/order/calendar/:year/:month',
     OrderController.get_orders_in_month);
 
 router.post('/order',
-    body('client_id').isUUID(),
     body('employee_id').isUUID(),
     body('date').isDate(),
-    authMiddleWare(['employee']),
+    authMiddleWare(['client']),
     OrderController.add_order);
 
 router.delete('/order/:id', 
     param('id').isUUID(),
-    authMiddleWare(['employee']),
+    authMiddleWare(['employee','client']),
     OrderController.delete_order);
 
 
