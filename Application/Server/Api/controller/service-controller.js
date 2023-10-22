@@ -1,4 +1,4 @@
-const {findOne,findAll,update} = require('../services/service-service')
+const {findOne,findAll,update, create} = require('../services/service-service')
 const validateService = require('../services/validate-service')
 
 class ServiceController{
@@ -24,6 +24,20 @@ class ServiceController{
             res.json(await findAll({order:[['name', 'ASC']]},all))
         }catch(e){
            next(e)
+        }
+    }
+
+    async add_service(req,res,next){
+        try{
+            validateService.validate(req)
+
+            const {name,price,is_hourly} = req.body
+
+            await create({name,price,is_hourly})
+
+            res.status(200).json({message:"Успешно"})
+        }catch(e){
+            next(e)
         }
     }
 

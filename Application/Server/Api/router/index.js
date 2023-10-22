@@ -42,7 +42,12 @@ router.get('/service',
     authMiddleWare(['employee','client']),
     ServiceController.get_services);
 
-router.post('/service');
+router.post('/service',
+    body('name').isString().isLength({max:50}),
+    body('price').isDecimal({max:100000,min:0}),
+    body('is_hourly').isBoolean(),
+    authMiddleWare(['employee']),
+    ServiceController.add_service);
 
 router.delete('/service/:id', 
     param('id').isUUID(),

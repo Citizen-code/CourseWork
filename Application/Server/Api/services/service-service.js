@@ -18,6 +18,10 @@ class ServiceService{
         return await service.findOne(option)
     }
 
+    async create(option){
+        return await service.create(option)
+    }
+
     async update(field,option){
         return await service.update(field,option)
     }

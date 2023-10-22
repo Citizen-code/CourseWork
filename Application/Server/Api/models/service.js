@@ -16,7 +16,7 @@ module.exports = sequelize.define('service', {
     allowNull: true,
     defaultValue: sequelize.Sequelize.literal('CURRENT_DATE')
   },
-  prise: {
+  price: {
     type: DataTypes.DECIMAL,
     allowNull: false
   },
