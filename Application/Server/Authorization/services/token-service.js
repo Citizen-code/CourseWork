@@ -62,11 +62,11 @@ class TokenService{
         let refresh_sessions; 
         switch(data.type){
             case "client":
-                refresh_sessions = await findRefreshSessionsClient(refreshToken);
+                refresh_sessions = await this.findRefreshSessionsClient(refreshToken);
                 await this.removeClientToken(refreshToken)
                 break
             case "employee":
-                refresh_sessions = await findRefreshSessionsEmployee(refreshToken);
+                refresh_sessions = await this.findRefreshSessionsEmployee(refreshToken);
                 await this.removeEmployeeToken(refreshToken)
                 break
             default:

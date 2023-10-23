@@ -31,7 +31,7 @@ class EmployeeService{
     }
 
     async refresh(refreshTokenOld){
-        const payload = tokenService.validateRefreshToken(refreshTokenOld)
+        const payload = await tokenService.verifyRefreshToken(refreshTokenOld)
         if(!payload){
             throw ApiError.UnauthorizeError()
         }

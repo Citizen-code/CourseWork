@@ -72,7 +72,7 @@ class ClientService{
     }
 
     async refresh(refreshTokenOld){
-        const payload = tokenService.validateRefreshToken(refreshTokenOld)
+        const payload = tokenService.verifyRefreshToken(refreshTokenOld)
         if(!payload){
             throw ApiError.UnauthorizeError()
         }
