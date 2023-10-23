@@ -74,7 +74,7 @@ class TokenService{
         }
 
         if(!refresh_sessions || !data) return false
-        return refresh_sessions
+        return data
         
     }
 }
