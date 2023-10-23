@@ -15,6 +15,9 @@ class ClientService{
         }
         return await client.findOne(option)
     }
-
+    
+    async GetCount(option){
+        return await client.count(option)
+    }
 }
 module.exports = new ClientService()

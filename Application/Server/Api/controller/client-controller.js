@@ -1,5 +1,5 @@
 const ApiError = require('../exception/error');
-const {findOne,findAll} = require('../services/client-service')
+const {findOne,findAll, GetCount} = require('../services/client-service')
 const validateService = require('../services/validate-service')
 class ClientController{
     async get_client(req,res,next){
@@ -29,9 +29,29 @@ class ClientController{
         try{
             validateService.validate(req)
             
-            const {include} = req.query;
+            const {include,pagination,page} = req.query;
+            let option = {
+                order:[['surname', 'ASC']]
+            }
 
-            res.json(await findAll({},include))
+            if(pagination){
+                option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
+                option.offset = option.limit * (page - 1)
+            }
+
+            res.json(await findAll(option,include))
+        }catch(e){
+           next(e)
+        }
+    }
+
+    async get_count_clients(req,res,next){
+        try{
+            const count = await GetCount({})
+            res.json({
+                count_items:count,
+                count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
+            })
         }catch(e){
            next(e)
         }

@@ -7,17 +7,22 @@ const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
 //Клиент
+router.get('/client',
+    authMiddleWare(['employee']),
+    query('include').default(false).isBoolean(),
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
+    ClientController.get_clients);
+
+router.get('/client/count',
+    authMiddleWare(['employee']),
+    ClientController.get_count_clients);
+
 router.get('/client/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee','client']),
     ClientController.get_client);
-
-router.get('/client',
-    authMiddleWare(['employee']),
-    query('include').default(false).isBoolean(),
-    ClientController.get_clients);
-
 //Авто
 router.get('/car/:id',
     param('id').isUUID(),
