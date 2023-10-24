@@ -7,8 +7,8 @@ module.exports = sequelize.define('photo', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true
   },
-  photo: {
-    type: DataTypes.BLOB,
+  extension: {
+    type: DataTypes.STRING(10),
     allowNull: false
   }
 }, {

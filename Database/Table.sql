@@ -23,7 +23,7 @@ CREATE TABLE "refresh_session_client"(
 
 CREATE TABLE "photo"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"photo" bytea NOT NULL
+	"extension" VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE "engine"(
@@ -33,7 +33,7 @@ CREATE TABLE "engine"(
 
 CREATE TABLE "car"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"client_id" UUID REFERENCES "client"("id"),
+	"client_id" UUID REFERENCES "client"("id") NOT NULL UNIQUE,
 	"number" VARCHAR(20) NOT NULL,
 	"name" VARCHAR(200) NOT NULL,
 	"release_year" INT NULL,
