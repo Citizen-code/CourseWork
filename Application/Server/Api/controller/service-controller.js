@@ -1,4 +1,4 @@
-const {findOne,findAll,update, create} = require('../services/service-service')
+const {findOne,findAll,update, create, GetCount} = require('../services/service-service')
 const validateService = require('../services/validate-service')
 
 class ServiceController{
@@ -29,6 +29,18 @@ class ServiceController{
             }
 
             res.json(await findAll(option,all))
+        }catch(e){
+           next(e)
+        }
+    }
+
+    async get_count_services(req,res,next){
+        try{
+            const count = await GetCount({})
+            res.json({
+                count_items:count,
+                count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
+            })
         }catch(e){
            next(e)
         }

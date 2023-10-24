@@ -44,8 +44,14 @@ router.get('/service/:id',
 
 router.get('/service',
     query('all').default(false).isBoolean(),
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
     authMiddleWare(['employee','client']),
     ServiceController.get_services);
+
+router.get('/service/count',
+    authMiddleWare(['employee']),
+    ServiceController.get_count_services);
 
 router.post('/service',
     body('name').isString().isLength({max:50}),
@@ -71,8 +77,14 @@ router.get('/order/:id',
 
 router.get('/order',
     query('include').default(false).isBoolean(),
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
     authMiddleWare(['employee','client']),
     OrderController.get_orders);
+
+router.get('/order/count',
+    authMiddleWare(['employee']),
+    OrderController.get_count_orders);
 
 router.get('/order/calendar/:year/:month',
     param('year').isInt({max:2100,min:0}),

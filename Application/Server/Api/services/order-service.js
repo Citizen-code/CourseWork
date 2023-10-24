@@ -20,5 +20,9 @@ class OrderService{
         option.status_id = 2
         return await order.create(option)
     }
+
+    async GetCount(option){
+        return await order.count(option)
+    }
 }
 module.exports = new OrderService()

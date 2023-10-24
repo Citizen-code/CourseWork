@@ -1,5 +1,5 @@
 const {sequelize,Op} = require('../models/init-models')
-const {findOne, findAll, create} = require('../services/order-service')
+const {findOne, findAll, create, GetCount} = require('../services/order-service')
 const validateService = require('../services/validate-service')
 const ApiError = require('../exception/error')
 class OrderController{
@@ -42,6 +42,18 @@ class OrderController{
             res.json(await findAll(option,include))
         }catch(e){
             next(e)
+        }
+    }
+
+    async get_count_orders(req,res,next){
+        try{
+            const count = await GetCount({})
+            res.json({
+                count_items:count,
+                count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
+            })
+        }catch(e){
+           next(e)
         }
     }
 
@@ -92,7 +104,7 @@ class OrderController{
             
             await order.update({status_id:4})
 
-            res.json({message:"успешно"})
+            res.json({message:"Успешно"})
         }catch(e){
             next(e)
         }

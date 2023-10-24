@@ -26,5 +26,9 @@ class ServiceService{
         return await service.update(field,option)
     }
 
+    async GetCount(option){
+        return await service.count(option)
+    }
+
 }
 module.exports = new ServiceService()
