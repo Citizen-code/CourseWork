@@ -28,12 +28,16 @@ class OrderController{
         try{
             validateService.validate(req)
 
-            const {include} = req.query;
+            const {include, pagination, page} = req.query;
             const user = req.user;
             
             const option = {
                 where:user.type === 'client'?{client_id:user.id}:undefined,
                 order:[['date', 'ASC']]
+            }
+            if(pagination == "true"){
+                option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
+                option.offset = option.limit * (page - 1)
             }
             res.json(await findAll(option,include))
         }catch(e){

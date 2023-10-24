@@ -33,8 +33,7 @@ class ClientController{
             let option = {
                 order:[['surname', 'ASC']]
             }
-            console.log(pagination)
-            if(pagination === "true"){
+            if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)
             }

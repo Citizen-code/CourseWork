@@ -19,9 +19,16 @@ class ServiceController{
         try{
             validateService.validate(req)
 
-            const {all} = req.query;
+            const {all,pagination, page} = req.query;
+            let option = {
+                order:[['name', 'ASC']]
+            }
+            if(pagination == "true"){
+                option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
+                option.offset = option.limit * (page - 1)
+            }
 
-            res.json(await findAll({order:[['name', 'ASC']]},all))
+            res.json(await findAll(option,all))
         }catch(e){
            next(e)
         }
