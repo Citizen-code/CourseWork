@@ -3,6 +3,7 @@ const {body, param, query} = require('express-validator')
 const ClientController = require('../controller/client-controller');
 const OrderController = require('../controller/order-controller');
 const ServiceController = require('../controller/service-controller');
+const CarController = require('../controller/car-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
@@ -24,22 +25,64 @@ router.get('/client/:id',
     authMiddleWare(['employee','client']),
     ClientController.get_client);
 //Авто
+router.get('/car/count',
+    authMiddleWare(['employee']),
+    CarController.get_count_cars);
+
 router.get('/car/:id',
+    param('id').isUUID(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['employee','client']),
+    CarController.get_car);
+
+router.get('/car',
+    query('include').default(false).isBoolean(),
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
+    authMiddleWare(['employee','client']),
+    CarController.get_cars);
+
+router.post('/car',
+    body('number').isString().isLength({max:8, min:8}),
+    body('name').isString().isLength({max:200, min:1}),
+    body('release_year').default(undefined).optional().isInt({max:2100,min:1900}),
+    body('mileage').default(undefined).optional().isString().isLength({max:10, min:1}),
+    body('vin').default(undefined).optional().isString().isLength({max:17, min:17}),
+    body('color').default(undefined).optional().isString().isLength({max:50, min:1}),
+    body('engine_id').default(undefined).optional().isInt(),
+    body('photo_id').default(undefined).optional().isUUID(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['client']),
+    CarController.add_car);
+
+router.put('/car/:id',
+    param('id').isUUID(),
+    body('number').isString().isLength({max:8, min:8}),
+    body('name').isString().isLength({max:200, min:1}),
+    body('release_year').default(undefined).optional().isInt({max:2100,min:1900}),
+    body('mileage').default(undefined).optional().isString().isLength({max:10, min:1}),
+    body('vin').default(undefined).optional().isString().isLength({max:17, min:17}),
+    body('color').default(undefined).optional().isString().isLength({max:50, min:1}),
+    body('engine_id').default(undefined).optional().isInt(),
+    body('photo_id').default(undefined).optional().isUUID(),
+    authMiddleWare(['employee','client']),
+    CarController.update_car);
+
+//Сотрудник
+router.get('/employee/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee','client']));
 
-router.get('/car');
-
-router.post('/car');
-
-router.put('/car');
+router.get('/employee',
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['employee','client']));
 
 //Услуга
 router.get('/service/count',
     authMiddleWare(['employee']),
     ServiceController.get_count_services);
-    
+
 router.get('/service/:id', 
     param('id').isUUID(),
     query('all').default(false).isBoolean(),
