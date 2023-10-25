@@ -36,6 +36,10 @@ router.post('/car');
 router.put('/car');
 
 //Услуга
+router.get('/service/count',
+    authMiddleWare(['employee']),
+    ServiceController.get_count_services);
+    
 router.get('/service/:id', 
     param('id').isUUID(),
     query('all').default(false).isBoolean(),
@@ -48,10 +52,6 @@ router.get('/service',
     query('page').default(1).isInt(),
     authMiddleWare(['employee','client']),
     ServiceController.get_services);
-
-router.get('/service/count',
-    authMiddleWare(['employee']),
-    ServiceController.get_count_services);
 
 router.post('/service',
     body('name').isString().isLength({max:50}),
