@@ -4,6 +4,7 @@ const ClientController = require('../controller/client-controller');
 const OrderController = require('../controller/order-controller');
 const ServiceController = require('../controller/service-controller');
 const CarController = require('../controller/car-controller');
+const EmployeeController = require('../controller/employee-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
@@ -69,14 +70,22 @@ router.put('/car/:id',
     CarController.update_car);
 
 //Сотрудник
+router.get('/employee/count',
+    authMiddleWare(['employee','client']),
+    EmployeeController.get_count_employees);
+
 router.get('/employee/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
-    authMiddleWare(['employee','client']));
+    authMiddleWare(['employee','client']),
+    EmployeeController.get_employee);
 
 router.get('/employee',
     query('include').default(false).isBoolean(),
-    authMiddleWare(['employee','client']));
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
+    authMiddleWare(['employee','client']),
+    EmployeeController.get_employees);
 
 //Услуга
 router.get('/service/count',

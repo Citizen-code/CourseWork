@@ -1,7 +1,5 @@
-const {sequelize,Op} = require('../models/init-models')
 const {findOne, findAll, create, update, GetCount} = require('../services/car-service')
 const validateService = require('../services/validate-service')
-const ApiError = require('../exception/error')
 class CarController{
 
     async get_car(req,res,next){
