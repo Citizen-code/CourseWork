@@ -98,7 +98,7 @@ class CarController{
                 engine_id,
                 photo_id
             }
-            await update(option,{where:[{id},{client_id: user.type === 'client'? user.id : undefined}]})
+            await update(option,{where:[{id},user.type === 'client'?{client_id:user.id}:undefined]})
 
             res.status(200).json({message:"Успешно"})
         }catch(e){
