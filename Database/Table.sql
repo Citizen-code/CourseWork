@@ -98,7 +98,7 @@ CREATE TABLE "consumable_part"(
 	"brand" VARCHAR(50) NOT NULL,
 	"article" VARCHAR(50) NOT NULL,
 	"name" VARCHAR(150) NOT NULL,
-	"prise" DECIMAL NOT NULL,
+	"price" DECIMAL NOT NULL,
 	"measure_unit" VARCHAR(10) NOT NULL,
 	"photo_id" UUID REFERENCES "photo"("id") NULL
 );
