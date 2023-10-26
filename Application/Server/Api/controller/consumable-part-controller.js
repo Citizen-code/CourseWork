@@ -6,8 +6,9 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {id,include} = req.params;
-            
+            const {id} = req.params;
+            const {include} = req.query;
+
             res.json(await findOne({where:{id},order:[['name', 'ASC']]},include))
         }catch(e){
            next(e)
@@ -19,6 +20,7 @@ class ConsumablePartController{
             validateService.validate(req)
 
             const {include,pagination, page} = req.query;
+
             let option = {
                 order:[['name', 'ASC']]
             }
