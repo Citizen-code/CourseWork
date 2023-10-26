@@ -3,14 +3,14 @@ const {order,list_services,service,status_order} = require('../models/init-model
 class OrderService{
 
     async findAll(option,include=undefined){
-        if(include){
+        if(include=="true"){
             option.include = [{model:list_services, as:'list_services', include:{model:service, as:'service'}},{model:status_order, as:'status'}] 
         }
         return await order.findAll(option)
     }
 
     async findOne(option,include=undefined){
-        if(include){
+        if(include=="true"){
             option.include = [{model:list_services, as:'list_services', include:{model:service, as:'service'}},{model:status_order, as:'status'}] 
         }
         return await order.findOne(option)

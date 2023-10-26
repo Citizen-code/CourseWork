@@ -6,9 +6,9 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {id} = req.params;
+            const {id,include} = req.params;
             
-            res.json(await findOne({where:{id},order:[['name', 'ASC']]},all))
+            res.json(await findOne({where:{id},order:[['name', 'ASC']]},include))
         }catch(e){
            next(e)
         }
@@ -18,7 +18,7 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {pagination, page} = req.query;
+            const {include,pagination, page} = req.query;
             let option = {
                 order:[['name', 'ASC']]
             }
@@ -27,7 +27,7 @@ class ConsumablePartController{
                 option.offset = option.limit * (page - 1)
             }
 
-            res.json(await findAll(option))
+            res.json(await findAll(option,include))
         }catch(e){
            next(e)
         }

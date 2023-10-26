@@ -19,7 +19,7 @@ module.exports = sequelize.define('consumable_part', {
     type: DataTypes.STRING(150),
     allowNull: false
   },
-  prise: {
+  price: {
     type: DataTypes.DECIMAL,
     allowNull: false
   },

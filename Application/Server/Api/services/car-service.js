@@ -3,14 +3,14 @@ const {car, photo} = require('../models/init-models')
 class OrderService{
 
     async findAll(option,include=undefined){
-        if(include){
+        if(include=="true"){
             option.include = {model:photo, as:'photo'}
         }
         return await car.findAll(option)
     }
 
     async findOne(option,include=undefined){
-        if(include){
+        if(include=="true"){
             option.include = {model:photo, as:'photo'}
         }
         return await car.findOne(option)
