@@ -1,13 +1,12 @@
-const {findOne,findAll,update, create, GetCount} = require('../services/service-service')
+const {findOne,findAll,update, create, GetCount} = require('../services/consumable-part-service')
 const validateService = require('../services/validate-service')
 
-class ServiceController{
-    async get_service(req,res,next){
+class ConsumablePartController{
+    async get_consumable_part(req,res,next){
         try{
             validateService.validate(req)
 
             const {id} = req.params;
-            const {all} = req.query;
             
             res.json(await findOne({where:{id},order:[['name', 'ASC']]},all))
         }catch(e){
@@ -15,11 +14,11 @@ class ServiceController{
         }
     }
 
-    async get_services(req,res,next){
+    async get_consumable_parts(req,res,next){
         try{
             validateService.validate(req)
 
-            const {all,pagination, page} = req.query;
+            const {pagination, page} = req.query;
             let option = {
                 order:[['name', 'ASC']]
             }
@@ -28,13 +27,13 @@ class ServiceController{
                 option.offset = option.limit * (page - 1)
             }
 
-            res.json(await findAll(option,all))
+            res.json(await findAll(option))
         }catch(e){
            next(e)
         }
     }
 
-    async get_count_services(req,res,next){
+    async get_count_consumable_parts(req,res,next){
         try{
             const count = await GetCount({})
             res.json({
@@ -46,7 +45,7 @@ class ServiceController{
         }
     }
 
-    async add_service(req,res,next){
+    async add_consumable_part(req,res,next){
         try{
             validateService.validate(req)
 
@@ -60,7 +59,7 @@ class ServiceController{
         }
     }
 
-    async update_service(req,res,next){
+    async update_consumable_part(req,res,next){
         try{
             validateService.validate(req)
 
@@ -80,20 +79,5 @@ class ServiceController{
             next(e)
         }
     }
-
-    async delete_service(req,res,next){
-        try{
-            validateService.validate(req)
-
-            const {id} = req.params
-
-            let is_active = false;
-            await update({is_active},{where:{id}})
-
-            res.status(200).json({message:"Успешно"})
-        }catch(e){
-            next(e)
-        }
-    }
 }
-module.exports = new ServiceController()
+module.exports = new ConsumablePartController()

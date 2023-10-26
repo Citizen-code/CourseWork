@@ -5,6 +5,7 @@ const OrderController = require('../controller/order-controller');
 const ServiceController = require('../controller/service-controller');
 const CarController = require('../controller/car-controller');
 const EmployeeController = require('../controller/employee-controller');
+const ConsumablePartController = require('../controller/consumable-part-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
@@ -46,12 +47,12 @@ router.get('/car',
 router.post('/car',
     body('number').isString().isLength({max:8, min:8}),
     body('name').isString().isLength({max:200, min:1}),
-    body('release_year').default(undefined).optional().isInt({max:2100,min:1900}),
-    body('mileage').default(undefined).optional().isString().isLength({max:10, min:1}),
-    body('vin').default(undefined).optional().isString().isLength({max:17, min:17}),
-    body('color').default(undefined).optional().isString().isLength({max:50, min:1}),
-    body('engine_id').default(undefined).optional().isInt(),
-    body('photo_id').default(undefined).optional().isUUID(),
+    body('release_year').optional().isInt({max:2100,min:1900}),
+    body('mileage').optional().isString().isLength({max:10, min:1}),
+    body('vin').optional().isString().isLength({max:17, min:17}),
+    body('color').optional().isString().isLength({max:50, min:1}),
+    body('engine_id').optional().isInt(),
+    body('photo_id').optional().isUUID(),
     query('include').default(false).isBoolean(),
     authMiddleWare(['client']),
     CarController.add_car);
@@ -60,12 +61,12 @@ router.put('/car/:id',
     param('id').isUUID(),
     body('number').isString().isLength({max:8, min:8}),
     body('name').isString().isLength({max:200, min:1}),
-    body('release_year').default(undefined).optional().isInt({max:2100,min:1900}),
-    body('mileage').default(undefined).optional().isString().isLength({max:10, min:1}),
-    body('vin').default(undefined).optional().isString().isLength({max:17, min:17}),
-    body('color').default(undefined).optional().isString().isLength({max:50, min:1}),
-    body('engine_id').default(undefined).optional().isInt(),
-    body('photo_id').default(undefined).optional().isUUID(),
+    body('release_year').optional().isInt({max:2100,min:1900}),
+    body('mileage').optional().isString().isLength({max:10, min:1}),
+    body('vin').optional().isString().isLength({max:17, min:17}),
+    body('color').optional().isString().isLength({max:50, min:1}),
+    body('engine_id').optional().isInt(),
+    body('photo_id').optional().isUUID(),
     authMiddleWare(['employee','client']),
     CarController.update_car);
 
@@ -118,7 +119,45 @@ router.delete('/service/:id',
     ServiceController.delete_service);
 
 router.put('/service/:id',
-    param('id').isUUID());
+    param('id').isUUID(),
+    body('name').optional().isString().isLength({max:50}),
+    body('price').optional().isDecimal({max:100000,min:0}),
+    body('is_hourly').optional().isBoolean(),
+    authMiddleWare(['employee']),
+    ServiceController.update_service);
+
+//Расходные запчасти
+router.get('/consumable-part/count',
+    authMiddleWare(['employee']),
+    ConsumablePartController.get_count_consumable_parts);
+
+router.get('/consumable-part/:id', 
+    param('id').isUUID(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['employee']),
+    ConsumablePartController.get_consumable_part);
+
+router.get('/consumable-part',
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['employee']),
+    ConsumablePartController.get_consumable_parts);
+
+router.post('/consumable-part',
+    body('name').isString().isLength({max:50}),
+    body('price').isDecimal({max:100000,min:0}),
+    body('is_hourly').isBoolean(),
+    authMiddleWare(['employee']),
+    ConsumablePartController.add_consumable_part);
+
+router.put('/consumable-part/:id',
+    param('id').isUUID(),
+    body('name').optional().isString().isLength({max:50}),
+    body('price').optional().isDecimal({max:100000,min:0}),
+    body('is_hourly').optional().isBoolean(),
+    authMiddleWare(['employee']),
+    ConsumablePartController.update_consumable_part);
 
 //Заказ
 router.get('/order/:id', 
@@ -155,6 +194,5 @@ router.delete('/order/:id',
     param('id').isUUID(),
     authMiddleWare(['employee','client']),
     OrderController.delete_order);
-
 
 module.exports = router;
