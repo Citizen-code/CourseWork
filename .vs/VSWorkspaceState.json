@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Application",
-    "\\Application\\Autoservice",
-    "\\Application\\Autoservice\\Autoservice"
+    ""
   ],
-  "SelectedNode": "\\Application\\Autoservice\\Autoservice.sln",
+  "SelectedNode": "\\Autoservice.sln",
   "PreviewInSolutionExplorer": false
 }
