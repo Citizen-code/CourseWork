@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:si="clr-namespace:SatialInterfaces.Controls.Calendar;assembly=CalendarControl"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Autoservice.CarTasksWindow"
+		Background="#9191E9"
+        Title="CarTasksWindow">
+	<Grid RowDefinitions="*, Auto" ColumnDefinitions="*, Auto">
+		<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Spacing="5">
+			<Button Name="PreviousWeekButton" 
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Height="35"
+					Margin="5 5 0 0"
+					Content="Предыдущая" 
+					Click="PreviousWeekButton_Click"/>
+			<Button Name="NextWeekButton" 
+					VerticalAlignment="Top"
+					Height="35"
+					Margin="5 5 0 0"
+					Content="Следующая" 
+					Click="NextWeekButton_Click"/>
+		</StackPanel>
+		<si:CalendarControl Name="TaskCalendar" AutoScrollToSelectedItem="True" Padding="0 50 60 0">
+			<si:CalendarControl.ItemTemplate>
+				
+			</si:CalendarControl.ItemTemplate>
+		</si:CalendarControl>
+	</Grid>
+</Window>
