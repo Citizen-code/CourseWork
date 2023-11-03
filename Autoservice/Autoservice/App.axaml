@@ -2,14 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
 			 xmlns:sty="using:FluentAvalonia.Styling"
-			 xmlns:ui="using:FluentAvalonia.UI.Controls"
-			 xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
              x:Class="Autoservice.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.Styles>
-		<themes:MaterialTheme PrimaryColor="Purple" SecondaryColor="Lime"/>
-		<StyleInclude Source="avares://CalendarControl/Themes/Default.axaml"/>
+		<sty:FluentAvaloniaTheme/>
+		<StyleInclude Source="avares://CalendarControl/Themes/Default.axaml"/>		
     </Application.Styles>
 </Application>
