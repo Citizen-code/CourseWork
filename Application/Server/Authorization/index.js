@@ -9,6 +9,9 @@ let PORT = process.env.PORT || 5000
 
 let app = express()
 
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.json())
 app.use(cookieParser())
 app.use("/auth", router)

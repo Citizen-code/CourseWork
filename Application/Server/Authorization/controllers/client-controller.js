@@ -40,7 +40,7 @@ class ClientController{
             const token = await clientService.logout(refreshToken)
 
             res.clearCookie('refreshToken')
-            return res.json(token)
+            return res.json({message:'Успешно'})
         }catch(e){
             next(e)
         }
