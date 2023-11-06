@@ -22,4 +22,9 @@ public partial class CarTasksWindow : Window
     {
 
     }
+
+    public void ExitButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+
+    }
 }
