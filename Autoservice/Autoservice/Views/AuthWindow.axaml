@@ -15,7 +15,7 @@
 			<TextBlock Text="Логин"/>
 			<TextBox Name="LoginTextBox"
 					 Height="20"
-					 Width="150"
+					 Width="200"
 					 Background="#D9D9D9"
 					 CornerRadius="2"/>
 			<TextBlock Text="Пароль"
@@ -23,18 +23,19 @@
 			<TextBox Name="PasswordTextBox"
 					 PasswordChar="*"
 					 Height="20"
-					 Width="150"
+					 Width="200"
 					 Background="#D9D9D9"
 					 CornerRadius="2"/>
 			<Button Name="LogInButton"
 					Height="35"
-					Width="80"
+					Width="100"
 					HorizontalAlignment="Center"
 					Margin="0 20 0 0"
 					Background="#C2AFF0"
 					HorizontalContentAlignment="Center"
 					VerticalContentAlignment="Center"
-					Content="ВОЙТИ"/>
+					Content="ВОЙТИ"
+					Click="LogInButton_Click"/>
 		</StackPanel>
 	</Border>
 </Window>

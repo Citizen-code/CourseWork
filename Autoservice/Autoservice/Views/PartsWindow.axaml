@@ -2,24 +2,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ui="using:FluentAvalonia.UI.Controls"
+		xmlns:ui="using:FluentAvalonia.UI.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Autoservice.RequestsPage"
+        x:Class="Autoservice.PartsWindow"
 		Background="#9191E9"
-        Title="RequestsPage">
+        Title="PartsWindow">
 	<Grid ShowGridLines="True">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="3*"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<!--TODO: Красиво сделать ListBox-->
-		<ListBox Name="ServiceListBox" Grid.Column="0">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+		<ItemsControl Grid.Column="0">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+		</ItemsControl>
 		<ui:NavigationView Grid.RowSpan="2" Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Right" Background="#C2AFF0">
 			<ui:NavigationView.MenuItems>
 				<ui:NavigationViewItemHeader Content="Wheely" HorizontalAlignment="Center"/>

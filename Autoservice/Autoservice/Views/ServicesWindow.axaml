@@ -14,7 +14,9 @@
 		</Grid.ColumnDefinitions>
 		<ListBox Name="RequestListBox" Grid.Column="0">
 			<ListBox.ItemTemplate>
-
+				<DataTemplate>
+					
+				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
 		<ui:NavigationView Grid.RowSpan="2" Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Right" Background="#C2AFF0">

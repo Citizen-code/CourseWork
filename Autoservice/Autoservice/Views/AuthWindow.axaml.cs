@@ -10,4 +10,9 @@ public partial class AuthWindow : Window
     {
         InitializeComponent();
     }
+
+    public void LogInButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+
+    }
 }
