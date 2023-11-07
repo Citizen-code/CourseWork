@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express")
+const cors = require('cors')
 const {sequelize} = require('./models/init-models')
 const router = require("./router/index")
 const errorMiddleWare = require('./middlewares/error-middleware')
@@ -7,6 +8,10 @@ let PORT = process.env.PORT || 5001
 
 let app = express()
 
+app.use(cors({
+    origin: ['http://localhost:3000','http://185.252.146.21'],
+    credentials:true
+}));
 app.use(express.json())
 app.use("/api", router)
 app.use(errorMiddleWare)
