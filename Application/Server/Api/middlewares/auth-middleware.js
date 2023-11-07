@@ -1,14 +1,16 @@
 const ApiError = require('../exception/error')
-const jwt = require('jsonwebtoken')
+const axios = require('axios')
 
 module.exports = function (accesses = []) {
-    return function (req,res,next){
+    return async function (req,res,next){
         try{
             const accessToken = req.headers.authorization.split(' ')[1]
-
-            const userData = jwt.decode(accessToken)
+            const userData = (await axios.get(`${process.env.AUTH_URL}/auth/validate/`,{
+                headers:{
+                    Authorization:`Bearer ${accessToken}`
+                }
+            })).data
             if(!userData) return next(ApiError.UnauthorizeError())
-            
             if(!accesses.includes(userData.type)) return next(ApiError.Forbidden())
 
             req.user = userData
