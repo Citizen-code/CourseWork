@@ -67,7 +67,7 @@ class ClientController{
             const activationLink = req.params.link
             await clientService.activation(activationLink)
 
-            return res.redirect(process.env.CLIENT_URL)//Заменить
+            return res.redirect(process.env.CLIENT_URL)
         }catch(e){
             next(e)
         }

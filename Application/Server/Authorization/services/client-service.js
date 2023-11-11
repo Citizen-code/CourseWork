@@ -56,7 +56,7 @@ class ClientService{
         if(!isPassEquals){
             throw ApiError.BadRequest('Неверный пароль')
         }
-        
+
         const {refreshToken,accessToken} = tokenService.generateToken({id:client.id, type:"client"})
         await tokenService.saveClientToken(refreshToken,client.id)
 
@@ -73,12 +73,10 @@ class ClientService{
 
     async refresh(refreshTokenOld){
         const payload = await tokenService.verifyRefreshToken(refreshTokenOld)
-        console.log(payload)
         if(!payload){
             throw ApiError.UnauthorizeError()
         }
         const {refreshToken,accessToken} = tokenService.generateToken({id:payload.id, type:"client"})
-        console.log(payload)
 
         await tokenService.saveClientToken(refreshToken, payload.id)
 
