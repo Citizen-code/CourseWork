@@ -10,7 +10,7 @@ CREATE TABLE "client"(
 
 CREATE TABLE "authorization_client"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"client_id" UUID REFERENCES "client"("id"),
+	"client_id" UUID REFERENCES "client"("id") NOT NULL,
 	"password" TEXT NOT NULL,
 	"is_activated" BOOL DEFAULT FALSE
 );
@@ -40,7 +40,7 @@ CREATE TABLE "car"(
 	"mileage" BIGINT NULL,
 	"vin" VARCHAR(17) NULL,
 	"color" VARCHAR(50) NULL,
-	"engine_id" INT REFERENCES "engine"("id"),
+	"engine_id" INT REFERENCES "engine"("id") NULL,
 	"photo_id" UUID REFERENCES "photo"("id") NULL
 );
 
@@ -71,18 +71,25 @@ CREATE TABLE "status_order"(
 
 CREATE TABLE "order"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	"date" DATE DEFAULT CURRENT_DATE,
+	"date" DATE NOT NULL,
+	"time" TIME NOT NULL,
+	"comment" VARCHAR(500) NULL,
 	"client_id" UUID REFERENCES "client"("id") NOT NULL,
 	"employee_id" UUID REFERENCES "employee"("id") NOT NULL,
 	"status_id" INT REFERENCES "status_order"("id") NOT NULL
+);
+
+CREATE TABLE "service_price"(
+	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+	"price" DECIMAL NOT NULL,
+	"is_time_based" BOOL DEFAULT FALSE
 );
 
 CREATE TABLE "service"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"name" VARCHAR(150) NOT NULL,
 	"date_add" DATE DEFAULT CURRENT_DATE,
-	"price" DECIMAL NOT NULL,
-	"is_hourly" BOOL DEFAULT FALSE,
+	"price_id" UUID REFERENCES "service_price"("id") NOT NULL,
 	"is_active" BOOL DEFAULT TRUE
 );
 
@@ -90,6 +97,7 @@ CREATE TABLE "list_services"(
 	"id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 	"order_id" UUID REFERENCES "order"("id") NOT NULL,
 	"service_id" UUID REFERENCES "service"("id") NOT NULL,
+	"price_id" UUID REFERENCES "service_price"("id") NOT NULL,
 	"time" DECIMAL NULL
 );
 
@@ -100,7 +108,8 @@ CREATE TABLE "consumable_part"(
 	"name" VARCHAR(150) NOT NULL,
 	"price" DECIMAL NOT NULL,
 	"measure_unit" VARCHAR(10) NOT NULL,
-	"photo_id" UUID REFERENCES "photo"("id") NULL
+	"photo_id" UUID REFERENCES "photo"("id") NULL,
+	"date_add" DATE DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE "list_consumable_parts"(
