@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AutoserviceWPF.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#9191E9"
@@ -19,6 +20,11 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <syncfusion:SfScheduler Grid.Row="1" ViewType="Week" FirstDayOfWeek="Monday">
+            <syncfusion:SfScheduler.DaysViewSettings>
+                <syncfusion:DaysViewSettings ViewHeaderHeight="45" TimeIntervalSize="-1" StartHour="8" EndHour="18" TimeRulerSize="50"/>
+            </syncfusion:SfScheduler.DaysViewSettings>
+        </syncfusion:SfScheduler>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Grid.ColumnSpan="2"  Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
                 <Button Canvas.Right="205" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
@@ -27,8 +33,7 @@
                 <StackPanel Width="170" Margin="16">
                     <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
                     <StackPanel HorizontalAlignment="Left" Margin="5">
-                        <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
-                        <TextBlock x:Name="RequestsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Заявки" FontSize="18" PreviewMouseLeftButtonDown="RequestsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
+                        <TextBlock x:Name="RequestsNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Заявки" FontSize="18" PreviewMouseLeftButtonDown="RequestsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="ServicesNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Услуги" FontSize="18" PreviewMouseLeftButtonDown="ServicesNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>

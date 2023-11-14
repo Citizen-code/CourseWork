@@ -24,5 +24,25 @@ namespace AutoserviceWPF.Pages
         {
             InitializeComponent();
         }
+
+        private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new CarTasksPage());
+        }
+
+        private void RequestsNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new RequestsPage());
+        }
+
+        private void ServicesNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new ServicesPage());
+        }
+
+        private void PartsNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new PartsPage());
+        }
     }
 }
