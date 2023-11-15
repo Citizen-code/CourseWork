@@ -58,6 +58,8 @@ class ClientController{
 
     async edit_client(req,res,next){
         try{
+            validateService.validate(req)
+
             const {id} = req.params;
             const {surname,firstname,lastname,birth_date,email,phone} = req.body
             if(req.user.type == 'client' && id != req.user.id){
