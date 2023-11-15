@@ -1,5 +1,5 @@
 const ApiError = require('../exception/error');
-const {findOne,findAll, GetCount} = require('../services/client-service')
+const {findOne,findAll, GetCount, update} = require('../services/client-service');
 const validateService = require('../services/validate-service')
 class ClientController{
     async get_client(req,res,next){
@@ -51,6 +51,20 @@ class ClientController{
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
             })
+        }catch(e){
+           next(e)
+        }
+    }
+
+    async edit_client(req,res,next){
+        try{
+            const {id} = req.params;
+            const {surname,firstname,lastname,birth_date,email,phone} = req.body
+            if(req.user.type == 'client' && id != req.user.id){
+                throw ApiError.Forbidden();
+            }
+            await update({surname,firstname,lastname,birth_date,email,phone},{where:{id}})
+            res.json({message:'Успешно'})
         }catch(e){
            next(e)
         }

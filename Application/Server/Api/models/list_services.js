@@ -23,6 +23,14 @@ module.exports = sequelize.define('list_services', {
       key: 'id'
     }
   },
+  price_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: 'service_price',
+      key: 'id'
+    }
+  },
   time: {
     type: DataTypes.DECIMAL,
     allowNull: true

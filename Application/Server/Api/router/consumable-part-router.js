@@ -22,17 +22,23 @@ router.get('/',
     ConsumablePartController.get_consumable_parts);
 
 router.post('/',
-    body('name').isString().isLength({max:50}),
+    body('brand').isString().isLength({max:50}),
+    body('article').isString().isLength({max:50}),
+    body('name').isString().isLength({max:150}),
     body('price').isDecimal({max:100000,min:0}),
-    body('is_hourly').isBoolean(),
+    body('measure_unit').isUUID(),
+    body('photo_id').optional().isUUID(), 
     authMiddleWare(['employee']),
     ConsumablePartController.add_consumable_part);
 
 router.put('/:id',
     param('id').isUUID(),
-    body('name').optional().isString().isLength({max:50}),
-    body('price').optional().isDecimal({max:100000,min:0}),
-    body('is_hourly').optional().isBoolean(),
+    body('brand').isString().isLength({max:50}),
+    body('article').isString().isLength({max:50}),
+    body('name').isString().isLength({max:150}),
+    body('price').isDecimal({max:100000,min:0}),
+    body('measure_unit').isUUID(),
+    body('photo_id').optional().isUUID(),    
     authMiddleWare(['employee']),
     ConsumablePartController.update_consumable_part);
 

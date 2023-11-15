@@ -7,9 +7,10 @@ class ServiceController{
             validateService.validate(req)
 
             const {id} = req.params;
+            const {include} = req.query;
             const {all} = req.query;
-            
-            res.json(await findOne({where:{id},order:[['name', 'ASC']]},all))
+
+            res.json(await findOne({where:{id},order:[['name', 'ASC']]},all,include))
         }catch(e){
            next(e)
         }
@@ -19,7 +20,7 @@ class ServiceController{
         try{
             validateService.validate(req)
 
-            const {all,pagination, page} = req.query;
+            const {all,pagination, page, include} = req.query;
             let option = {
                 order:[['name', 'ASC']]
             }
@@ -28,7 +29,7 @@ class ServiceController{
                 option.offset = option.limit * (page - 1)
             }
 
-            res.json(await findAll(option,all))
+            res.json(await findAll(option,all,include))
         }catch(e){
            next(e)
         }
@@ -37,6 +38,7 @@ class ServiceController{
     async get_count_services(req,res,next){
         try{
             const count = await GetCount({})
+            
             res.json({
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
@@ -50,9 +52,8 @@ class ServiceController{
         try{
             validateService.validate(req)
 
-            const {name,price,is_hourly} = req.body
-
-            await create({name,price,is_hourly})
+            const {name,price,is_time_based} = req.body
+            await create({name,price,is_time_based})
 
             res.status(200).json({message:"Успешно"})
         }catch(e){
@@ -64,13 +65,13 @@ class ServiceController{
         try{
             validateService.validate(req)
 
-            const {name,price,is_hourly} = req.body
+            const {name,price,is_time_based} = req.body
             const {id} = req.params
             
             const option = {
                 name,
                 price,
-                is_hourly
+                is_time_based
             }
 
             await update(option,{where:{id}})

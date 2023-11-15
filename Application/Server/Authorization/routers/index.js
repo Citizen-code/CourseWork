@@ -7,12 +7,12 @@ let router = Router()
 
 router.post('/registration',
     body('email').isEmail().isLength({max:30}),
-    body('password').isString().isLength({max:32,min:3}),//Дописать валидацию фио
-    body('birth_date').isDate(),
+    body('password').isString().isLength({max:32,min:3}),
+    body('birth_date').optional().isDate(),
     body('surname').isString().isLength({max:20}),
     body('firstname').isString().isLength({max:20}),
-    body('lastname').isString().isLength({max:20}),
-    body('phone').isString().isLength({max:20}),
+    body('lastname').optional().isString().isLength({max:20}),
+    body('phone').optional().isString().isLength({max:20}),
     ClientController.registration)
 
 router.post('/login/client',

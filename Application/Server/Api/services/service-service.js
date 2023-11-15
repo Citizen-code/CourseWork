@@ -1,8 +1,11 @@
-const {service} = require('../models/init-models')
+const {service, service_price} = require('../models/init-models')
 
 class ServiceService{
 
-    async findAll(option,all){
+    async findAll(option,all,include){
+        if(include=="true"){
+            option.include = {model:service_price, as:'price'}
+        }
         if(!all){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
@@ -10,7 +13,10 @@ class ServiceService{
         return await service.findAll(option)
     }
 
-    async findOne(option,all){
+    async findOne(option,all,include){
+        if(include=="true"){
+            option.include = {model:service_price, as:'price'}
+        }
         if(!all){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
@@ -19,11 +25,17 @@ class ServiceService{
     }
 
     async create(option){
-        return await service.create(option)
+        const price = await service_price.create({price:option.price,is_time_based:option.is_time_based})
+        return await service.create({name:option.name, price_id:price.id})
     }
 
     async update(field,option){
-        return await service.update(field,option)
+        if(field?.price == undefined){
+            return await service.update(field,option)
+        }else{
+            const price = await service_price.create({price:field.price,is_time_based:field?.is_time_based})
+            return await service.update({name:option.name, price_id:price.id},option)
+        }
     }
 
     async GetCount(option){

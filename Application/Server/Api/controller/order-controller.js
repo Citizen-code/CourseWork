@@ -1,5 +1,5 @@
 const {sequelize,Op} = require('../models/init-models')
-const {findOne, findAll, create, GetCount} = require('../services/order-service')
+const {findOne, findAll, create, GetCount,create_content,update} = require('../services/order-service')
 const validateService = require('../services/validate-service')
 const ApiError = require('../exception/error')
 class OrderController{
@@ -114,14 +114,36 @@ class OrderController{
         try{
             validateService.validate(req)
 
-            const {employee_id, date} = req.body
+            const {comment, date, time} = req.body
             const user = req.user;
 
             await create({
                 client_id: user.id,
-                employee_id, 
-                date
+                comment,
+                date,
+                time
             })
+
+            res.json({message:"успешно"})
+        }catch(e){
+            next(e)
+        }
+    }
+
+    async add_content_order(req,res,next){
+        try{
+            validateService.validate(req)
+
+            const {id} = req.params
+            const {list_services, list_consumable_parts} = req.body
+            const user = req.user;
+
+            await update({
+                status_id:1,
+                employee_id:user.id
+            },{where:{id}})
+
+            await create_content(id,list_services,list_consumable_parts)
 
             res.json({message:"успешно"})
         }catch(e){

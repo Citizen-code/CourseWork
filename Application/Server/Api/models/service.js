@@ -14,16 +14,15 @@ module.exports = sequelize.define('service', {
   date_add: {
     type: DataTypes.DATEONLY,
     allowNull: true,
-    defaultValue: sequelize.Sequelize.literal('CURRENT_DATE')
+    defaultValue: sequelize.literal('CURRENT_DATE')
   },
-  price: {
-    type: DataTypes.DECIMAL,
-    allowNull: false
-  },
-  is_hourly: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-    defaultValue: false
+  price_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    references: {
+      model: 'service_price',
+      key: 'id'
+    }
   },
   is_active: {
     type: DataTypes.BOOLEAN,

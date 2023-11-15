@@ -11,6 +11,14 @@ module.exports = sequelize.define('order', {
     type: DataTypes.DATEONLY,
     allowNull: false
   },
+  time: {
+    type: DataTypes.TIME,
+    allowNull: false
+  },
+  comment: {
+    type: DataTypes.STRING(500),
+    allowNull: true
+  },
   client_id: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -21,7 +29,7 @@ module.exports = sequelize.define('order', {
   },
   employee_id: {
     type: DataTypes.UUID,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: 'employee',
       key: 'id'

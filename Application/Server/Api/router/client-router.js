@@ -1,6 +1,6 @@
 
 const Router = require("express").Router;
-const {param, query} = require('express-validator')
+const {param, query, body} = require('express-validator')
 const ClientController = require('../controller/client-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
 
@@ -22,5 +22,15 @@ router.get('/:id',
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee','client']),
     ClientController.get_client);
+
+router.put('/:id',
+    body('surname').optional().isString().isLength({max:20}),
+    body('firstname').optional().isString().isLength({max:20}),
+    body('lastname').optional().isString().isLength({max:20}),
+    body('birth_date').optional().isDate(),
+    body('email').optional().isEmail().isLength({max:30}),
+    body('phone').optional().isString().isLength({max:20}),
+    authMiddleWare(['employee','client']),
+    ClientController.edit_client);
 
 module.exports = router

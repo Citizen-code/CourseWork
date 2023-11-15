@@ -51,9 +51,9 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {name,price,is_hourly} = req.body
+            const {brand,article,name,price,measure_unit,photo_id} = req.body
 
-            await create({name,price,is_hourly})
+            await create({brand,article,name,price,measure_unit,photo_id})
 
             res.status(200).json({message:"Успешно"})
         }catch(e){
@@ -65,14 +65,10 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {name,price,is_hourly} = req.body
+            const {brand,article,name,price,measure_unit,photo_id} = req.body
             const {id} = req.params
             
-            const option = {
-                name,
-                price,
-                is_hourly
-            }
+            const option = {brand,article,name,price,measure_unit,photo_id}
 
             await update(option,{where:{id}})
 

@@ -34,6 +34,11 @@ module.exports = sequelize.define('consumable_part', {
       model: 'photo',
       key: 'id'
     }
+  },
+  date_add: {
+    type: DataTypes.DATEONLY,
+    allowNull: true,
+    defaultValue: sequelize.Sequelize.literal('CURRENT_DATE')
   }
 }, {
   sequelize,

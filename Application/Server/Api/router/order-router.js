@@ -29,10 +29,22 @@ router.get('/calendar/:year/:month',
     OrderController.get_orders_in_month);
 
 router.post('/',
-    body('employee_id').isUUID(),
+    body('comment').optional().isLength({max:500}),
     body('date').isDate(),
+    body('time').isTime(),
     authMiddleWare(['client']),
     OrderController.add_order);
+
+router.post('/:id',
+    param('id').isUUID(),
+    body('list_services').isArray({min:1}),
+    body('list_services.*.service_id').isUUID(),
+    body('list_services.*.price_id').isUUID(),
+    body('list_services.*.time').isDecimal(),
+    body('list_consumable_parts').optional().isArray(),
+    body('list_consumable_parts.*.consumable_part_id').isUUID(),
+    authMiddleWare(['employee']),
+    OrderController.add_content_order);
 
 router.delete('/:id', 
     param('id').isUUID(),
