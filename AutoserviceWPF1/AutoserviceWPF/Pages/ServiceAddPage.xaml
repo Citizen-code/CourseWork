@@ -10,7 +10,11 @@
       Background="#9191E9"
       Title="ServiceAddPage">
 
-    <Grid>
-        <!--TODO: Мб сделать вместо Grid Canvas-->
-    </Grid>
+    <Canvas>
+        <TextBox x:Name="ServiceNameTextBox" Canvas.Left="180" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Название" Background="White" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
+        <TextBox x:Name="ServicePriceTextBox" Canvas.Right="180" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Цена" Background="White" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
+        <CheckBox x:Name="IsHourlyTextBox" Canvas.Left="260" Canvas.Top="220" Content="Почасовая" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Background="#457EAC" Cursor="Hand"/>
+        <Button x:Name="AddServiceButton" Canvas.Left="260" Canvas.Top="270" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="ДОБАВИТЬ" Cursor="Hand" Click="AddServiceButton_Click"/>
+        <Button x:Name="BackButton" Canvas.Right="260" Canvas.Top="270" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="НАЗАД" Cursor="Hand" Click="BackButton_Click"/>
+    </Canvas>
 </Page>

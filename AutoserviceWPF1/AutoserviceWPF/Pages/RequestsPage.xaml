@@ -19,7 +19,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Name="ServiceListBox" Grid.Column="0">
+        <ListBox Name="ServiceListBox" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
 
@@ -39,6 +39,7 @@
                         <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     </StackPanel>
+                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
         </materialDesign:DrawerHost>

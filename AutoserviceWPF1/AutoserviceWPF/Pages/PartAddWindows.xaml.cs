@@ -24,5 +24,15 @@ namespace AutoserviceWPF.Pages
         {
             InitializeComponent();
         }
+
+        private void AddPartButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -44,5 +44,15 @@ namespace AutoserviceWPF.Pages
         {
             NavigationService.Navigate(new ClientsPage());
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthPage());
+        }
+
+        private void AddPartButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PartAddWindows());
+        }
     }
 }

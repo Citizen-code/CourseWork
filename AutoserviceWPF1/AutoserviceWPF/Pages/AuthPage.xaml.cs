@@ -25,7 +25,7 @@ namespace AutoserviceWPF.Pages
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new CarTasksPage());
         }
