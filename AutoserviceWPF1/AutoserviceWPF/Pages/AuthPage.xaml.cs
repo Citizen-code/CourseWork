@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoserviceWPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,29 @@ namespace AutoserviceWPF.Pages
             InitializeComponent();
         }
 
-        private void EnterButton_Click(object sender, RoutedEventArgs e)
+        private async void EnterButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CarTasksPage());
+            try
+            {
+                await ApiRestClient.Login(new Uri("http://185.252.146.21"), LoginTextBox.Text, PasswordBox.Password);
+                var list = await ApiRestClient.Api.Client.GetClients();
+                MessageBox.Show(list[9].Surname);
+                NavigationService.Navigate(new CarTasksPage());
+            }
+            catch (Exception ex)
+            {
+                if (ex is ApiError error)
+                {
+                    if (error.Error.Errors.Count > 0)
+                    {
+                        string errorList = string.Join("\n", error.Error.Errors);
+                        MessageBox.Show(errorList, error.Message);
+                    }
+                    else MessageBox.Show(error.Message, "Ошибка");
+                }
+                else
+                    MessageBox.Show(ex.Message, "Ошибка");
+            }
         }
     }
 }
