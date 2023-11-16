@@ -17,18 +17,37 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Name="ServiceListBox" Grid.Row="1">
-            <ListBox.ItemTemplate>
+        <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
+            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
+                <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        <ListView x:Name="RequestsListView" Grid.Row="1">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding}" Margin="0 20 0 0"/>
+                        </StackPanel>
+                    </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Grid.ColumnSpan="2"  Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+            </ListView.ItemTemplate>
+        </ListView>
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
-                <Button Canvas.Right="205" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="170" Margin="16">

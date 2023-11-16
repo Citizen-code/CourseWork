@@ -17,12 +17,40 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--TODO: Сделать WrapPanel-->
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Grid.ColumnSpan="2"  Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <ComboBox x:Name="VINComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="VIN автомобиля" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
+            <TextBlock Text="Год выпуска" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="ReleaseAscendingRadioButton" Content="По возрастанию"/>
+                <RadioButton x:Name="ReleaseDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
+        <ItemsControl>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}" Margin="0 5 0 0"/>
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
-                <Button Canvas.Right="205" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="170" Margin="16">

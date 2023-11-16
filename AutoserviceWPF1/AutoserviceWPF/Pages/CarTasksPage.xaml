@@ -18,19 +18,17 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <syncfusion:SfScheduler Grid.Row="1" ViewType="Week" FirstDayOfWeek="Monday" TimeZone="Russian Standart Time">
             <syncfusion:SfScheduler.DaysViewSettings>
                 <syncfusion:DaysViewSettings ViewHeaderHeight="45" TimeIntervalSize="-1" StartHour="8" EndHour="19" TimeRulerFormat="hh:mm" TimeRulerSize="50"/>
             </syncfusion:SfScheduler.DaysViewSettings>
         </syncfusion:SfScheduler>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Grid.ColumnSpan="2"  Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
-                <Button Canvas.Right="205" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
-                <!--TODO: По возможности заменить StackPanel на другой контейнер-->
                 <StackPanel Width="170" Margin="16" Cursor="">
                     <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
                     <StackPanel HorizontalAlignment="Left" Margin="5">
