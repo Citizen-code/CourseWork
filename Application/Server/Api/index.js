@@ -4,12 +4,14 @@ const cors = require('cors')
 const {sequelize} = require('./models/init-models')
 const router = require("./router/index")
 const errorMiddleWare = require('./middlewares/error-middleware')
+const fileUpload = require("express-fileupload");
 let PORT = process.env.PORT || 5001
 
 let app = express()
 
 app.use(cors());
 app.use(express.json())
+app.use(fileUpload());
 app.use("/api", router)
 app.use(errorMiddleWare)
 

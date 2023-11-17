@@ -6,9 +6,12 @@ const employee = require('./employee-router');
 const order = require('./order-router');
 const service = require('./service-router');
 const engine = require('./engine-router');
+const photo = require('./photo-router');
+
 
 let router = Router();
 
+router.use('/photo', photo)
 router.use('/engine',engine)
 router.use('/car',car)
 router.use('/client',client)
