@@ -17,13 +17,13 @@ router.get('/',
     authMiddleWare(['employee','client']),
     OrderController.get_orders);
 
-router.get('client/:id', 
+router.get('/client/:id', 
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
     authMiddleWare(['client']),
     OrderController.get_order_client);
 
-router.get('client/',
+router.get('/client',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt(),
