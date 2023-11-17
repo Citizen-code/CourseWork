@@ -4,12 +4,6 @@ const OrderController = require('../controller/order-controller');
 const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
-router.get('/:id', 
-    param('id').isUUID(),
-    query('include').default(false).isBoolean(),
-    authMiddleWare(['employee','client']),
-    OrderController.get_order);
-
 router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
@@ -17,18 +11,24 @@ router.get('/',
     authMiddleWare(['employee','client']),
     OrderController.get_orders);
 
-router.get('/client/:id', 
-    param('id').isUUID(),
-    query('include').default(false).isBoolean(),
-    authMiddleWare(['client']),
-    OrderController.get_order_client);
-
 router.get('/client',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt(),
     authMiddleWare(['client']),
     OrderController.get_orders_client);
+
+router.get('/client/:id', 
+    param('id').isUUID(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['client']),
+    OrderController.get_order_client);
+
+router.get('/:id', 
+    param('id').isUUID(),
+    query('include').default(false).isBoolean(),
+    authMiddleWare(['employee','client']),
+    OrderController.get_order);
 
 router.get('/count',
     authMiddleWare(['employee']),
