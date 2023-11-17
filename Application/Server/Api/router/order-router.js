@@ -8,7 +8,7 @@ router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt(),
-    authMiddleWare(['employee','client']),
+    authMiddleWare(['employee']),
     OrderController.get_orders);
 
 router.get('/client',
@@ -18,11 +18,14 @@ router.get('/client',
     authMiddleWare(['client']),
     OrderController.get_orders_client);
 
-router.get('/client/:id', 
+router.get('/client/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
-    authMiddleWare(['client']),
-    OrderController.get_order_client);
+    query('pagination').default(false).isBoolean(),
+    query('page').default(1).isInt(),
+    authMiddleWare(['employee']),
+    OrderController.get_orders_client);
+
 
 router.get('/:id', 
     param('id').isUUID(),

@@ -1,17 +1,35 @@
-const { order, list_services, service, status_order, consumable_part, list_consumable_parts, service_price, employee } = require('../models/init-models')
+const { order, list_services, service, status_order, consumable_part, list_consumable_parts, service_price, employee, photo } = require('../models/init-models')
 
 class OrderService {
 
     async findAll(option, include = undefined) {
         if (include == "true") {
-            option.include = [{ model: list_services, as: 'list_services', include: [{ model: service, as: 'service', include: { model: service_price, as: 'price' } }, { model: service_price, as: 'price' }] }, { model: list_consumable_parts, as: 'list_consumable_parts', include: { model: consumable_part, as: 'consumable_part' } }, { model: status_order, as: 'status' }, { model: employee, as: 'employee' }]
+            option.include = [
+                { model: list_services, as: 'list_services', include: [
+                    { model: service, as: 'service', include: { model: service_price, as: 'price' } },
+                    { model: service_price, as: 'price' }]},
+                { model: list_consumable_parts, as: 'list_consumable_parts', include: 
+                    { model: consumable_part, as: 'consumable_part' }},
+                { model: status_order, as: 'status' }, 
+                { model: employee, as: 'employee', include:
+                    {model:photo, as:'photo'}}
+            ]
         }
         return await order.findAll(option)
     }
 
     async findOne(option, include = undefined) {
         if (include == "true") {
-            option.include = [{ model: list_services, as: 'list_services', include: [{ model: service, as: 'service', include: { model: service_price, as: 'price' } }, { model: service_price, as: 'price' }] }, { model: list_consumable_parts, as: 'list_consumable_parts', include: { model: consumable_part, as: 'consumable_part' } }, { model: status_order, as: 'status' }, { model: employee, as: 'employee' }]
+            option.include = [
+                { model: list_services, as: 'list_services', include: [
+                    { model: service, as: 'service', include: { model: service_price, as: 'price' } },
+                    { model: service_price, as: 'price' }]},
+                { model: list_consumable_parts, as: 'list_consumable_parts', include: 
+                    { model: consumable_part, as: 'consumable_part' }},
+                { model: status_order, as: 'status' }, 
+                { model: employee, as: 'employee', include:
+                    {model:photo, as:'photo'}}
+            ]
         }
         return await order.findOne(option)
     }

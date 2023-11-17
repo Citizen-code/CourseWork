@@ -18,6 +18,7 @@ class OrderController{
                     user.type === 'client'?{client_id:user.id}:undefined
                 ]
             }
+
             res.json(await findOne(option, include))
         }catch(e){
             next(e)
@@ -29,12 +30,12 @@ class OrderController{
             validateService.validate(req)
 
             const {include, pagination, page} = req.query;
-            const user = req.user;
             
             const option = {
                 where:user.type === 'client'?{client_id:user.id}:undefined,
                 order:[['date', 'ASC']]
             }
+
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)
@@ -49,11 +50,12 @@ class OrderController{
         try{
             validateService.validate(req)
 
+            const {id} = req.params
             const {include, pagination, page} = req.query;
             const user = req.user;
-            
+            console.log(id)
             const option = {
-                where:{client_id:user.id},
+                where:user.type === 'client'?{client_id:user.id}:{client_id:id},
                 order:[['date', 'ASC']]
             }
             if(pagination == "true"){
@@ -61,26 +63,6 @@ class OrderController{
                 option.offset = option.limit * (page - 1)
             }
             res.json(await findAll(option,include))
-        }catch(e){
-            next(e)
-        }
-    }
-
-    async get_order_client(req,res,next){
-        try{
-            validateService.validate(req)
-
-            const {id} = req.params
-            const {include} = req.query;
-            const user = req.user;
-            
-            const option = {
-                where:[
-                    {id},
-                    {client_id:user.id},
-                ]
-            }
-            res.json(await findOne(option, include))
         }catch(e){
             next(e)
         }
