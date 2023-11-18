@@ -31,7 +31,6 @@ router.post('/',
     body('color').optional().isString().isLength({max:50, min:1}),
     body('engine_id').optional().isInt(),
     body('photo_id').optional().isUUID(),
-    query('include').default(false).isBoolean(),
     authMiddleWare(['client']),
     CarController.add_car);
 

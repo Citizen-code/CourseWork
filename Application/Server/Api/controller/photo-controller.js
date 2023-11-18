@@ -10,6 +10,9 @@ class PhotoController{
             if (!req.files) {
                 throw ApiError.BadRequest('Файлы не были загружены')
             }
+            if (!req.files.photo) {
+                throw ApiError.BadRequest('Файлы не были загружены')
+            }
             const file = req.files.photo;
             const path_file =  `${__dirname}/../../../../${v4()}.${file.name.split('.')[1]}`;
             file.mv(path_file, (err) => {

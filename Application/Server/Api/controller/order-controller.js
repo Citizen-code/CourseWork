@@ -30,6 +30,7 @@ class OrderController{
             validateService.validate(req)
 
             const {include, pagination, page} = req.query;
+            const user = req.user;
             
             const option = {
                 where:user.type === 'client'?{client_id:user.id}:undefined,
