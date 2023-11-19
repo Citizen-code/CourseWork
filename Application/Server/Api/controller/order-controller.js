@@ -57,7 +57,7 @@ class OrderController{
 
             const option = {
                 where:user.type === 'client'?{client_id:user.id}:{client_id:id},
-                order:[['date', 'ASC']]
+                order:[['date', 'DESC']]
             }
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
@@ -158,7 +158,7 @@ class OrderController{
 
             console.log((new Date(`${date} ${time}`) < new Date()))
             if((new Date(`${date} ${time}`) < new Date())){
-                throw ApiError.BadRequest('Дата не должна быть меньше текущей');
+                throw ApiError.BadRequest('Дата и время не должны быть меньше текущей даты и времени');
             }
 
             const busy_times = await findAll({ where: {date}, attributes:['time'] },"false")
