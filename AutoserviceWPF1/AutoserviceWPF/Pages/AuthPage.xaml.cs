@@ -31,8 +31,6 @@ namespace AutoserviceWPF.Pages
             try
             {
                 await ApiRestClient.Login(new Uri("http://185.252.146.21"), LoginTextBox.Text, PasswordBox.Password);
-                var list = await ApiRestClient.Api.Client.GetClients();
-                MessageBox.Show(list[9].Surname);
                 NavigationService.Navigate(new CarTasksPage());
             }
             catch (Exception ex)

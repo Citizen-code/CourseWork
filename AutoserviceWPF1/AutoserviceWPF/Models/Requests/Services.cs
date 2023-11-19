@@ -20,9 +20,10 @@ namespace AutoserviceWPF.Models.Requests
             return await ExecuteAsync<List<Service>>(request);
         }
 
-        public async Task<GetCountResponse> GetCountServices()
+        public async Task<GetCountResponse> GetCountServices(bool all = false)
         {
-            var request = new RestRequest("api/service/count", Method.Get);
+            var request = new RestRequest("api/service/count", Method.Get)
+                .AddParameter("all", all ? "true" : "false", ParameterType.QueryString);
             return await ExecuteAsync<GetCountResponse>(request);
         }
 

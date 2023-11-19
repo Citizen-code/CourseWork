@@ -191,7 +191,9 @@
     <Compile Include="Models\Requests\Clients.cs" />
     <Compile Include="Models\Requests\ConsumableParts.cs" />
     <Compile Include="Models\Requests\Employees.cs" />
+    <Compile Include="Models\Requests\Engine.cs" />
     <Compile Include="Models\Requests\Orders.cs" />
+    <Compile Include="Models\Requests\Photo.cs" />
     <Compile Include="Models\Requests\Services.cs" />
     <Compile Include="Pages\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>

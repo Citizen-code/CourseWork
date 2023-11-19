@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AutoserviceWPF.Models.ModelsResponse;
+using System;
 using System.Collections.Generic;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
-    public partial class Photo
+    public partial class Photo : BaseResponse
     {
         public Guid Id { get; set; }
 

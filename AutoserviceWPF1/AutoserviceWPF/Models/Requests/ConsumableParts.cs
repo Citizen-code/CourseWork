@@ -10,7 +10,7 @@ namespace AutoserviceWPF.Models.Requests
 {
     class ConsumableParts
     {
-        public async Task<List<ConsumablePart>> GetServices(bool include = true, bool pagination = false, int page = 1)
+        public async Task<List<ConsumablePart>> GetConsumableParts(bool include = true, bool pagination = false, int page = 1)
         {
             var request = new RestRequest("api/consumable-part", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
@@ -19,13 +19,13 @@ namespace AutoserviceWPF.Models.Requests
             return await ExecuteAsync<List<ConsumablePart>>(request);
         }
 
-        public async Task<GetCountResponse> GetCountServices()
+        public async Task<GetCountResponse> GetCountConsumableParts()
         {
             var request = new RestRequest("api/consumable-part/count", Method.Get);
             return await ExecuteAsync<GetCountResponse>(request);
         }
 
-        public async Task<ConsumablePart> GetService(Guid id, bool include = true)
+        public async Task<ConsumablePart> GetConsumablePart(Guid id, bool include = true)
         {
             var request = new RestRequest("api/consumable-part/{id}", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
@@ -33,14 +33,14 @@ namespace AutoserviceWPF.Models.Requests
             return await ExecuteAsync<ConsumablePart>(request);
         }
 
-        public async Task<BaseResponse> PostService(ConsumablePart consumable_part)
+        public async Task<BaseResponse> PostConsumablePart(ConsumablePart consumable_part)
         {
             var request = new RestRequest("api/consumable-part", Method.Post)
                 .AddJsonBody(consumable_part);
             return await ExecuteAsync<BaseResponse>(request);
         }
         
-        public async Task<BaseResponse> PutService(Guid id, ConsumablePart consumable_part)
+        public async Task<BaseResponse> PutConsumablePart(Guid id, ConsumablePart consumable_part)
         {
             var request = new RestRequest("api/consumable-part/{id}", Method.Put)
                 .AddParameter("id", $"{id}", ParameterType.UrlSegment)

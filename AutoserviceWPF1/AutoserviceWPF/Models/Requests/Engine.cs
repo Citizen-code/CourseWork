@@ -8,15 +8,15 @@ using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Models.Requests
 {
-    class Employees
+    class Engine
     {
-        public async Task<List<Employee>> GetEmployees(bool include = true, bool pagination = false, int page = 1)
+        public async Task<List<Engine>> GetEngines(bool include = true, bool pagination = false, int page = 1)
         {
-            var request = new RestRequest("api/employee", Method.Get)
+            var request = new RestRequest("api/engine", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("pagination", pagination ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("page", $"{page}", ParameterType.QueryString);
-            return await ExecuteAsync<List<Employee>>(request);
+            return await ExecuteAsync<List<Engine>>(request);
         }
     }
 }

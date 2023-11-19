@@ -32,5 +32,13 @@ namespace AutoserviceWPF.Models.Requests
                 .AddParameter("id", $"{id}", ParameterType.UrlSegment);
             return await ExecuteAsync<Client>(request);
         }
+
+        public async Task<BaseResponse> PutClient(Guid id, Client client)
+        {
+            var request = new RestRequest("api/client/{id}", Method.Put)
+                .AddParameter("id", $"{id}", ParameterType.UrlSegment)
+                .AddJsonBody(client);
+            return await ExecuteAsync<BaseResponse>(request);
+        }
     }
 }
