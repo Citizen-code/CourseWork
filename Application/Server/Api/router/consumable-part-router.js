@@ -16,7 +16,7 @@ router.get('/:id',
 
 router.get('/',
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt(),
+    query('page').default(1).isInt({min:0}),
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee']),
     ConsumablePartController.get_consumable_parts);

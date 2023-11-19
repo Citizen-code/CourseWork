@@ -54,7 +54,7 @@ class OrderController{
             const {id} = req.params
             const {include, pagination, page} = req.query;
             const user = req.user;
-            console.log(id)
+
             const option = {
                 where:user.type === 'client'?{client_id:user.id}:{client_id:id},
                 order:[['date', 'ASC']]
@@ -115,7 +115,7 @@ class OrderController{
                     user.type === 'client'?{client_id:user.id}:undefined
                 ]
             }
-            let order = (await findOne(option,true)) 
+            let order = (await findOne(option,"true")) 
             if(!order){
                 throw ApiError.BadRequest("Заказ не найден");
             }
@@ -124,6 +124,9 @@ class OrderController{
             }
             if(order.list_services.length != 0){
                 throw ApiError.BadRequest("Заказ не должен содержать услуги")
+            }
+            if(order.list_consumable_parts.length != 0){
+                throw ApiError.BadRequest("Заказ не должен содержать детали")
             }
             
             await order.update({status_id:4})

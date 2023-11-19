@@ -5,6 +5,7 @@ const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
 router.get('/count',
+    query('all').default(false).isBoolean(),
     authMiddleWare(['employee']),
     ServiceController.get_count_services);
 
@@ -18,7 +19,7 @@ router.get('/:id',
 router.get('/',
     query('all').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt(),
+    query('page').default(1).isInt({min:0}),
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee','client']),
     ServiceController.get_services);

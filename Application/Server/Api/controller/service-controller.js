@@ -37,7 +37,14 @@ class ServiceController{
 
     async get_count_services(req,res,next){
         try{
-            const count = await GetCount({})
+            const {all} = req.query;
+
+            const option = {}
+            if(!all){
+                if(!option.where) option.where = {} 
+                option.where.is_active = true 
+            }
+            const count = await GetCount(option)
             
             res.json({
                 count_items:count,

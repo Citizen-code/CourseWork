@@ -1,4 +1,7 @@
+const ApiError = require('../exception/error')
 const {findOne, findAll, create, update, GetCount} = require('../services/car-service')
+const ClientService = require('../services/client-service')
+
 const validateService = require('../services/validate-service')
 class CarController{
 
@@ -61,6 +64,11 @@ class CarController{
 
             const {number, name, release_year, mileage, vin, color, engine_id, photo_id} = req.body
             const user = req.user;
+
+            const client = ClientService.findOne({where:{id:user.id}},"true")
+            if(client.car != null){
+                throw ApiError.BadRequest('Клиент не должен иметь авто')
+            }
 
             await create({
                 client_id: user.id,

@@ -10,7 +10,7 @@ router.get('/',
     authMiddleWare(['employee']),
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt(),
+    query('page').default(1).isInt({min:0}),
     ClientController.get_clients);
 
 router.get('/count',

@@ -18,7 +18,7 @@ router.get('/:id',
 router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt(),
+    query('page').default(1).isInt({min:0}),
     authMiddleWare(['employee','client']),
     CarController.get_cars);
 
