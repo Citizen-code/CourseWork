@@ -102,6 +102,18 @@ class OrderController{
         }
     }
 
+    async get_orders_time_in_day(req,res,next){
+        try{
+            validateService.validate(req)
+
+            const {date} = req.params
+
+            res.json(await findAll({ where: {date}, attributes:['time'] },"false"))
+        }catch(e){
+            next(e)
+        }
+    }
+
     async delete_order(req,res,next){
         try{
             validateService.validate(req)
@@ -143,6 +155,11 @@ class OrderController{
 
             const {comment, date, time} = req.body
             const user = req.user;
+            
+            const busy_times = await findAll({ where: {date}, attributes:['time'] },"false")
+            if(busy_times.find((i)=> { return i.time == `${time}:00` }) != undefined){
+                throw ApiError.BadRequest('Время уже занято');
+            }
 
             await create({
                 client_id: user.id,

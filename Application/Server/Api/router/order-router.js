@@ -11,14 +11,14 @@ router.get('/count',
 router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt({min:0}),
+    query('page').default(1).isInt({min:1}),
     authMiddleWare(['employee']),
     OrderController.get_orders);
 
 router.get('/client',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt({min:0}),
+    query('page').default(1).isInt({min:1}),
     authMiddleWare(['client']),
     OrderController.get_orders_client);
 
@@ -26,7 +26,7 @@ router.get('/client/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
-    query('page').default(1).isInt({min:0}),
+    query('page').default(1).isInt({min:1}),
     authMiddleWare(['employee']),
     OrderController.get_orders_client);
 
@@ -43,6 +43,11 @@ router.get('/calendar/:year/:month',
     query('include').default(false).isBoolean(),
     authMiddleWare(['employee']),
     OrderController.get_orders_in_month);
+
+router.get('/time/:date',
+    param('date').isDate(),
+    authMiddleWare(['client']),
+    OrderController.get_orders_time_in_day);
 
 router.post('/',
     body('comment').optional().isLength({max:500}),
