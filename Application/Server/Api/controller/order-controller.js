@@ -155,7 +155,12 @@ class OrderController{
 
             const {comment, date, time} = req.body
             const user = req.user;
-            
+
+            console.log((new Date(`${date} ${time}`) < new Date()))
+            if((new Date(`${date} ${time}`) < new Date())){
+                throw ApiError.BadRequest('Дата не должна быть меньше текущей');
+            }
+
             const busy_times = await findAll({ where: {date}, attributes:['time'] },"false")
             if(busy_times.find((i)=> { return i.time == `${time}:00` }) != undefined){
                 throw ApiError.BadRequest('Время уже занято');
