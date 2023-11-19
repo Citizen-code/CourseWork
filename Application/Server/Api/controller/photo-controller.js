@@ -14,8 +14,8 @@ class PhotoController{
 
             const file = req.files.photo;
             const id = v4();
-            const extension = file.name.split('.')[1];
-            const path_file =  `${__dirname}${process.env.FOLDER_PATH}${id}.${extension}`;
+            const extension = `.${file.name.split('.')[1]}`;
+            const path_file =  `${__dirname}${process.env.FOLDER_PATH}${id}${extension}`;
             const data = await photo.create({id,extension})
 
             file.mv(path_file,async (err) => {
