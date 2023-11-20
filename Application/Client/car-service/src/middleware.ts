@@ -10,17 +10,17 @@ export default async function middleware(req: NextRequest) {
             const responseNext = NextResponse.next()
             const response = await Refresh(responseNext)
             if (response == undefined) return responseNext;
-            else return NextResponse.redirect(new URL('/auth', req.url))
+            else return NextResponse.redirect(new URL('/login', req.url))
         }
         else if(client === 401){
-            if(req.nextUrl.pathname.includes('/auth')) return;
-            else return NextResponse.redirect(new URL('/auth', req.url))
-        }else if(req.nextUrl.pathname.includes('/auth')){
+            if(req.nextUrl.pathname.includes('/login')) return;
+            else return NextResponse.redirect(new URL('/login', req.url))
+        }else if(req.nextUrl.pathname.includes('/login')){
             return NextResponse.redirect(new URL('/profile', req.url));
         }
     }
 }
 
 export const config = {
-    matcher: ['/profile', '/auth']
+    matcher: ['/profile', '/login']
 }
