@@ -8,12 +8,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#9191E9"
-      Title="ClientsPage">
+      Title="ClientsPage" Loaded="Page_Loaded">
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -28,27 +29,29 @@
             </StackPanel>
         </StackPanel>
         <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
-        <ItemsControl>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}" Margin="0 5 0 0"/>
-                        <TextBlock Text="{Binding}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <ScrollViewer  Grid.Row="1">
+            <ItemsControl x:Name="ClientList" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Id}"/>
+                            <TextBlock Text="{Binding Surname}"/>
+                            <TextBlock Text="{Binding Firstname}"/>
+                            <TextBlock Text="{Binding Lastname}"/>
+                            <TextBlock Text="{Binding BirthDate}"/>
+                            <TextBlock Text="{Binding BirthDate}" Margin="0 5 0 0"/>
+                            <TextBlock Text="{Binding Phone}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
                 <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
@@ -65,5 +68,14 @@
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
         </materialDesign:DrawerHost>
+        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="3" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <ListBox SelectionChanged="Pagination_Selected" x:Name="Pagination">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 </Page>

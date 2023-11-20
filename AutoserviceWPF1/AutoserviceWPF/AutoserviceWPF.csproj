@@ -182,6 +182,7 @@
     <Compile Include="Models\ModelsDB\Service.cs" />
     <Compile Include="Models\ModelsDB\ServicePrice.cs" />
     <Compile Include="Models\ModelsDB\StatusOrder.cs" />
+    <Compile Include="Models\ModelsPartial\Client.cs" />
     <Compile Include="Models\ModelsPartial\Photo.cs" />
     <Compile Include="Models\ModelsResponse\BaseResponse.cs" />
     <Compile Include="Models\ModelsResponse\ErrorValidate.cs" />

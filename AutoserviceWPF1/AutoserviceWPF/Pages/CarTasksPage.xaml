@@ -19,9 +19,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <syncfusion:SfScheduler Grid.Row="1" ViewType="Week" FirstDayOfWeek="Monday" TimeZone="Russian Standart Time">
+        <syncfusion:SfScheduler Grid.Row="1" ViewType="Week" FirstDayOfWeek="Monday" x:Name="Caledr">
             <syncfusion:SfScheduler.DaysViewSettings>
-                <syncfusion:DaysViewSettings ViewHeaderHeight="45" TimeIntervalSize="-1" StartHour="8" EndHour="19" TimeRulerFormat="hh:mm" TimeRulerSize="50"/>
+                <syncfusion:DaysViewSettings ViewHeaderHeight="45" TimeIntervalSize="-1" StartHour="8" EndHour="21" TimeRulerFormat="hh:mm" TimeRulerSize="50"/>
             </syncfusion:SfScheduler.DaysViewSettings>
         </syncfusion:SfScheduler>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">

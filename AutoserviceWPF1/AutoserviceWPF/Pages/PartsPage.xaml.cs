@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Pages
 {
@@ -20,6 +21,51 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class PartsPage : Page
     {
+        int Page = 1;
+        int PagesCount = 1;
+
+        public async void Update()
+        {
+            PartsList.ItemsSource = null;
+            int pages = (await Api.ConsumableParts.GetCountConsumableParts()).CountPages;
+            if (PagesCount != pages)
+                for (int i = 1; i < pages + 1; i++)
+                    Pagination.Items.Add(i);
+            PagesCount = pages;
+            PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(false, true, Page);
+        }
+
+        private void Pagination_Selected(object sender, RoutedEventArgs e)
+        {
+            if (Pagination.SelectedItem != null)
+            {
+                if (Page != (int)Pagination.SelectedItem)
+                {
+                    Page = (int)Pagination.SelectedItem;
+                    Update();
+                }
+            }
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+            if (e.Delta < 0)
+            {
+                scrollViewer.LineRight();
+            }
+            else
+            {
+                scrollViewer.LineLeft();
+            }
+            e.Handled = true;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
         public PartsPage()
         {
             InitializeComponent();
