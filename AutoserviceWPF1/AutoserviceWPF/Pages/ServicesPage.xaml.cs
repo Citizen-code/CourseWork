@@ -21,8 +21,8 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class ServicesPage : Page
     {
-        int Page = 1;
-        int PagesCount = 1;
+        int page = 1;
+        int pagesCount = 1;
 
         public ServicesPage()
         {
@@ -34,16 +34,32 @@ namespace AutoserviceWPF.Pages
             try
             {
                 ServicesListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.Client.GetCountClients()).CountPages;
-                if (PagesCount != pages)
+                int pages = (await ApiRestClient.Api.Services.GetCountServices()).CountPages;
+                if (pagesCount != pages)
+                {
                     for (int i = 1; i < pages + 1; i++)
+                    {
                         Pagination.Items.Add(i);
-                PagesCount = pages;
-                ServicesListView.ItemsSource = await ApiRestClient.Api.Client.GetClients(false, true, Page);
+                    }
+                }
+                pagesCount = pages;
+                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(true, true, page, true);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Pagination_Selected(object sender, RoutedEventArgs e)
+        {
+            if (Pagination.SelectedItem != null)
+            {
+                if (page != (int)Pagination.SelectedItem)
+                {
+                    page = (int)Pagination.SelectedItem;
+                    LoadServices();
+                }
             }
         }
 
@@ -75,6 +91,32 @@ namespace AutoserviceWPF.Pages
         private void AddServiceButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ServiceAddPage());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LoadServices();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+            if (e.Delta < 0)
+            {
+                scrollViewer.LineRight();
+            }
+            else
+            {
+                scrollViewer.LineLeft();
+            }
+            e.Handled = true;
         }
     }
 }

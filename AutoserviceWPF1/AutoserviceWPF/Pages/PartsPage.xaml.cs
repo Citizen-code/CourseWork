@@ -24,15 +24,31 @@ namespace AutoserviceWPF.Pages
         int Page = 1;
         int PagesCount = 1;
 
-        public async void Update()
+        public PartsPage()
         {
-            PartsList.ItemsSource = null;
-            int pages = (await Api.ConsumableParts.GetCountConsumableParts()).CountPages;
-            if (PagesCount != pages)
-                for (int i = 1; i < pages + 1; i++)
-                    Pagination.Items.Add(i);
-            PagesCount = pages;
-            PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(true, true, Page);
+            InitializeComponent();
+        }
+
+        public async void LoadParts()
+        {
+            try
+            {
+                PartsList.ItemsSource = null;
+                int pages = (await Api.ConsumableParts.GetCountConsumableParts()).CountPages;
+                if (PagesCount != pages)
+                {
+                    for (int i = 1; i < pages + 1; i++)
+                    {
+                        Pagination.Items.Add(i);
+                    }
+                }
+                PagesCount = pages;
+                PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(true, true, Page);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Pagination_Selected(object sender, RoutedEventArgs e)
@@ -42,7 +58,7 @@ namespace AutoserviceWPF.Pages
                 if (Page != (int)Pagination.SelectedItem)
                 {
                     Page = (int)Pagination.SelectedItem;
-                    Update();
+                    LoadParts();
                 }
             }
         }
@@ -63,12 +79,14 @@ namespace AutoserviceWPF.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Update();
-        }
-
-        public PartsPage()
-        {
-            InitializeComponent();
+            try
+            {
+                LoadParts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -21,28 +21,44 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class ClientsPage : Page
     {
-        int Page = 1;
-        int PagesCount = 1;
+        int page = 1;
+        int pagesCount = 1;
 
-        public async void Update()
+        public ClientsPage()
         {
-            ClientList.ItemsSource = null;
-            int pages = (await Api.Client.GetCountClients()).CountPages;
-            if (PagesCount != pages)
-                for (int i = 1; i < pages + 1; i++)
-                    Pagination.Items.Add(i);
-            PagesCount = pages;
-            ClientList.ItemsSource = await Api.Client.GetClients(false, true, Page);
+            InitializeComponent();
+        }
+
+        public async void LoadClients()
+        {
+            try
+            {
+                ClientList.ItemsSource = null;
+                int pages = (await Api.Client.GetCountClients()).CountPages;
+                if (pagesCount != pages)
+                {
+                    for (int i = 1; i < pages + 1; i++)
+                    {
+                        Pagination.Items.Add(i);
+                    }
+                }
+                pagesCount = pages;
+                ClientList.ItemsSource = await Api.Client.GetClients(true, true, page);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Pagination_Selected(object sender, RoutedEventArgs e)
         {
             if (Pagination.SelectedItem != null)
             {
-                if (Page != (int)Pagination.SelectedItem)
+                if (page != (int)Pagination.SelectedItem)
                 {
-                    Page = (int)Pagination.SelectedItem;
-                    Update();
+                    page = (int)Pagination.SelectedItem;
+                    LoadClients();
                 }
             }
         }
@@ -63,12 +79,14 @@ namespace AutoserviceWPF.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Update();
-        }
-
-        public ClientsPage()
-        {
-            InitializeComponent();
+            try
+            {
+                LoadClients();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

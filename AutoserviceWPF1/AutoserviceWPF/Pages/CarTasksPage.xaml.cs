@@ -74,7 +74,14 @@ namespace AutoserviceWPF.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadOrders();
+            try
+            {
+                LoadOrders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoserviceWPF.Models;
+using AutoserviceWPF.Models.ModelsDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,14 +27,23 @@ namespace AutoserviceWPF.Pages
             InitializeComponent();
         }
 
-        private void AddServiceButton_Click(object sender, RoutedEventArgs e)
+        private async void AddServiceButton_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                Service service = new Service { Name = ServiceNameTextBox.Text };
+                service.Price.Price = Decimal.Parse(ServicePriceTextBox.Text);
+                await ApiRestClient.Api.Services.PostService(service);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.GoBack();
         }
     }
 }

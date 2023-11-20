@@ -10,6 +10,7 @@
       Background="#9191E9"
       Title="RequestsPage"
       Loaded="Page_Loaded">
+    
     <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
         <Grid ShowGridLines="True">
             <Grid.RowDefinitions>
@@ -21,13 +22,15 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <DockPanel LastChildFill="False">
-                <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
-                    <TextBlock Text="Дата" HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
-                        <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+                <StackPanel Orientation="Horizontal" Cursor="">
+                    <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
+                        <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
+                            <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <Button DockPanel.Dock="Right" Width="200"  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>

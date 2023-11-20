@@ -22,8 +22,8 @@ namespace AutoserviceWPF.Pages
     public partial class RequestsPage : Page
     {
 
-        int Page = 1;
-        int PagesCount = 1;
+        int page = 1;
+        int pagesCount = 1;
 
         public RequestsPage()
         {
@@ -36,11 +36,15 @@ namespace AutoserviceWPF.Pages
             {
                 RequestsListView.ItemsSource = null;
                 int pages = (await ApiRestClient.Api.Orders.GetCountOrders()).CountPages;
-                if (PagesCount != pages)
+                if (pagesCount != pages)
+                {
                     for (int i = 1; i < pages + 1; i++)
+                    {
                         Pagination.Items.Add(i);
-                PagesCount = pages;
-                RequestsListView.ItemsSource = await ApiRestClient.Api.Orders.GetOrders(true, true, Page);
+                    }
+                }
+                pagesCount = pages;
+                RequestsListView.ItemsSource = await ApiRestClient.Api.Orders.GetOrders(true, true, page);
             }
             catch (Exception ex)
             {
@@ -52,9 +56,9 @@ namespace AutoserviceWPF.Pages
         {
             if (Pagination.SelectedItem != null)
             {
-                if (Page != (int)Pagination.SelectedItem)
+                if (page != (int)Pagination.SelectedItem)
                 {
-                    Page = (int)Pagination.SelectedItem;
+                    page = (int)Pagination.SelectedItem;
                     LoadRequests();
                 }
             }
@@ -101,7 +105,14 @@ namespace AutoserviceWPF.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadRequests();
+            try
+            {
+                LoadRequests();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

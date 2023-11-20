@@ -33,19 +33,21 @@ namespace AutoserviceWPF.Pages
                 await ApiRestClient.Login(new Uri("http://185.252.146.21/"), LoginTextBox.Text, PasswordBox.Password);
                 NavigationService.Navigate(new CarTasksPage());
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is ApiError error)
             {
-                if (ex is ApiError error)
+                if (error.Error.Errors.Count > 0)
                 {
-                    if (error.Error.Errors.Count > 0)
-                    {
-                        string errorList = string.Join("\n", error.Error.Errors);
-                        MessageBox.Show(errorList, error.Message);
-                    }
-                    else MessageBox.Show(error.Message, "Ошибка");
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message);
                 }
                 else
-                    MessageBox.Show(ex.Message, "Ошибка");
+                {
+                    MessageBox.Show(error.Message, "Ошибка");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
