@@ -32,11 +32,11 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding}"/>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding Name}"/>
                             <TextBlock Text="{Binding}"/>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding Price.Price}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

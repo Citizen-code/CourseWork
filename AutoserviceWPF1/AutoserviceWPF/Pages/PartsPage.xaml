@@ -30,24 +30,26 @@
         </StackPanel>
         <!--TODO: Сделать WrapPanel-->
         <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
-        <ItemsControl x:Name="PartsList" Grid.Row="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Id}"/>
-                        <Image Source="{Binding Photo.Url}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock Text="{Binding}"/>
-                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="PartsList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="{Binding Brand}"/>
+                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding Photo.Url}"/>
+                            <TextBlock Text="{Binding Article}"/>
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Price}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
         <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 20" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
             <materialDesign:PackIcon Height="20" Width="20" Kind="Add"/>
         </Button>

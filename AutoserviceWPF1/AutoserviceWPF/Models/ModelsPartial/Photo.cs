@@ -2,6 +2,6 @@
 {
     partial class Photo
     {
-        public string Url { get => $"{ApiRestClient.Url.AbsoluteUri}photo/{Id}{Extension}"; }
+        public string Url { get => $"{ApiRestClient.Url}photo/{Id}{Extension}"; }
     }
 }

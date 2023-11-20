@@ -10,7 +10,7 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public DateTime Date { get; set; }
 
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         public string Comment { get; set; }
 

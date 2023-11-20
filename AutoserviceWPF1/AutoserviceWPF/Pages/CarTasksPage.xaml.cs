@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoserviceWPF.Models;
+using Syncfusion.UI.Xaml.Scheduler;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +20,31 @@ namespace AutoserviceWPF.Pages
     /// <summary>
     /// Логика взаимодействия для CarTasksPage.xaml
     /// </summary>
+    public class Ordersa
+    {
+        public string EventName { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+        public Brush BackgroundColor { get; set; }
+        public Brush ForegroundColor { get; set; }
+    }
     public partial class CarTasksPage : Page
     {
+
         public CarTasksPage()
         {
             InitializeComponent();
+        }
+
+        public async void LoadOrders()
+        {
+            List<Ordersa> orders = new List<Ordersa>();
+            var g = (await ApiRestClient.Api.Orders.GetCalendarOrders(2023, 11));
+            foreach (var item in g)
+            {
+                orders.Add(new Ordersa() { EventName = item.StatusId.ToString(), From = item.Date, To = item.Date });
+            }
+            Caledr.ItemsSource = orders;
         }
 
         private void RequestsNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -48,6 +70,11 @@ namespace AutoserviceWPF.Pages
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthPage());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadOrders();
         }
     }
 }

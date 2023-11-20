@@ -8,59 +8,78 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#9191E9"
-      Title="RequestsPage">
-
-    <Grid ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
-            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
-                <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
-            </StackPanel>
-        </StackPanel>
-        <ListView x:Name="RequestsListView" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
+      Title="RequestsPage"
+      Loaded="Page_Loaded">
+    <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel LastChildFill="False">
+                <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
+                    <TextBlock Text="Дата" HorizontalAlignment="Center"/>
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding}"/>
-                            <TextBlock Text="{Binding}"/>
-                            <TextBlock Text="{Binding}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding}"/>
-                            <TextBlock Text="{Binding}"/>
-                            <TextBlock Text="{Binding}" Margin="0 20 0 0"/>
-                        </StackPanel>
+                        <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
+                        <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
                     </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Width="800" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
-            <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
-            </Canvas>
-            <materialDesign:DrawerHost.RightDrawerContent>
-                <StackPanel Width="170" Margin="16">
-                    <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
-                    <StackPanel HorizontalAlignment="Left" Margin="5">
-                        <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
-                        <TextBlock x:Name="ServicesNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Услуги" FontSize="18" PreviewMouseLeftButtonDown="ServicesNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
-                        <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
-                        <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
-                    </StackPanel>
-                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
                 </StackPanel>
-            </materialDesign:DrawerHost.RightDrawerContent>
-        </materialDesign:DrawerHost>
-    </Grid>
+                <Button DockPanel.Dock="Right" Width="200"  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+            </DockPanel>
+            <ScrollViewer Grid.Row="1">
+                <ListView x:Name="RequestsListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <!--TODO: Заменить StackPanel на что-нибудь другое-->
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Client.Surname}"/>
+                                    <TextBlock Text="{Binding Client.Firstname}"/>
+                                    <TextBlock Text="{Binding Client.Lastname}"/>
+                                    <TextBlock Text="{Binding Client.Email}"/>
+                                    <TextBlock Text="{Binding Client.Phone}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Status.Name}"/>
+                                    <TextBlock Text="{Binding Employee.Surname}"/>
+                                    <TextBlock Text="{Binding Employee.Firstname}"/>
+                                    <TextBlock Text="{Binding Employee.Lastname}"/>
+                                    <TextBlock Text="{Binding Date}" Margin="0 20 0 0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="3" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <ListBox SelectionChanged="Pagination_Selected" x:Name="Pagination">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <materialDesign:DrawerHost.RightDrawerContent>
+            <StackPanel Width="170" Margin="16">
+                <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
+                <StackPanel HorizontalAlignment="Left" Margin="5">
+                    <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
+                    <TextBlock x:Name="ServicesNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Услуги" FontSize="18" PreviewMouseLeftButtonDown="ServicesNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
+                    <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
+                    <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
+                </StackPanel>
+                <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
+            </StackPanel>
+        </materialDesign:DrawerHost.RightDrawerContent>
+    </materialDesign:DrawerHost>
+    
 </Page>

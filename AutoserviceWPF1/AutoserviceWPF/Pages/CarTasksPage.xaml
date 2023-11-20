@@ -9,7 +9,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#9191E9"
-      Title="CarTasksPage">
+      Title="CarTasksPage"
+      Loaded="Page_Loaded">
 
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
@@ -20,6 +21,9 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <syncfusion:SfScheduler Grid.Row="1" ViewType="Week" FirstDayOfWeek="Monday" x:Name="Caledr">
+            <syncfusion:SfScheduler.AppointmentMapping>
+                <syncfusion:AppointmentMapping Subject="EventName" StartTime="From" EndTime="To" AppointmentBackground="BackgroundColor" Foreground="ForegroundColor"/>
+            </syncfusion:SfScheduler.AppointmentMapping>
             <syncfusion:SfScheduler.DaysViewSettings>
                 <syncfusion:DaysViewSettings ViewHeaderHeight="45" TimeIntervalSize="-1" StartHour="8" EndHour="21" TimeRulerFormat="hh:mm" TimeRulerSize="50"/>
             </syncfusion:SfScheduler.DaysViewSettings>

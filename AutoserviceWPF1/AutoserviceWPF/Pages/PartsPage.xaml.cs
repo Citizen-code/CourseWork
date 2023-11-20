@@ -32,7 +32,7 @@ namespace AutoserviceWPF.Pages
                 for (int i = 1; i < pages + 1; i++)
                     Pagination.Items.Add(i);
             PagesCount = pages;
-            PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(false, true, Page);
+            PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(true, true, Page);
         }
 
         private void Pagination_Selected(object sender, RoutedEventArgs e)
