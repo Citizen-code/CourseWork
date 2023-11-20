@@ -1,0 +1,228 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/carousel.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+.carousel_image_filter__at_ls{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	opacity: 0.6;
+}
+
+.carousel_image_item_carousel__m5gin {
+	height: 100vh;
+}
+
+.carousel_info_carousel__9tZg7{
+	z-index: 10;
+	text-align: center;
+}
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/header.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+@media (max-width: 576px) { 
+    .header_menu_el_left__v0G9e{
+        text-align:center;
+    }
+    #header_logo-min__8zFLv{
+        visibility: visible;
+    }
+}
+@media (min-width: 577px) { 
+    .header_menu_el_left__v0G9e{
+        text-align:left;
+        text-wrap:nowrap;
+    }
+}
+.header_menu_el_center__x9pZP{
+    text-align: center;
+}
+.header_menu_el_right__6tvR3{
+    text-align:right;
+    margin: 10px;
+}
+.header_menu_el_left__v0G9e .header_menu_el_center__x9pZP .header_menu_el_right__6tvR3{
+    padding: 5px 10px;
+}
+.header_menu_row___97oL{
+    justify-content: center;
+}
+.header_menu_link__v_6Oi{
+    margin: 0px 10px;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    white-space: pre;
+}
+#header_header__RNcPq{
+    margin: 20px;
+    background: rgba(0,0,0,0);
+    position: absolute;
+    z-index: 10;
+    width: 98%;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/about.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+.about_background-img__K_j8U {
+  background: linear-gradient(to right, #000, rgba(100,0,0,0.88)), url('https://w.forfun.com/fetch/7d/7df3005f2012193c9074adb4bc4f0e7b.jpeg');
+  background-position: left bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+}
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/border.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+.border_element-shape-fill__IICrl {
+  fill: white;
+  stroke: white;
+}
+
+.border_svg__VXdus {
+  display: block;
+  width: calc(100% + 1.3px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+}
+
+.border_element-shape__VGU5m {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+}
+
+.border_element-shape-top__mPpIo{
+  top: -1px;
+}
+
+.border_element-shape-bottom__pudWV{
+  bottom: -1px;
+  transform: rotate(180deg);
+}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/services.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+.services_background__g1yLy{
+  background: white;
+  color: black;
+  padding: 10px;
+}
+
+.services_h1__rvhOb {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.services_h5__xF__Z {
+  font-weight: bold;
+}
+
+.services_element__NCjYU{
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.services_bnt__7f89_{
+  margin-top: 15px;
+}
+
+.services_img__9ESbu{
+  height: 200px;
+  width: 100%;
+}
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/gallery.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+.gallery_background__SIQEJ{
+    background: black;
+    padding: 10px;
+}
+
+.gallery_element__cnIMX{
+    padding: 10px;
+}
+
+.gallery_h1__O7uqz{
+    text-align: center;
+}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/components/style/home/feedback.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+.feedback_element-shape-fill__wHnEC {
+  fill: black;
+  stroke: black;
+}
+
+.feedback_element-shape-fill-bottom__XYFZP {
+  fill: white;
+  stroke: white;
+}
+
+.feedback_svg__OeeSW {
+  display: block;
+  width: calc(100% + 1.3px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+}
+
+.feedback_element-shape__Try6h {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+}
+
+.feedback_element-shape-top__FHvvf{
+  top: -1px;
+}
+
+.feedback_element-shape-bottom__9MUPJ{
+  bottom: -1px;
+  transform: rotate(180deg);
+}
+
+.feedback_h1__Se4qg {
+  text-align: center;
+  font-weight: bold;
+}
+
+.feedback_background__HOYst{
+  background-color: white;
+  color: black;
+  padding: 0 0 20px 0;
+  text-align: center;
+}
+
+.feedback_card-background__ACkhV{
+  background-color: white;
+  color: black;
+  border-top: solid  black;
+  border-bottom: solid  black;
+  margin: 10px;
+}
+
+.feedback_card-footer__Uxc9T{
+  text-align: right;
+  font-weight: bold;
+  color: red;
+}
+

@@ -1,0 +1,31 @@
+.element-shape-fill {
+  fill: white;
+  stroke: white;
+}
+
+.svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+}
+
+.element-shape {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+}
+
+.element-shape-top{
+  top: -1px;
+}
+
+.element-shape-bottom{
+  bottom: -1px;
+  transform: rotate(180deg);
+}

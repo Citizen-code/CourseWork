@@ -1,0 +1,9 @@
+.background-img {
+  background: linear-gradient(to right, #000, rgba(100,0,0,0.88)), url('https://w.forfun.com/fetch/7d/7df3005f2012193c9074adb4bc4f0e7b.jpeg');
+  background-position: left bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+}

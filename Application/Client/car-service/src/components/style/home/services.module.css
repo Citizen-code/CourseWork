@@ -1,0 +1,31 @@
+.background{
+  background: white;
+  color: black;
+  padding: 10px;
+}
+
+.h1 {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.h5 {
+  font-weight: bold;
+}
+
+.element{
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.bnt{
+  margin-top: 15px;
+}
+
+.img{
+  height: 200px;
+  width: 100%;
+}
