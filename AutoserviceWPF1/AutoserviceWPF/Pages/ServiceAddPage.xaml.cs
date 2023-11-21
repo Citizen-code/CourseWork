@@ -62,9 +62,11 @@ namespace AutoserviceWPF.Pages
                 {
                     case true:
                         await ApiRestClient.Api.Services.PostService(_serviceRequest);
+                        NavigationService.Navigate(new ServicesPage());
                         break;
                     case false:
                         await ApiRestClient.Api.Services.PutService(_service.Id, _serviceRequest);
+                        NavigationService.Navigate(new ServicesPage());
                         break;
                 }
             }
