@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoserviceWPF.Models.ModelsDB;
 using AutoserviceWPF.Models.ModelsResponse;
 using static AutoserviceWPF.Models.ApiRestClient;
+using AutoserviceWPF.Models.ModelsRequest;
 
 namespace AutoserviceWPF.Models.Requests
 {
@@ -43,14 +44,14 @@ namespace AutoserviceWPF.Models.Requests
             return await ExecuteAsync<BaseResponse>(request);
         }
 
-        public async Task<BaseResponse> PostService(Service service)
+        public async Task<BaseResponse> PostService(ServiceRequest service)
         {
             var request = new RestRequest("api/service", Method.Post)
                 .AddJsonBody(service);
             return await ExecuteAsync<BaseResponse>(request);
         }
 
-        public async Task<BaseResponse> PutService(Guid id, Service service)
+        public async Task<BaseResponse> PutService(Guid id, ServiceRequest service)
         {
             var request = new RestRequest("api/service/{id}", Method.Put)
                 .AddParameter("id", $"{id}", ParameterType.UrlSegment)

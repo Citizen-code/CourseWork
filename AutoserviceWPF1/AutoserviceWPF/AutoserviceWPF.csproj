@@ -184,6 +184,7 @@
     <Compile Include="Models\ModelsDB\StatusOrder.cs" />
     <Compile Include="Models\ModelsPartial\Client.cs" />
     <Compile Include="Models\ModelsPartial\Photo.cs" />
+    <Compile Include="Models\ModelsRequest\ServiceRequest.cs" />
     <Compile Include="Models\ModelsResponse\BaseResponse.cs" />
     <Compile Include="Models\ModelsResponse\ErrorValidate.cs" />
     <Compile Include="Models\ModelsResponse\GetCountResponse.cs" />

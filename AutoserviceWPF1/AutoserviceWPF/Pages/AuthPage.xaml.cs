@@ -38,11 +38,11 @@ namespace AutoserviceWPF.Pages
                 if (error.Error.Errors.Count > 0)
                 {
                     string errorList = string.Join("\n", error.Error.Errors);
-                    MessageBox.Show(errorList, error.Message);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    MessageBox.Show(error.Message, "Ошибка");
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)

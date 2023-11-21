@@ -1,5 +1,6 @@
 ﻿using AutoserviceWPF.Models;
 using AutoserviceWPF.Models.ModelsDB;
+using AutoserviceWPF.Models.ModelsRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,22 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
-                Service service = new Service { Name = ServiceNameTextBox.Text };
-                service.Price.Price = Decimal.Parse(ServicePriceTextBox.Text);
+                Decimal.TryParse(ServicePriceTextBox.Text,out decimal price);
+                if(price == 0) throw new Exception("Неверная цена");
+                ServiceRequest service = new ServiceRequest { Name = ServiceNameTextBox.Text, Price = price, IsTimeBased = IsHourlyTextBox.IsChecked };
                 await ApiRestClient.Api.Services.PostService(service);
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {
