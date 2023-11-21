@@ -31,8 +31,8 @@
         <!--TODO: Сделать WrapPanel-->
         <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
         <ScrollViewer Grid.Row="1">
-            <ItemsControl x:Name="PartsList">
-                <ItemsControl.ItemTemplate>
+            <ListView x:Name="PartsList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="{Binding Brand}"/>
@@ -42,18 +42,18 @@
                             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Price}"/>
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                </ListView.ItemsPanel>
+            </ListView>
         </ScrollViewer>
         <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 20" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
             <materialDesign:PackIcon Height="20" Width="20" Kind="Add"/>
         </Button>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
                 <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>

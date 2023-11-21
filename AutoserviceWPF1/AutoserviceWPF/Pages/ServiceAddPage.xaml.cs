@@ -23,19 +23,50 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class ServiceAddPage : Page
     {
+        private readonly Service _service;
+        private readonly ServiceRequest _serviceRequest;
+        private readonly bool IsAdded;
+
         public ServiceAddPage()
         {
             InitializeComponent();
+            _serviceRequest = new ServiceRequest();
+            IsAdded = true;
+            IsHourlyTextBox.IsChecked = false;
+            LoadServiceData();
+        }
+
+        public ServiceAddPage(Service service)
+        {
+            InitializeComponent();
+            _service = service;
+            IsHourlyTextBox.IsChecked = false;
+            LoadServiceData();
+        }
+
+        public void LoadServiceData()
+        {
+            this.DataContext = _service;
         }
 
         private async void AddServiceButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Decimal.TryParse(ServicePriceTextBox.Text,out decimal price);
-                if(price == 0) throw new Exception("Неверная цена");
-                ServiceRequest service = new ServiceRequest { Name = ServiceNameTextBox.Text, Price = price, IsTimeBased = IsHourlyTextBox.IsChecked };
-                await ApiRestClient.Api.Services.PostService(service);
+
+                _serviceRequest.Name = ServiceNameTextBox.Text;
+                _serviceRequest.Price = Convert.ToDecimal(ServicePriceTextBox.Text);
+                _serviceRequest.IsTimeBased = IsHourlyTextBox.IsChecked;
+
+                switch (IsAdded)
+                {
+                    case true:
+                        await ApiRestClient.Api.Services.PostService(_serviceRequest);
+                        break;
+                    case false:
+                        await ApiRestClient.Api.Services.PutService(_service.Id, _serviceRequest);
+                        break;
+                }
             }
             catch (Exception ex) when (ex is ApiError error)
             {

@@ -1,7 +1,7 @@
 ﻿using AutoserviceWPF.Models.ModelsResponse;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -15,7 +15,7 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public string Lastname { get; set; }
 
-        [JsonPropertyName("Birth_Date")]
+        [JsonProperty("Birth_Date")]
         public DateTime BirthDate { get; set; }
 
         public string Email { get; set; }

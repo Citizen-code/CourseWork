@@ -2,6 +2,9 @@
 using System;
 using System.Threading.Tasks;
 using AutoserviceWPF.Models.ModelsResponse;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using RestSharp.Serializers.NewtonsoftJson;
 
 namespace AutoserviceWPF.Models
 {
@@ -30,7 +33,16 @@ namespace AutoserviceWPF.Models
         public static void CreateApi(Uri uri, string token)
         {
             Authenticator = new Authenticator(uri, token);
-            RestClient = new RestClient(new RestClientOptions(uri) { Authenticator = Authenticator });
+            RestClient = new RestClient(new RestClientOptions(uri) { Authenticator = Authenticator }, 
+                configureSerialization: s => s.UseNewtonsoftJson(new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                DefaultValueHandling = DefaultValueHandling.Include,
+                TypeNameHandling = TypeNameHandling.None,
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.None,
+                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+            }));
             Url = uri;
             Api = new Api();
         }

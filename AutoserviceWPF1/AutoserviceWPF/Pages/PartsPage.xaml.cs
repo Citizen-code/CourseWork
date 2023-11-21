@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoserviceWPF.Models.ModelsDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -117,6 +118,19 @@ namespace AutoserviceWPF.Pages
         private void AddPartButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PartAddWindows());
+        }
+
+        private void PartsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PartsList.SelectedItem != null)
+            {
+                ConsumablePart currentPart = (ConsumablePart)PartsList.SelectedItem;
+                NavigationService.Navigate(new PartAddWindows(currentPart));
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

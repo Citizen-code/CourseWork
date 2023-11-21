@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -8,13 +8,13 @@ namespace AutoserviceWPF.Models.ModelsDB
     {
         public Guid Id { get; set; }
 
-        [JsonPropertyName("order_id")]
+        [JsonProperty("order_id")]
         public Guid OrderId { get; set; }
 
-        [JsonPropertyName("service_id")]
+        [JsonProperty("service_id")]
         public Guid ServiceId { get; set; }
 
-        [JsonPropertyName("price_id")]
+        [JsonProperty("price_id")]
         public Guid PriceId { get; set; }
 
         public decimal? Time { get; set; }

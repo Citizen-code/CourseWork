@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -14,7 +14,7 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public string Lastname { get; set; }
 
-        [JsonPropertyName("photo_id")]
+        [JsonProperty("photo_id")]
         public Guid? PhotoId { get; set; }
 
         //public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

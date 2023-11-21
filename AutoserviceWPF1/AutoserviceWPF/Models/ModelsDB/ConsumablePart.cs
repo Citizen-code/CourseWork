@@ -1,7 +1,8 @@
 ﻿using AutoserviceWPF.Models.ModelsResponse;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -17,13 +18,13 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public decimal Price { get; set; }
 
-        [JsonPropertyName("Measure_Unit")]
+        [JsonProperty("measure_unit")]
         public string MeasureUnit { get; set; }
 
-        [JsonPropertyName("photo_id")]
+        [JsonProperty("photo_id")]
         public Guid? PhotoId { get; set; }
 
-        [JsonPropertyName("Date_Add")]
+        [JsonProperty("Date_Add")]
         public DateTime DateAdd { get; set; }
 
         //public virtual ICollection<ListConsumablePart> ListConsumableParts { get; set; } = new List<ListConsumablePart>();

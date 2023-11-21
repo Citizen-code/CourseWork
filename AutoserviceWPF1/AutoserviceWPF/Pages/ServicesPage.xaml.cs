@@ -1,4 +1,5 @@
 ﻿using AutoserviceWPF.Models;
+using AutoserviceWPF.Models.ModelsDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,6 +118,19 @@ namespace AutoserviceWPF.Pages
                 scrollViewer.LineLeft();
             }
             e.Handled = true;
+        }
+
+        private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ServicesListView.SelectedItem != null)
+            {
+                Service currentService = (Service)ServicesListView.SelectedItem;
+                NavigationService.Navigate(new ServiceAddPage(currentService));
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

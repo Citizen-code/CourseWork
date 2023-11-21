@@ -1,7 +1,8 @@
 ﻿using AutoserviceWPF.Models.ModelsResponse;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -9,14 +10,14 @@ namespace AutoserviceWPF.Models.ModelsDB
     {
         public Guid Id { get; set; }
 
-        [JsonPropertyName("client_id")]
+        [JsonProperty("client_id")]
         public Guid ClientId { get; set; }
 
         public string Number { get; set; }
 
         public string Name { get; set; }
 
-        [JsonPropertyName("Release_Year")]
+        [JsonProperty("Release_Year")]
         public int? ReleaseYear { get; set; }
 
         public long? Mileage { get; set; }
@@ -25,10 +26,10 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public string Color { get; set; }
 
-        [JsonPropertyName("engine_id")]
+        [JsonProperty("engine_id")]
         public int? EngineId { get; set; }
 
-        [JsonPropertyName("photo_id")]
+        [JsonProperty("photo_id")]
         public Guid? PhotoId { get; set; }
 
         public virtual Client Client { get; set; }

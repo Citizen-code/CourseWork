@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -10,7 +10,7 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public decimal Price { get; set; }
 
-        [JsonPropertyName("Is_Time_Based")]
+        [JsonProperty("Is_Time_Based")]
         public bool? IsTimeBased { get; set; }
 
         //public virtual ICollection<ListService> ListServices { get; set; } = new List<ListService>();

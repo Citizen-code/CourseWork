@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsResponse
 {
     public class BaseResponse
     {
-        [JsonPropertyName("message")]
+        [JsonProperty("message")]
         public string Message { get; set; } = string.Empty;
-        [JsonPropertyName("errors")]
+        [JsonProperty("errors")]
         public List<ErrorValidate> Errors { get; set; } = new List<ErrorValidate>();
     }
 }

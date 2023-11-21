@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace AutoserviceWPF.Models.ModelsResponse
 {
     public class ErrorValidate
     {
-        [JsonPropertyName("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
-        [JsonPropertyName("msg")]
+        [JsonProperty("msg")]
         public string Message { get; set; }
-        [JsonPropertyName("path")]
+        [JsonProperty("path")]
         public string Path { get; set; }
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
-        [JsonPropertyName("value")]
+        [JsonProperty("value")]
         public string Value { get; set; }
 
         public override string ToString()

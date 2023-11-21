@@ -1,13 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace AutoserviceWPF.Models.ModelsResponse
 {
     internal class TokenResponse: BaseResponse
     {
-        [JsonPropertyName("accessToken")]
+        [JsonProperty("accessToken")]
         public string AccessToken { get; set; } = string.Empty;
 
-        [JsonPropertyName("refreshToken")]
+        [JsonProperty("refreshToken")]
         public string RefreshToken { get; set; } = string.Empty;
     }
 }
