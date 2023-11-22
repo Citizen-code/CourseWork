@@ -164,7 +164,7 @@ class OrderController{
             if((new Date(`${date} ${time}`) < new Date())){
                 throw ApiError.BadRequest('Дата и время не должны быть меньше текущей даты и времени');
             }
-
+            const status_id = 4
             const busy_times = await findAll({ where: {date, status_id: {[Op.ne]: status_id }}, attributes:['time'] },"false")
             if(busy_times.find((i)=> { return i.time == `${time}:00` }) != undefined){
                 throw ApiError.BadRequest('Время уже занято');
