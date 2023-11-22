@@ -165,7 +165,7 @@ class OrderController{
                 throw ApiError.BadRequest('Дата и время не должны быть меньше текущей даты и времени');
             }
 
-            const busy_times = await findAll({ where: {date}, attributes:['time'] },"false")
+            const busy_times = await findAll({ where: {date, status_id: {[Op.ne]: status_id }}, attributes:['time'] },"false")
             if(busy_times.find((i)=> { return i.time == `${time}:00` }) != undefined){
                 throw ApiError.BadRequest('Время уже занято');
             }
