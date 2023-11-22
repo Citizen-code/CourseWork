@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\App.xaml
-101946882703
+11-1770008084
 
-46389037961
+47661392552
 37-1837293754
-MainWindow.xaml;Pages\AuthPage.xaml;Pages\CarTasksPage.xaml;Pages\ClientsPage.xaml;Pages\PartAddWindows.xaml;Pages\PartsPage.xaml;Pages\RequestEditPage.xaml;Pages\RequestsPage.xaml;Pages\ServiceAddPage.xaml;Pages\ServicesPage.xaml;
+MainWindow.xaml;Pages\AuthPage.xaml;Pages\CarTasksPage.xaml;Pages\ClientsPage.xaml;Pages\PartAddWindows.xaml;Pages\PartsPage.xaml;Pages\RequestsPage.xaml;Pages\RequestUpdatePage.xaml;Pages\ServiceAddPage.xaml;Pages\ServicesPage.xaml;Pages\СlientInfoPage.xaml;
 
-True
+False
 

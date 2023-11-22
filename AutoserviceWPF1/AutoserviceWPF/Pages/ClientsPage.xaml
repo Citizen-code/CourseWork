@@ -28,10 +28,9 @@
                 <RadioButton x:Name="ReleaseDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
             </StackPanel>
         </StackPanel>
-        <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
         <ScrollViewer  Grid.Row="1">
-            <ItemsControl x:Name="ClientList" >
-                <ItemsControl.ItemTemplate>
+            <ListView x:Name="ClientList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ClientList_SelectionChanged">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="10">
                             <TextBlock Text="{Binding Surname}"/>
@@ -43,13 +42,18 @@
                             <TextBlock Text="{Binding Car.Name}"/>
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                </ListView.ItemsPanel>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="UpdateClient" Header="{materialDesign:PackIcon Kind=Pencil}" Click="UpdateClient_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
         </ScrollViewer>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>

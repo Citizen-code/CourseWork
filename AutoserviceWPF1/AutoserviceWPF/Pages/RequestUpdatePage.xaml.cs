@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AutoserviceWPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для RequestEditPage.xaml
+    /// Логика взаимодействия для RequestUpdatePage.xaml
     /// </summary>
-    public partial class RequestEditPage : Page
+    public partial class RequestUpdatePage : Page
     {
-        public RequestEditPage()
+        public RequestUpdatePage()
         {
             InitializeComponent();
         }

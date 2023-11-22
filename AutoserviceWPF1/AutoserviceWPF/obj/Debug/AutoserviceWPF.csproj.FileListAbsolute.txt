@@ -370,5 +370,7 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\RestSharp.Serializers.NewtonsoftJson.dll
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\Newtonsoft.Json.xml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\RestSharp.Serializers.NewtonsoftJson.xml
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestEditPage.g.cs
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestEditPage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.baml

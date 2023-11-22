@@ -24,16 +24,16 @@ namespace AutoserviceWPF.Pages
     public partial class ServiceAddPage : Page
     {
         private readonly Service _service;
-        private readonly ServiceRequest _serviceRequest;
         private readonly bool IsAdded;
 
         public ServiceAddPage()
         {
             InitializeComponent();
-            _serviceRequest = new ServiceRequest();
+            _service = new Service();
+            _service.Price = new ServicePrice();
             IsAdded = true;
             IsHourlyTextBox.IsChecked = false;
-            LoadServiceData();
+            this.DataContext = _service;
         }
 
         public ServiceAddPage(Service service)
@@ -41,11 +41,6 @@ namespace AutoserviceWPF.Pages
             InitializeComponent();
             _service = service;
             IsHourlyTextBox.IsChecked = false;
-            LoadServiceData();
-        }
-
-        public void LoadServiceData()
-        {
             this.DataContext = _service;
         }
 
@@ -53,20 +48,18 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
-
-                _serviceRequest.Name = ServiceNameTextBox.Text;
-                _serviceRequest.Price = Convert.ToDecimal(ServicePriceTextBox.Text);
-                _serviceRequest.IsTimeBased = IsHourlyTextBox.IsChecked;
-
                 switch (IsAdded)
                 {
                     case true:
-                        await ApiRestClient.Api.Services.PostService(_serviceRequest);
-                        NavigationService.Navigate(new ServicesPage());
+                        _service.Name = ServiceNameTextBox.Text;
+                        _service.Price.Price = Convert.ToDecimal(ServicePriceTextBox.Text);
+                        _service.Price.IsTimeBased = IsHourlyTextBox.IsChecked;
+                        await ApiRestClient.Api.Services.PostService(new ServiceRequest() { Name = _service.Name, Price = _service.Price.Price, IsTimeBased = _service.Price.IsTimeBased });
+                        NavigationService.GoBack();
                         break;
                     case false:
-                        await ApiRestClient.Api.Services.PutService(_service.Id, _serviceRequest);
-                        NavigationService.Navigate(new ServicesPage());
+                        await ApiRestClient.Api.Services.PutService(_service.Id, new ServiceRequest() { Name = _service.Name, Price = _service.Price.Price, IsTimeBased = _service.Price.IsTimeBased });
+                        NavigationService.GoBack();
                         break;
                 }
             }

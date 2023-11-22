@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoserviceWPF.Models.ModelsDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -112,6 +113,32 @@ namespace AutoserviceWPF.Pages
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthPage());
+        }
+
+        private void ClientList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ClientList.SelectedItem != null)
+            {
+                Client currentClient = (Client)ClientList.SelectedItem;
+                NavigationService.Navigate(new СlientInfoPage(currentClient));
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void UpdateClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClientList.SelectedItems != null)
+            {
+                Client currentClient = (Client)ClientList.SelectedItems;
+                //NavigationService.Navigate(new CarUpdatePage(currentClient));
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

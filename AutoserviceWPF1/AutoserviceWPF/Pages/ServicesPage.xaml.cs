@@ -44,8 +44,9 @@ namespace AutoserviceWPF.Pages
                     }
                 }
                 pagesCount = pages;
-                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(true, true, page, true);
+                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(false, true, page, true);
             }
+            //TODO: Добавить Api try catch.
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -120,7 +121,24 @@ namespace AutoserviceWPF.Pages
             e.Handled = true;
         }
 
-        private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Service currentService = (Service)ServicesListView.SelectedItem;
+                if (MessageBox.Show("Вы хотите удалить услугу ?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    await ApiRestClient.Api.Services.DeleteService(currentService.Id);
+                    LoadServices();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdateService_Click(object sender, RoutedEventArgs e)
         {
             if (ServicesListView.SelectedItem != null)
             {
