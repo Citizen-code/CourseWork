@@ -65,8 +65,8 @@ class CarController{
             const {number, name, release_year, mileage, vin, color, engine_id, photo_id} = req.body
             const user = req.user;
 
-            const client = ClientService.findOne({where:{id:user.id}},"true")
-            if(client.car != null){
+            const client = await ClientService.findOne({where:{id:user.id}},"true")
+            if(client.car != undefined){
                 throw ApiError.BadRequest('Клиент не должен иметь авто')
             }
 

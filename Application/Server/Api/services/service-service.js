@@ -34,7 +34,7 @@ class ServiceService{
             return await service.update(field,option)
         }else{
             const price = await service_price.create({price:field.price,is_time_based:field?.is_time_based})
-            return await service.update({name:option.name, price_id:price.id},option)
+            return await service.update({name:field.name, price_id:price.id}, option)
         }
     }
 

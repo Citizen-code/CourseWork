@@ -38,7 +38,7 @@ router.put('/:id',
     body('name').optional().isString({max:150}),
     body('price').optional().isDecimal({max:100000,min:0}),
     body('measure_unit').optional().isString({max:10}),
-    body('photo_id').optional().isUUID(),    
+    body('photo_id').optional().isUUID(),
     authMiddleWare(['employee']),
     ConsumablePartController.update_consumable_part);
 

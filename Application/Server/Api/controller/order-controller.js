@@ -1,4 +1,4 @@
-const {sequelize,Op} = require('../models/init-models')
+const {sequelize, Op} = require('../models/init-models')
 const {findOne, findAll, create, GetCount,create_content,update} = require('../services/order-service')
 const validateService = require('../services/validate-service')
 const ApiError = require('../exception/error')
@@ -107,8 +107,12 @@ class OrderController{
             validateService.validate(req)
 
             const {date} = req.params
-
-            res.json(await findAll({ where: {date}, attributes:['time'] },"false"))
+            const status_id = 4
+            res.json(await findAll({ 
+                where: {
+                    date,
+                    status_id: {[Op.ne]: status_id }
+            }, attributes:['time'] },"false"))
         }catch(e){
             next(e)
         }
