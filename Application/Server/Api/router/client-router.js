@@ -24,12 +24,12 @@ router.get('/:id',
     ClientController.get_client);
 
 router.put('/:id',
-    body('surname').optional().isString().isLength({max:20}),
-    body('firstname').optional().isString().isLength({max:20}),
-    body('lastname').optional().isString().isLength({max:20}),
-    body('birth_date').optional().isDate(),
-    body('email').optional().isEmail().isLength({max:30}),
-    body('phone').optional().isString().isLength({max:20}),
+    body('surname').optional().isString().isLength({max:20}).withMessage('Фамилия не должна превышать 20 символов'),
+    body('firstname').optional().isString().isLength({max:20}).withMessage('Имя не должна превышать 20 символов'),
+    body('lastname').optional().isString().isLength({max:20}).withMessage('Отчество не должна превышать 20 символов'),
+    body('birth_date').optional().isDate().withMessage('Неверный формат даты рождения'),
+    body('email').optional().isEmail().withMessage('Неверный формат email').isLength({max:30}).withMessage('Email не должна превышать 20 символов'),
+    body('phone').optional().isMobilePhone().withMessage('Неверный формат номера телефона').isLength({max:20}).withMessage('Телефон не должна превышать 20 символов'),
     authMiddleWare(['employee','client']),
     ClientController.edit_client);
 

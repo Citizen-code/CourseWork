@@ -6,7 +6,7 @@ class ServiceService{
         if(include=="true"){
             option.include = {model:service_price, as:'price'}
         }
-        if(!all){
+        if(all!="true"){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
         }
@@ -17,7 +17,7 @@ class ServiceService{
         if(include=="true"){
             option.include = {model:service_price, as:'price'}
         }
-        if(!all){
+        if(all!="true"){
             if(!option.where) option.where = {} 
             option.where.is_active = true 
         }

@@ -25,8 +25,8 @@ router.get('/',
     ServiceController.get_services);
 
 router.post('/',
-    body('name').isString().isLength({max:50}),
-    body('price').isDecimal({max:100000,min:0}),
+    body('name').isString().isLength({max:50}).withMessage('Наименование должно быть не больше 50'),
+    body('price').isDecimal({max:100000,min:0}).withMessage('Цена должна быть числом с точкой не должен превышать 100000 символов'),
     body('is_time_based').isBoolean(),
     authMiddleWare(['employee']),
     ServiceController.add_service);
@@ -38,8 +38,8 @@ router.delete('/:id',
 
 router.put('/:id',
     param('id').isUUID(),
-    body('name').optional().isString().isLength({max:50}),
-    body('price').optional().isDecimal({max:100000,min:0}),
+    body('name').optional().isString().isLength({max:50}).withMessage('Наименование должно быть не больше 50'),
+    body('price').optional().isDecimal({max:100000,min:0}).withMessage('Цена должна быть числом с точкой не должен превышать 100000 символов'),
     body('is_time_based').optional().isBoolean(),
     authMiddleWare(['employee']),
     ServiceController.update_service);

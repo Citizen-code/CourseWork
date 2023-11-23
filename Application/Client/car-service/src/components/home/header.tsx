@@ -19,7 +19,7 @@ export default function Header(){
                     </div>
                     <div className={`col-auto ${style.menu_el_right} d-none d-md-block`}>
                         <ul>
-                            <li>Вт-Сб: 10:00 – 19:00</li>
+                            <li>Пн-Вс: 08:00 – 20:00</li>
                             <li>wheely@yandex.ru</li>
                             <li>+7 900 428 55 64</li>
                         </ul>

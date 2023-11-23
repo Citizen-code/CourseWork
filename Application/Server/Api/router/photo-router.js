@@ -4,7 +4,7 @@ const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
 router.post('/',
-    //authMiddleWare(['employee','client']),
+    authMiddleWare(['employee','client']),
     PhotoController.upload_photo);
 
 module.exports = router

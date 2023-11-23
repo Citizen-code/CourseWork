@@ -8,28 +8,13 @@ export default function ItemList({ order, fetchData }: { order: Order, fetchData
 
             case 1: return <ItemContent order={order} />;
             case 2: return <div>
-                <h6 className='ps-3 p-2 fw-bold d-inline-block'>Заказ ожидает выполнения</h6>
-                {order.comment != undefined ?
-                    <div className="ps-3 p-2">
-                        <h5 className='fw-bold d-inline-block'>Комментарий:</h5>
-                        <h6 className='fw-light text-truncate'>{order.comment}</h6>
-                    </div> : <></>}
+                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ ожидает выполнения</h5>
             </div>
             case 3: return <div>
-                <h6 className='ps-3 p-2 fw-bold d-inline-block'>Заказ в процессе выполнения</h6>
-                {order.comment != undefined ?
-                    <div className="ps-3 p-2">
-                        <h5 className='fw-bold d-inline-block'>Комментарий:</h5>
-                        <h6 className='fw-light text-truncate'>{order.comment}</h6>
-                    </div> : <></>}
+                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ в процессе выполнения</h5>
             </div>
             case 4: return <div>
-                <h6 className='ps-3 p-2 fw-bold d-inline-block'>Заказ отменен</h6>
-                {order.comment != undefined ?
-                    <div className="ps-3 p-2">
-                        <h5 className='fw-bold d-inline-block'>Комментарий:</h5>
-                        <h6 className='fw-light text-truncate'>{order.comment}</h6>
-                    </div> : <></>}
+                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ отменен</h5>
             </div>
         }
     }
@@ -42,7 +27,7 @@ export default function ItemList({ order, fetchData }: { order: Order, fetchData
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {order.comment != undefined ?
-                    <div className="ps-3 p-2">
+                    <div className="ps-3 pt-2">
                         <h5 className='fw-bold d-inline-block'>Комментарий:</h5>
                         <h6 className='fw-light text-truncate'>{order.comment}</h6>
                     </div> : <></>}
