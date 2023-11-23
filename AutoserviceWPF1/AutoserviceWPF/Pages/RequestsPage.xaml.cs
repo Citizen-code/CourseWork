@@ -1,4 +1,5 @@
 ﻿using AutoserviceWPF.Models;
+using AutoserviceWPF.Models.ModelsDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,6 +113,19 @@ namespace AutoserviceWPF.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddServiceToRequest_Click(object sender, RoutedEventArgs e)
+        {
+            if (RequestsListView.SelectedItem != null)
+            {
+                Order currentOrder = (Order)RequestsListView.SelectedItem;
+                NavigationService.Navigate(new AddServiceToRequestPage(currentOrder));
+            }
+            else
+            {
+                return;
             }
         }
     }

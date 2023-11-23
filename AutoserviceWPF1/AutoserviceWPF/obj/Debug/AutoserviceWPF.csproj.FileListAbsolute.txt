@@ -372,7 +372,9 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\RestSharp.Serializers.NewtonsoftJson.xml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.baml
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.g.cs
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarUpdatePage.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarUpdatePage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AddPartToRequest.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AddServiceToRequestPage.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AddPartToRequest.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AddServiceToRequestPage.baml
