@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import style from '@/components/style/home/services.module.css'
 import items from '@/data/service'
+import Link from 'next/link'
 
 export default function Services(){
     return(
@@ -18,9 +19,9 @@ export default function Services(){
                                 <div className="card-text">
                                     {item.description}
                                 </div>
-                                <a className={`btn btn-outline-danger ${style['bnt']}`} href="#" role="button">
+                                <Link className={`btn btn-outline-danger ${style['bnt']}`} href="/profile?select=service" role="button">
                                     Заказать услугу
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     )}

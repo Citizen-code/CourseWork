@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import type ErrorValidate from '@/interface/model/error_validate';
 import RegistrationAction from '@/action/auth/registration';
 import type ErrorsForm from '@/interface/errors.form';
 import ErrorsShow from '../errors.show';
 
 export default function Registration() {
+    const params = useSearchParams()
+    const url = params.get('url')
     const [surname, setSurname] = useState<string>('')
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
@@ -27,7 +30,7 @@ export default function Registration() {
             list:error!.errors || []
           })
       }else{
-        location.href = '/profile'
+        location.href = url || '/profile'
       }
     }
 

@@ -81,6 +81,23 @@ class OrderController{
         }
     }
 
+    async get_count_orders_client(req,res,next){
+        try{
+            const {id} = req.params
+            const user = req.user;
+            const option = {
+                where:user.type === 'client'?{client_id:user.id}:{client_id:id}
+            }
+            const count = await GetCount(option)
+            res.json({
+                count_items:count,
+                count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
+            })
+        }catch(e){
+           next(e)
+        }
+    }
+
     async get_orders_in_month(req,res,next){
         try{
             validateService.validate(req)

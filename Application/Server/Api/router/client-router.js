@@ -29,7 +29,7 @@ router.put('/:id',
     body('lastname').optional().isString().isLength({max:20}).withMessage('Отчество не должна превышать 20 символов'),
     body('birth_date').optional().isDate().withMessage('Неверный формат даты рождения'),
     body('email').optional().isEmail().withMessage('Неверный формат email').isLength({max:30}).withMessage('Email не должна превышать 20 символов'),
-    body('phone').optional().isMobilePhone().withMessage('Неверный формат номера телефона').isLength({max:20}).withMessage('Телефон не должна превышать 20 символов'),
+    body('phone').optional().isString().withMessage('Неверный формат номера телефона').isLength({max:20}).withMessage('Телефон не должна превышать 20 символов'),
     authMiddleWare(['employee','client']),
     ClientController.edit_client);
 

@@ -15,6 +15,7 @@ export default function NewOrder() {
     const [comment, setComment] = useState<string>('')
     const [isVisibleTime, setIsVisibleTime] = useState<boolean>(false)
     const [isVisibleComment, setIsVisibleComment] = useState<boolean>(false)
+    const [isVisibleMessage, setIsVisibleMessage] = useState<boolean>(false)
 
     const GetTimes = (busy_times:Order[]) => {
         const times = [] as string[]
@@ -27,7 +28,7 @@ export default function NewOrder() {
     }
 
     const remove = () =>{
-        setDate('');
+        setIsVisibleMessage(true)
         setIsVisibleTime(false);
         setIsVisibleComment(false);
         setTimes([]);
@@ -40,11 +41,12 @@ export default function NewOrder() {
             <ErrorsShow errorsForm={errorsForm}/>
                 <div className="form-outline m-2">
                     <label className='fw-bold'>Дата</label>
-                    <input type='date' className="form-control" onChange={
+                    <input type='date' className="form-control" max="2024-12-31" onChange={
                         async (e) =>{
                             if(e.target.value != ''){
+                                setDate(e.target.value);
                                 if(new Date(e.target.value) > new Date()){
-                                    setDate(e.target.value);
+                                    setIsVisibleMessage(false)
                                     setIsVisibleComment(false);
                                     setTime('')
                                     GetTimes((await ApiService.order_time(e.target.value)).data);
@@ -56,6 +58,7 @@ export default function NewOrder() {
 
                     } value={date} />
                 </div>
+                {isVisibleMessage ? <div>На этот день нельзя записаться</div>:<></>}
                 {isVisibleTime?
                 <div className="form-outline m-2">
                     <label className='fw-bold'>Время</label>
@@ -63,11 +66,11 @@ export default function NewOrder() {
                         {times.length == 0?<div>В этот день невозможно записаться</div>:
                         times.map(item=>
                             <div key={item}>
-                                <label onClick={(e)=>{
+                                <input autoComplete='off' type="radio" className="btn-check" name='bnt' id={item}/>
+                                <label htmlFor={item} onClick={(e)=>{
                                     setTime(item)
                                     setIsVisibleComment(true)
-                                }} className="btn btn-outline-primary">{item}</label>
-                                <input type="radio" className="btn-check" id={item}/>
+                                }} className="btn btn-outline-info">{item}</label>
                             </div>
                         )}
                     </div>
@@ -75,7 +78,7 @@ export default function NewOrder() {
                 {isVisibleComment?<>
                 <div className="form-outline m-2">
                     <label className='fw-bold'>Комментарий</label>
-                    <textarea className="form-control" rows={3} onChange={(e) => setComment(e.target.value)} value={comment} />
+                    <textarea className="form-control" rows={4} onChange={(e) => setComment(e.target.value)} value={comment} />
                 </div>
                 <button className="m-2 btn btn-secondary btn-block" onClick={async () => {
                     const body: Order = {

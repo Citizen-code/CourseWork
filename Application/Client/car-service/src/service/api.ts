@@ -1,6 +1,7 @@
 import $api from "@/core/axios";
 import type Car from "@/interface/model/car";
 import type Client from "@/interface/model/client";
+import type Count from "@/interface/model/count";
 import type Engine from "@/interface/model/engine";
 import type Message from "@/interface/model/message";
 import type Order from "@/interface/model/order";
@@ -67,6 +68,11 @@ export default class ApiService{
     static async orders(include?:boolean, pagination?:boolean, page?:number): Promise<AxiosResponse<Order[]>> {
         return $api.get<Order[]>(`api/order/client`,{ params:{ include, pagination, page } })
     }
+
+    static async orders_count(): Promise<AxiosResponse<Count>> {
+        return $api.get<Count>(`api/order/client/count`)
+    }
+
 
     static async order_time(date:string): Promise<AxiosResponse<Order[]>> {
         return $api.get<Order[]>(`api/order/time/${date}`)

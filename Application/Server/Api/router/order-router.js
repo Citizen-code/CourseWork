@@ -22,6 +22,10 @@ router.get('/client',
     authMiddleWare(['client']),
     OrderController.get_orders_client);
 
+router.get('/client/count',
+    authMiddleWare(['client']),
+    OrderController.get_count_orders_client);
+
 router.get('/client/:id',
     param('id').isUUID(),
     query('include').default(false).isBoolean(),
@@ -29,6 +33,11 @@ router.get('/client/:id',
     query('page').default(1).isInt({min:1}),
     authMiddleWare(['employee']),
     OrderController.get_orders_client);
+
+router.get('/client/count/:id',
+    param('id').isUUID(),
+    authMiddleWare(['employee']),
+    OrderController.get_count_orders_client);
 
 
 router.get('/:id', 

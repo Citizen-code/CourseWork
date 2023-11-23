@@ -11,7 +11,7 @@ const items:ItemCarousel[] = [
             <div className={style.info_carousel}>
                 <div style={{'padding':'10px'}}><h1>ПОЛНЫЙ СПЕКТР РЕМОНТНЫХ РАБОТ<br/>АВТОМОБИЛЯ</h1></div>
                 <div style={{'padding':'10px'}}><h6>Слесарные работы, техническое обслуживание, диагностика, установка дополнительного<br/>оборудования, кузовные работы.</h6></div>
-                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile" role="button">Оформить</Link></div>
+                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile?select=service" role="button">Оформить</Link></div>
             </div>
     },
     {
@@ -22,7 +22,7 @@ const items:ItemCarousel[] = [
             <div className={style.info_carousel}>
                 <div style={{'padding':'10px'}}><h1>Техническое обслуживание по стандарту<br/>официального дилера без потери<br/>гарантийных обязательств</h1></div>
                 <div style={{'padding':'10px'}}><h6>KIA, HYUNDAI. GENESIS. SSANG YOUNG и другие бренды.</h6></div>
-                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile" role="button">Оформить</Link></div>
+                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile?select=service" role="button">Оформить</Link></div>
             </div>
         
     },
@@ -34,7 +34,7 @@ const items:ItemCarousel[] = [
             <div className={style.info_carousel}>
                 <div style={{'padding':'10px'}}><h1>Профессиональный ремонт АКПП<br/>за 24 часа с гарантией</h1></div>
                 <div style={{'padding':'10px'}}><h6>Мы даем гарантию до двух лет ремонтные работы.</h6></div>
-                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile" role="button">Оформить</Link></div>
+                <div style={{'padding':'10px'}}><Link className="btn btn-secondary btn-lg" href="/profile?select=service" role="button">Оформить</Link></div>
             </div>
         
     }

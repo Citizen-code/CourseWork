@@ -5,7 +5,12 @@ import ItemList from "./item"
 
 export default function ListHistory(){
     const [listOrders, setListOrders] = useState([] as Order[])
-    const fetchData = async () => setListOrders(((await ApiService.orders(true)).data))
+    const [page, setPage] = useState<number>(1)
+    const [countPage, setCountPage] = useState<number>(1)
+    const fetchData = async () => {
+        setCountPage(((await ApiService.orders_count()).data.count_pages))
+        setListOrders(((await ApiService.orders(true,true,page)).data));
+    }
     useEffect(() =>{
         fetchData()
     },[])
@@ -39,6 +44,9 @@ export default function ListHistory(){
                     )}
                 </>
             :<h3 className='fw-bold text-center p-'>Нет ни одного заказа</h3>}
+            {countPage>1?
+                <div>1</div>
+            :<></>}
         </>
     )
 }
