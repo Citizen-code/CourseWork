@@ -146,6 +146,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CarUpdatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ClientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +220,9 @@
     </Compile>
     <Compile Include="Pages\CarTasksPage.xaml.cs">
       <DependentUpon>CarTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CarUpdatePage.xaml.cs">
+      <DependentUpon>CarUpdatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>

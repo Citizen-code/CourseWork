@@ -115,12 +115,12 @@ namespace AutoserviceWPF.Pages
             NavigationService.Navigate(new AuthPage());
         }
 
-        private void ClientList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UpdateClient_Click(object sender, RoutedEventArgs e)
         {
             if (ClientList.SelectedItem != null)
             {
                 Client currentClient = (Client)ClientList.SelectedItem;
-                NavigationService.Navigate(new СlientInfoPage(currentClient));
+                NavigationService.Navigate(new CarUpdatePage(currentClient));
             }
             else
             {
@@ -128,12 +128,12 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-        private void UpdateClient_Click(object sender, RoutedEventArgs e)
+        private void ClientInfo_Click(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedItems != null)
+            if (ClientList.SelectedItem != null)
             {
-                Client currentClient = (Client)ClientList.SelectedItems;
-                //NavigationService.Navigate(new CarUpdatePage(currentClient));
+                Client currentClient = (Client)ClientList.SelectedItem;
+                NavigationService.Navigate(new СlientInfoPage(currentClient));
             }
             else
             {

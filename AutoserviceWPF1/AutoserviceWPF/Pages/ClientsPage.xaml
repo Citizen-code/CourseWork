@@ -29,7 +29,7 @@
             </StackPanel>
         </StackPanel>
         <ScrollViewer  Grid.Row="1">
-            <ListView x:Name="ClientList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ClientList_SelectionChanged">
+            <ListView x:Name="ClientList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="10">
@@ -45,12 +45,13 @@
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel/>
+                        <WrapPanel ItemHeight="165" ItemWidth="180"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
                 <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem x:Name="UpdateClient" Header="{materialDesign:PackIcon Kind=Pencil}" Click="UpdateClient_Click"/>
+                        <MenuItem x:Name="ClientInfo" Header="{materialDesign:PackIcon Kind=Info}" Click="ClientInfo_Click"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>

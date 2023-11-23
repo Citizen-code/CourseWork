@@ -28,8 +28,6 @@
                 <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
             </StackPanel>
         </StackPanel>
-        <!--TODO: Сделать WrapPanel-->
-        <!--TODO: Придумать что-нибудь с изменением данных (мб событие своё написать или MouseDoubleClick)-->
         <ScrollViewer Grid.Row="1">
             <ListView x:Name="PartsList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
                 <ListView.ItemTemplate>

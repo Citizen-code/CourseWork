@@ -1,0 +1,23 @@
+﻿<Page x:Class="AutoserviceWPF.Pages.CarUpdatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AutoserviceWPF.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CarUpdatePage"
+      Background="#9191E9">
+
+    <Canvas>
+        <TextBox x:Name="CarNameTextBox" Canvas.Left="60" Canvas.Top="140" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Наименование" Background="White" Text="{Binding Car.Name}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <TextBox x:Name="CarNumberTextBox" Canvas.Left="300" Canvas.Top="140" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Номер" Background="White" Text="{Binding Car.Number}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <TextBox x:Name="CarReleaseYearTextBox" Canvas.Right="60" Canvas.Top="140" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Год выпуска" Background="White" Text="{Binding Car.ReleaseYear}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <TextBox x:Name="CarMileageTextBox" Canvas.Left="60" Canvas.Top="220" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Пробег" Background="White" Text="{Binding Car.Mileage}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <TextBox x:Name="CarVinTextBox" Canvas.Left="300" Canvas.Top="220" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="VIN номер" Background="White" Text="{Binding Car.Vin}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <TextBox x:Name="CarColorTextBox" Canvas.Right="60" Canvas.Top="220" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Цвет" Background="White" Text="{Binding Car.Color}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+        <Button x:Name="AddPartButton" Canvas.Left="250" Canvas.Top="280" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="ДОБАВИТЬ" Cursor="Hand" Click="AddPartButton_Click"/>
+        <Button x:Name="BackButton" Canvas.Right="250" Canvas.Top="280" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="НАЗАД" Cursor="Hand" Click="BackButton_Click"/>
+    </Canvas>
+</Page>

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Numerics;
 
 namespace AutoserviceWPF.Models.ModelsDB
 {
@@ -17,10 +18,10 @@ namespace AutoserviceWPF.Models.ModelsDB
 
         public string Name { get; set; }
 
-        [JsonProperty("Release_Year")]
+        [JsonProperty("release_year")]
         public int? ReleaseYear { get; set; }
 
-        public long? Mileage { get; set; }
+        public string Mileage { get; set; }
 
         public string Vin { get; set; }
 

@@ -374,3 +374,5 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestUpdatePage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarUpdatePage.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarUpdatePage.baml

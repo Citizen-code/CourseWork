@@ -59,16 +59,16 @@ namespace AutoserviceWPF.Pages
                 _part.Price = Convert.ToDecimal(PartCostTextBox.Text);
                 _part.MeasureUnit = (String)PartMeasureUnitCombobox.SelectedItem;
 
-                //TODO: Переделать на switch.
-                if (IsAdded)
+                switch (IsAdded)
                 {
-                    await ApiRestClient.Api.ConsumableParts.PostConsumablePart(_part);
-                    NavigationService.GoBack();
-                }
-                else
-                {
-                    await ApiRestClient.Api.ConsumableParts.PutConsumablePart(_part.Id, _part);
-                    NavigationService.GoBack();
+                    case true:
+                        await ApiRestClient.Api.ConsumableParts.PostConsumablePart(_part);
+                        NavigationService.GoBack();
+                        break;
+                    case false:
+                        await ApiRestClient.Api.ConsumableParts.PutConsumablePart(_part.Id, _part);
+                        NavigationService.GoBack();
+                        break;
                 }
             }
             catch (Exception ex) when (ex is ApiError error)
