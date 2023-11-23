@@ -8,13 +8,13 @@ export default function ItemList({ order, fetchData }: { order: Order, fetchData
 
             case 1: return <ItemContent order={order} />;
             case 2: return <div>
-                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ ожидает выполнения</h5>
+                <h5 className='ps-3 pt-2 pb-2fw-bold d-inline-block'>Заказ ожидает выполнения</h5>
             </div>
             case 3: return <div>
-                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ в процессе выполнения</h5>
+                <h5 className='ps-3 pt-2 pb-2 fw-bold d-inline-block'>Заказ в процессе выполнения</h5>
             </div>
             case 4: return <div>
-                <h5 className='ps-3 pb-2 fw-bold d-inline-block'>Заказ отменен</h5>
+                <h5 className='ps-3 pt-2 pb-2 fw-bold d-inline-block'>Заказ отменен</h5>
             </div>
         }
     }
@@ -23,7 +23,7 @@ export default function ItemList({ order, fetchData }: { order: Order, fetchData
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h6 className='modal-title fw-bold d-inline-block pt-1' id="exampleModalLabel">{order.status?.name}</h6>
+                        <h6 className='modal-title fw-bold d-inline-block pt-1' id="exampleModalLabel">{`Заказ - № ${order.id}`}</h6>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {order.comment != undefined ?
