@@ -1,4 +1,5 @@
-﻿using AutoserviceWPF.Models.ModelsDB;
+﻿using AutoserviceWPF.Models;
+using AutoserviceWPF.Models.ModelsDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static AutoserviceWPF.Models.ApiRestClient;
+
 
 namespace AutoserviceWPF.Pages
 {
@@ -22,8 +23,8 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class PartsPage : Page
     {
-        int Page = 1;
-        int PagesCount = 1;
+        int page = 1;
+        int pagesCount = 1;
 
         public PartsPage()
         {
@@ -34,17 +35,17 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
-                PartsList.ItemsSource = null;
-                int pages = (await Api.ConsumableParts.GetCountConsumableParts()).CountPages;
-                if (PagesCount != pages)
+                PartsListView.ItemsSource = null;
+                int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts()).CountPages;
+                if (pagesCount != pages)
                 {
                     for (int i = 1; i < pages + 1; i++)
                     {
                         Pagination.Items.Add(i);
                     }
                 }
-                PagesCount = pages;
-                PartsList.ItemsSource = await Api.ConsumableParts.GetConsumableParts(true, true, Page);
+                pagesCount = pages;
+                PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page);
             }
             catch (Exception ex)
             {
@@ -56,9 +57,9 @@ namespace AutoserviceWPF.Pages
         {
             if (Pagination.SelectedItem != null)
             {
-                if (Page != (int)Pagination.SelectedItem)
+                if (page != (int)Pagination.SelectedItem)
                 {
-                    Page = (int)Pagination.SelectedItem;
+                    page = (int)Pagination.SelectedItem;
                     LoadParts();
                 }
             }
@@ -122,9 +123,9 @@ namespace AutoserviceWPF.Pages
 
         private void PartsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PartsList.SelectedItem != null)
+            if (PartsListView.SelectedItem != null)
             {
-                ConsumablePart currentPart = (ConsumablePart)PartsList.SelectedItem;
+                ConsumablePart currentPart = (ConsumablePart)PartsListView.SelectedItem;
                 NavigationService.Navigate(new PartAddWindows(currentPart));
             }
             else

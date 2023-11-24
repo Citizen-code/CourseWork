@@ -29,7 +29,7 @@
             </StackPanel>
         </StackPanel>
         <ScrollViewer Grid.Row="1">
-            <ListView x:Name="PartsList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
+            <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
