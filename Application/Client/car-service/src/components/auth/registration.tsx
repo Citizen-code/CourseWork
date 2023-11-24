@@ -41,28 +41,28 @@ export default function Registration() {
                 <div className='row'>
                     <div className='col'>
                         <div className="form-outline mb-4">
-                            <input type='email' className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
+                            <input id='EmailReg' type='email' className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
                         </div>
                         <div className="form-outline mb-4">
-                            <input type='password' className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
+                            <input id='PasswordReg' type='password' className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
                         </div>
                         <div className="form-outline mb-4">
-                            <input type='tel' className="form-control" onChange={e => setPhone(e.target.value)} placeholder='Телефон' value={phone} />
+                            <input id='Phone' type='tel' className="form-control" onChange={e => setPhone(e.target.value)} placeholder='Телефон' value={phone} />
                         </div>
                     </div>
                     <div className='col'>
                         <div className="form-outline mb-4">
-                            <input type='text' className="form-control" onChange={e => setSurname(e.target.value)} placeholder='Фамилия' value={surname} />
+                            <input id='Surname' type='text' className="form-control" onChange={e => setSurname(e.target.value)} placeholder='Фамилия' value={surname} />
                         </div>
                         <div className="form-outline mb-4">
-                            <input type='text' className="form-control" onChange={e => setFirstname(e.target.value)} placeholder='Имя' value={firstname} />
+                            <input id='Firstname' type='text' className="form-control" onChange={e => setFirstname(e.target.value)} placeholder='Имя' value={firstname} />
                         </div>
                         <div className="form-outline mb-4">
-                            <input type='text' className="form-control" onChange={e => setLastname(e.target.value)} placeholder='Отчество' value={lastname} />
+                            <input id='Lastname' type='text' className="form-control" onChange={e => setLastname(e.target.value)} placeholder='Отчество' value={lastname} />
                         </div>
                     </div>
                     <div className="form-outline mb-4 d-flex justify-content-center">
-                        <label>Дата рождения<input type='date' className="form-control" onChange={e => setBirthDate(new Date(e.target.value))} placeholder='Дата' value={birthDate?.toLocaleDateString('en-CA')} /></label>
+                        <label>Дата рождения<input id='Date' type='date' className="form-control" onChange={e => setBirthDate(new Date(e.target.value))} placeholder='Дата' value={birthDate?.toLocaleDateString('en-CA')} /></label>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ export default function Registration() {
                 </div>
             </div>
             <div className="row m-4">
-                <button type="submit" className="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
+                <button id='RegBnt' type="submit" className="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
             </div>
         </form>
     )

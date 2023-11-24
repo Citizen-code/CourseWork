@@ -9,8 +9,8 @@ import ErrorsShow from '../errors.show';
 export default function Authorization() {
   const params = useSearchParams()
   const url = params.get('url')
-  const [email, setEmail] = useState<string>('1234@yandex.ru')
-  const [password, setPassword] = useState<string>('123')
+  const [email, setEmail] = useState<string>('')//1234@yandex.ru
+  const [password, setPassword] = useState<string>('')//123
   const [remember, setRemember] = useState<boolean>(true)
   const [errorsForm, setErrorsForm] = useState<ErrorsForm>({isHidden:true,message:'',isHiddenList:true,list:[]})
 
@@ -32,10 +32,10 @@ export default function Authorization() {
     <form action={formAction} className='pt-2'>
       <ErrorsShow errorsForm={errorsForm}/>
       <div className="form-outline mb-4">
-        <input className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
+        <input id='Email' className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
       </div>
       <div className="form-outline mb-4">
-        <input className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
+        <input id='Password' className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
       </div>
 
       <div className="row m-1">
@@ -46,7 +46,7 @@ export default function Authorization() {
         </div>
       </div>
       <div className="row m-4">
-        <button type="submit" className="btn btn-primary btn-block mb-4">Войти</button>
+        <button id='LogBnt' type="submit" className="btn btn-primary btn-block mb-4">Войти</button>
       </div>
     </form>
   )

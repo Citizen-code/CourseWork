@@ -30,13 +30,9 @@ class OrderController{
             validateService.validate(req)
 
             const {include, pagination, page, status} = req.query;
-            const user = req.user;
-            
+
             const option = {
-                where:[
-                    user.type === 'client'?{client_id:user.id}:{client_id:id},
-                    status != undefined?{status_id:status}:undefined
-                ],
+                where:status != undefined ? {status_id:status} : undefined,
                 order:[['date', 'ASC']]
             }
 
