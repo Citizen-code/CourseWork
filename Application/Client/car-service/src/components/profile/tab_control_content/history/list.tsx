@@ -19,8 +19,14 @@ export default function ListHistory(){
             isFinally?1:undefined,
             isCancel?4:undefined
         ]
-        setCountPage(((await ApiService.orders_count(status)).data.count_pages))
-        setListOrders(((await ApiService.orders(true, true, page, status)).data));
+        const count = (await ApiService.orders_count(status)).data.count_pages
+        setCountPage(count)
+        if(page > count) {
+            setPage(count)
+            setListOrders(((await ApiService.orders(true, true, count, status)).data));
+        }
+        else setListOrders(((await ApiService.orders(true, true, page, status)).data));
+        
     }
     const click_page =(item:number) => {
         if(page == item) return;
@@ -34,7 +40,7 @@ export default function ListHistory(){
         }
         return <>
             {pages.map(item => 
-                <li key={item} className="page-item">
+                <li key={item} className={`page-item ${item == page?'active':''}`}>
                     <button className="page-link" onClick={async ()=> click_page(item)}>{item}</button>
                 </li>
             )}
@@ -45,34 +51,34 @@ export default function ListHistory(){
     },[isActive, isCancel, isFinally, page])
     return (
         <>
-            <div className="w-100 d-flex align-items-center justify-content-between">
-                <div className="p-4">
-                    <h5 className="m-0">Добро пожаловать</h5>
-                    {(client.surname!=undefined||client.firstname!=undefined)?
-                    <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
-                </div>
-                <div className="p-4">
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isActive} onChange={()=>{
-                            setIsActive(!isActive)
-                        }}/>
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать активные заказы</label>
-                    </div>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isFinally} onChange={()=>{
-                            setIsFinally(!isFinally)
-                        }}/>
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать завешенные заказы</label>
-                    </div>
-                    <div className="form-check form-switch">
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isCancel} onChange={() => {
-                            setIsCancel(!isCancel)
-                        }}/>
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать отмененные заказы</label>
-                    </div>
-                </div>
-            </div>
             {listOrders.length != 0? <>
+                <div className="w-100 d-flex align-items-center justify-content-between">
+                    <div className="p-4  d-none d-sm-block">
+                        <h5 className="m-0">Добро пожаловать</h5>
+                        {(client.surname!=undefined||client.firstname!=undefined)?
+                        <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
+                    </div>
+                    <div className="p-4">
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isActive} onChange={()=>{
+                                setIsActive(!isActive)
+                            }}/>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать активные заказы</label>
+                        </div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isFinally} onChange={()=>{
+                                setIsFinally(!isFinally)
+                            }}/>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать завешенные заказы</label>
+                        </div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isCancel} onChange={() => {
+                                setIsCancel(!isCancel)
+                            }}/>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать отмененные заказы</label>
+                        </div>
+                    </div>
+                </div>
                     <div className="list-group">
                         {listOrders.map(item =>
                             <button key={item.id} data-bs-toggle="modal" data-bs-target={`#id-${item.id}`} className="list-group-item list-group-item-action" aria-current="true">
@@ -99,7 +105,7 @@ export default function ListHistory(){
                         <ItemList key={item.id} order={item} fetchData={fetchData}/>
                     )}
                 </>
-            :<h3 className='fw-bold text-center p-'>Нет ни одного заказа</h3>}
+            :<h3 className='fw-bold text-center p-4'>Нет ни одного заказа</h3>}
             {countPage > 1 ?
             <nav className="p-3">
                 <ul className="pagination d-flex flex-wrap align-items-center justify-content-center">

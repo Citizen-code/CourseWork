@@ -18,7 +18,7 @@ export default function AddCar({ cancel }: { cancel: () => void }) {
   const [release_year, setReleaseYear] = useState<number>()
   const [vin, setVin] = useState<string>()
   const [name, setName] = useState<string>()
-  const [photo, setPhoto] = useState({} as File)
+  const [photo, setPhoto] = useState<File|undefined>(undefined)
   const [errorsForm, setErrorsForm] = useState<ErrorsForm>(empty_error)
   useEffect(()=>{
     const fetchData = async () => {

@@ -10,7 +10,7 @@ export default function InfoCar({ edit }: { edit: () => void }) {
 
   return (
     <div className="card">
-      {((client.id && client.car))?
+      {((client.id && client.car?.photo))?
         <Image src={`${process.env.BASE_URL}/photo/${client.car?.photo?.id}${client.car?.photo?.extension}`} height={250} width={300} className={`card-img-top`} alt="Фото авто"/>
       :<></>}
       <div className="card-body">
