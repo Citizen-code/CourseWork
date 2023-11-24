@@ -26,10 +26,10 @@
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding Service.Name}"/>
+                                <TextBlock Text="{Binding Name}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                <TextBlock Text="{Binding Service.Price.Price}"/>
+                                <TextBlock Text="{Binding Price.Price}"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

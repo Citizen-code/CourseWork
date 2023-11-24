@@ -23,34 +23,35 @@ namespace AutoserviceWPF.Pages
     public partial class AddServiceToRequestPage : Page
     {
         private readonly Order _order;
-        private readonly ListService _service;
-        private List<ListService> _listService;
+        private readonly Service _service;
+        private readonly ListService _listService;
+        private List<ListService> _listServices;
 
         public AddServiceToRequestPage(Order order)
         {
             InitializeComponent();
             _order = order;
             ServicesListView.DataContext = _service;
-            ServicesToRequestListView.DataContext = _service;
+            ServicesToRequestListView.DataContext = _listService;
         }
 
         private void AddService_Click(object sender, RoutedEventArgs e)
         {
             ListService currentService = (ListService)ServicesListView.SelectedItem;
-            _listService.Add(currentService);
+            _listServices.Add(currentService);
             ServicesToRequestListView.Items.Add(currentService);
         }
 
         private void DeleteService_Click(object sender, RoutedEventArgs e)
         {
             ListService currentService = (ListService)ServicesToRequestListView.SelectedItem;
-            _listService.Remove(currentService);
+            _listServices.Remove(currentService);
             ServicesToRequestListView.Items.Remove(currentService);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddPartToRequest(_order, _listService));
+            NavigationService.Navigate(new AddPartToRequest(_order, _listServices));
         }
     }
 }
