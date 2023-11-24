@@ -51,7 +51,7 @@ class OrderService {
 
     async create_content(order_id, services, consumable_parts) {
         services.forEach(async (item) => {
-            await list_services.create({ order_id, service_id: item.service_id, time: item.time, price_id: item.price_id });
+            await list_services.create({ order_id, service_id: item.service_id, time: item.time != 0 ? item.time : undefined, price_id: item.price_id });
         })
         if (consumable_parts != undefined) {
             consumable_parts.forEach(async (item) => {
