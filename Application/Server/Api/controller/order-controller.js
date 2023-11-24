@@ -29,11 +29,14 @@ class OrderController{
         try{
             validateService.validate(req)
 
-            const {include, pagination, page} = req.query;
+            const {include, pagination, page, status} = req.query;
             const user = req.user;
             
             const option = {
-                where:user.type === 'client'?{client_id:user.id}:undefined,
+                where:[
+                    user.type === 'client'?{client_id:user.id}:{client_id:id},
+                    status != undefined?{status_id:status}:undefined
+                ],
                 order:[['date', 'ASC']]
             }
 
@@ -52,11 +55,14 @@ class OrderController{
             validateService.validate(req)
 
             const {id} = req.params
-            const {include, pagination, page} = req.query;
+            const {include, pagination, page, status} = req.query;
             const user = req.user;
 
             const option = {
-                where:user.type === 'client'?{client_id:user.id}:{client_id:id},
+                where:[
+                    user.type === 'client'?{client_id:user.id}:{client_id:id},
+                    status != undefined?{status_id:status}:undefined
+                ],
                 order:[['date', 'DESC']]
             }
             if(pagination == "true"){
@@ -71,7 +77,8 @@ class OrderController{
 
     async get_count_orders(req,res,next){
         try{
-            const count = await GetCount({})
+            const {status} = req.query;
+            const count = await GetCount({where:status != undefined?{status_id:status}:undefined})
             res.json({
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
@@ -85,8 +92,12 @@ class OrderController{
         try{
             const {id} = req.params
             const user = req.user;
+            const {status} = req.query;
             const option = {
-                where:user.type === 'client'?{client_id:user.id}:{client_id:id}
+                where:[
+                    user.type === 'client'?{client_id:user.id}:{client_id:id},
+                    status != undefined?{status_id:status}:undefined
+                ],
             }
             const count = await GetCount(option)
             res.json({

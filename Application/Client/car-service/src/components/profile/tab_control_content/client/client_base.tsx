@@ -26,7 +26,7 @@ export default function ClientInfo(){
                 <div className="p-4">
                     <h5 className="m-0">Добро пожаловать</h5>
                     {(client.surname!=undefined||client.firstname!=undefined)?
-                    <h4>{`${client.surname} ${client.firstname}`}</h4>: <></>}
+                    <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
                 </div>
                 <div className="d-inline-flex align-items-center justify-content-end p-4">
                     {client.email!=undefined?

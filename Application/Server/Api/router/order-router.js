@@ -5,6 +5,8 @@ const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
 router.get('/count',
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
     authMiddleWare(['employee']),
     OrderController.get_count_orders);
 
@@ -12,6 +14,8 @@ router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
     authMiddleWare(['employee']),
     OrderController.get_orders);
 
@@ -19,10 +23,14 @@ router.get('/client',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
     authMiddleWare(['client']),
     OrderController.get_orders_client);
 
 router.get('/client/count',
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
     authMiddleWare(['client']),
     OrderController.get_count_orders_client);
 
@@ -31,6 +39,8 @@ router.get('/client/:id',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
     authMiddleWare(['employee']),
     OrderController.get_orders_client);
 

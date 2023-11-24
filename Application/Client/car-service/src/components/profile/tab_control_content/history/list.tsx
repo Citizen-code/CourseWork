@@ -10,14 +10,22 @@ export default function ListHistory(){
     const [listOrders, setListOrders] = useState([] as Order[])
     const [page, setPage] = useState<number>(1)
     const [countPage, setCountPage] = useState<number>(1)
-    const fetchData = async (select_page=page) => {
-        setCountPage(((await ApiService.orders_count()).data.count_pages))
-        setListOrders(((await ApiService.orders(true, true, select_page)).data));
+    const [isActive, setIsActive] = useState<boolean>(true)
+    const [isFinally, setIsFinally] = useState<boolean>(true)
+    const [isCancel, setIsCancel] = useState<boolean>(false)
+    const fetchData = async () => {
+        const status = [
+            isActive?2:undefined,
+            isFinally?1:undefined,
+            isCancel?4:undefined
+        ]
+        setCountPage(((await ApiService.orders_count(status)).data.count_pages))
+        setListOrders(((await ApiService.orders(true, true, page, status)).data));
     }
     const click_page =(item:number) => {
         if(page == item) return;
         setPage(item);
-        fetchData(item)
+        //fetchData(item)
     }
     const create_pages = ()=>{
         let pages = [] as number[];
@@ -34,17 +42,34 @@ export default function ListHistory(){
     }
     useEffect(() =>{
         fetchData()
-    },[])
+    },[isActive, isCancel, isFinally, page])
     return (
         <>
-            <div className="w-100 d-inline-flex align-items-center justify-content-between">
+            <div className="w-100 d-flex align-items-center justify-content-between">
                 <div className="p-4">
                     <h5 className="m-0">Добро пожаловать</h5>
                     {(client.surname!=undefined||client.firstname!=undefined)?
-                    <h4>{`${client.surname} ${client.firstname}`}</h4>: <></>}
+                    <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
                 </div>
-                <div className="d-inline-flex align-items-center justify-content-end p-4">
-                    <div>Текст</div>
+                <div className="p-4">
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isActive} onChange={()=>{
+                            setIsActive(!isActive)
+                        }}/>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать активные заказы</label>
+                    </div>
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isFinally} onChange={()=>{
+                            setIsFinally(!isFinally)
+                        }}/>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать завешенные заказы</label>
+                    </div>
+                    <div className="form-check form-switch">
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isCancel} onChange={() => {
+                            setIsCancel(!isCancel)
+                        }}/>
+                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать отмененные заказы</label>
+                    </div>
                 </div>
             </div>
             {listOrders.length != 0? <>
@@ -75,17 +100,19 @@ export default function ListHistory(){
                     )}
                 </>
             :<h3 className='fw-bold text-center p-'>Нет ни одного заказа</h3>}
+            {countPage > 1 ?
             <nav className="p-3">
                 <ul className="pagination d-flex flex-wrap align-items-center justify-content-center">
                     <li className="page-item">
                         <button className="page-link" onClick={async ()=> click_page(1)}><span aria-hidden="true">&laquo;</span></button>
                     </li>
-                    {countPage > 1 ? create_pages():<></>}
+                    {create_pages()}
                     <li className="page-item">
                         <button className="page-link" onClick={async ()=> click_page(countPage)}><span aria-hidden="true">&raquo;</span></button>
                     </li>
                 </ul>
             </nav>
+            :<></>}
         </>
     )
 }

@@ -65,12 +65,12 @@ export default class ApiService{
         return $api.delete<Message>(`api/order/${id}`)
     }
 
-    static async orders(include?:boolean, pagination?:boolean, page?:number): Promise<AxiosResponse<Order[]>> {
-        return $api.get<Order[]>(`api/order/client`,{ params:{ include, pagination, page } })
+    static async orders(include?:boolean, pagination?:boolean, page?:number, status?:(number|undefined)[]): Promise<AxiosResponse<Order[]>> {
+        return $api.get<Order[]>(`api/order/client`,{ params:{ include, pagination, page, status } })
     }
 
-    static async orders_count(): Promise<AxiosResponse<Count>> {
-        return $api.get<Count>(`api/order/client/count`)
+    static async orders_count(status?:(number|undefined)[]): Promise<AxiosResponse<Count>> {
+        return $api.get<Count>(`api/order/client/count`, {params:{status}})
     }
 
 
