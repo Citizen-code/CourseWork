@@ -22,8 +22,8 @@ export default function ListHistory(){
         const count = (await ApiService.orders_count(status)).data.count_pages
         setCountPage(count)
         if(page > count) {
-            setPage(count)
-            setListOrders(((await ApiService.orders(true, true, count, status)).data));
+            setPage(count==0?1:count)
+            setListOrders(((await ApiService.orders(true, true, count==0?1:count, status)).data));
         }
         else setListOrders(((await ApiService.orders(true, true, page, status)).data));
         
@@ -51,7 +51,6 @@ export default function ListHistory(){
     },[isActive, isCancel, isFinally, page])
     return (
         <>
-            {listOrders.length != 0? <>
                 <div className="w-100 d-flex align-items-center justify-content-between">
                     <div className="p-4  d-none d-sm-block">
                         <h5 className="m-0">Добро пожаловать</h5>
@@ -79,6 +78,7 @@ export default function ListHistory(){
                         </div>
                     </div>
                 </div>
+                {listOrders.length != 0?<>
                     <div className="list-group">
                         {listOrders.map(item =>
                             <button key={item.id} data-bs-toggle="modal" data-bs-target={`#id-${item.id}`} className="list-group-item list-group-item-action" aria-current="true">
