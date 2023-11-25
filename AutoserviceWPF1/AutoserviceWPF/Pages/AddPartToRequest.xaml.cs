@@ -79,9 +79,29 @@ namespace AutoserviceWPF.Pages
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            await ApiRestClient.Api.Orders.AddContentOrder(_order.Id, _listServices, _listParts);
-            //MessageBox.Show($"{_listServices.Count}", "test");
-            //MessageBox.Show($"{_listParts.Count}", "test");
+            try
+            {
+                await ApiRestClient.Api.Orders.AddContentOrder(_order.Id, _listServices, _listParts);
+                MessageBox.Show($"{_listServices.Count}", "test");
+                MessageBox.Show($"{_listParts.Count}", "test");
+                NavigationService.Navigate(new RequestsPage());
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

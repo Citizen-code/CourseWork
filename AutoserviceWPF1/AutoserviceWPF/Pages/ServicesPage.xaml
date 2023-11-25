@@ -32,14 +32,16 @@
             <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <TextBlock Text="{Binding Name}"/>
+                        <Border CornerRadius="10" Background="White">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding Price.Price}"/>
+                                </StackPanel>
                             </StackPanel>
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                <TextBlock Text="{Binding Price.Price}"/>
-                            </StackPanel>
-                        </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ContextMenu>
@@ -48,11 +50,6 @@
                         <MenuItem x:Name="DeleteService" Header="{materialDesign:PackIcon Kind=Trash}" Click="MenuItem_Click"/>
                     </ContextMenu>
                 </ListView.ContextMenu>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
         <Button x:Name="AddServiceButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 20" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddServiceButton_Click" Cursor="Hand">
@@ -60,7 +57,7 @@
         </Button>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="170" Margin="16">

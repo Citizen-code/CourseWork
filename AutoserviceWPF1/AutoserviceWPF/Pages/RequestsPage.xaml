@@ -12,7 +12,7 @@
       Loaded="Page_Loaded">
     
     <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="10*"/>
@@ -22,9 +22,9 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <DockPanel LastChildFill="False">
-                <StackPanel Orientation="Horizontal" Cursor="">
+                <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+                    <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
                         <TextBlock Text="Дата" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal">
@@ -33,29 +33,33 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <Button DockPanel.Dock="Right" Width="200"  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </DockPanel>
+            <Canvas>
+                <Button Canvas.Right="20" Canvas.Top="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+            </Canvas>
             <ScrollViewer Grid.Row="1">
                 <ListView x:Name="RequestsListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <!--TODO: Заменить StackPanel на что-нибудь другое-->
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Client.Surname}"/>
-                                    <TextBlock Text="{Binding Client.Firstname}"/>
-                                    <TextBlock Text="{Binding Client.Lastname}"/>
-                                    <TextBlock Text="{Binding Client.Email}"/>
-                                    <TextBlock Text="{Binding Client.Phone}"/>
+                            <Border CornerRadius="10" Background="White" Cursor="">
+                                <StackPanel Orientation="Horizontal">
+                                    <!--TODO: Заменить StackPanel на что-нибудь другое-->
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Client.Surname}"/>
+                                        <TextBlock Text="{Binding Client.Firstname}"/>
+                                        <TextBlock Text="{Binding Client.Lastname}"/>
+                                        <TextBlock Text="{Binding Client.Email}"/>
+                                        <TextBlock Text="{Binding Client.Phone}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Status.Name}"/>
+                                        <TextBlock Text="{Binding Employee.Surname}"/>
+                                        <TextBlock Text="{Binding Employee.Firstname}"/>
+                                        <TextBlock Text="{Binding Employee.Lastname}"/>
+                                        <TextBlock Text="{Binding Date}" Margin="0 20 0 0"/>
+                                    </StackPanel>
                                 </StackPanel>
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Status.Name}"/>
-                                    <TextBlock Text="{Binding Employee.Surname}"/>
-                                    <TextBlock Text="{Binding Employee.Firstname}"/>
-                                    <TextBlock Text="{Binding Employee.Lastname}"/>
-                                    <TextBlock Text="{Binding Date}" Margin="0 20 0 0"/>
-                                </StackPanel>
-                            </StackPanel>
+                            </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.ContextMenu>

@@ -74,6 +74,7 @@ namespace AutoserviceWPF.Pages
 
         private void AddService_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Добавить TextBox для ввода времени услуги.
             _listService = new ListService() { ServiceId = ((Service)ServicesListView.SelectedItem).Id, Service = (Service)ServicesListView.SelectedItem, PriceId = ((Service)ServicesListView.SelectedItem).PriceId };
             _listServices.Add(_listService);
             ServicesToRequestListView.Items.Add(_listService);

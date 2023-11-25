@@ -17,7 +17,7 @@ namespace AutoserviceWPF.Models.ModelsDB
         [JsonProperty("price_id")]
         public Guid PriceId { get; set; }
 
-        public decimal? Time { get; set; }
+        public decimal Time { get; set; }
 
         public virtual Order Order { get; set; }
 

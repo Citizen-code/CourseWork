@@ -12,7 +12,7 @@
       Title="CarTasksPage"
       Loaded="Page_Loaded">
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
@@ -30,7 +30,7 @@
         </syncfusion:SfScheduler>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0" Cursor="">
             <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="170" Margin="16" Cursor="">

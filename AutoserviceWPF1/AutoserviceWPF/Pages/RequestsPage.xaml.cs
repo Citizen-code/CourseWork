@@ -22,6 +22,9 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class RequestsPage : Page
     {
+        //private readonly Order _order;
+        //private readonly List<ListService> _listServices;
+        //private readonly List<ListConsumablePart> _listParts;
 
         int page = 1;
         int pagesCount = 1;
@@ -30,6 +33,14 @@ namespace AutoserviceWPF.Pages
         {
             InitializeComponent();
         }
+
+        //public RequestsPage(Order order, List<ListService> listServices, List<ListConsumablePart> listParts)
+        //{
+        //    InitializeComponent();
+        //    _order = order;
+        //    _listServices = listServices;
+        //    _listParts = listParts;
+        //}
 
         private async void LoadRequests()
         {

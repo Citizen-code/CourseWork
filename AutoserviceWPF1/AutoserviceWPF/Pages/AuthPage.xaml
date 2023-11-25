@@ -11,6 +11,7 @@
       Title="AuthPage">
 
     <Grid>
+        <Image Source="C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\Resources\evora.jpeg" Stretch="Fill" Opacity="0.5"/>
         <Border Background="#6C6CE8" CornerRadius="10"  HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="30" Cursor="">
                 <TextBlock Text="Wheely" HorizontalAlignment="Center" Margin="0 0 0 10" FontSize="22" Cursor=""/>

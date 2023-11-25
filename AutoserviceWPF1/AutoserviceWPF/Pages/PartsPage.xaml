@@ -19,26 +19,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        <ComboBox x:Name="BrandComboBox" Width="200" VerticalAlignment="Bottom" Margin="0 0 100 0" materialDesign:HintAssist.Hint="Бренд" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 100 0">
-            <TextBlock Text="Стоимость" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="PriceAscendingRadioButton" Content="По возрастанию"/>
-                <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <ComboBox x:Name="BrandComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Бренд" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
+                <TextBlock Text="Стоимость" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="PriceAscendingRadioButton" Content="По возрастанию"/>
+                    <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <ScrollViewer Grid.Row="1">
             <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock Text="{Binding Brand}"/>
-                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding Photo.Url}"/>
-                            <TextBlock Text="{Binding Article}"/>
-                            <TextBlock Text="{Binding Name}"/>
-                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Price}"/>
-                        </StackPanel>
+                        <Border CornerRadius="10" Background="White">
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <TextBlock Text="{Binding Brand}"/>
+                                <Image Height="200" Width="200" Stretch="Fill" Source="{Binding Photo.Url}"/>
+                                <TextBlock Text="{Binding Article}"/>
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Price}"/>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemsPanel>
@@ -53,7 +57,7 @@
         </Button>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="20" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <materialDesign:DrawerHost.RightDrawerContent>
                 <StackPanel Width="170" Margin="16">
