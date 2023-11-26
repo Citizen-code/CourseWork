@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import type ErrorValidate from '@/interface/model/error_validate';
+import { useSearchParams, useRouter } from 'next/navigation'
 import RegistrationAction from '@/action/auth/registration';
 import type ErrorsForm from '@/interface/errors.form';
 import ErrorsShow from '../errors.show';
 
 export default function Registration() {
-    const params = useSearchParams()
-    const url = params.get('url')
+    const url = useSearchParams().get('url')
+    const {push} = useRouter()
     const [surname, setSurname] = useState<string>('')
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
@@ -30,7 +29,7 @@ export default function Registration() {
             list:error!.errors || []
           })
       }else{
-        location.href = url || '/profile'
+        push(url || '/profile')
       }
     }
 
@@ -62,7 +61,7 @@ export default function Registration() {
                         </div>
                     </div>
                     <div className="form-outline mb-4 d-flex justify-content-center">
-                        <label>Дата рождения<input id='Date' type='date' className="form-control" onChange={e => setBirthDate(new Date(e.target.value))} placeholder='Дата' value={birthDate?.toLocaleDateString('en-CA')} /></label>
+                        <label>Дата рождения<input id='Date' type='date' className="form-control" onChange={e => setBirthDate(new Date(e.target.value))} placeholder='Дата' defaultValue={birthDate?.toLocaleDateString('en-CA')} /></label>
                     </div>
                 </div>
             </div>

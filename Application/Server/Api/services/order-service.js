@@ -26,11 +26,10 @@ class OrderService {
                     { model: service, as: 'service', include: { model: service_price, as: 'price' } },
                     { model: service_price, as: 'price' }]},
                 { model: list_consumable_parts, as: 'list_consumable_parts', include: 
-                    { model: consumable_part, as: 'consumable_part' }},
+                    { model: consumable_part, as: 'consumable_part' , include: {model:photo, as:'photo'}}},
                 { model: status_order, as: 'status' },
                 { model: client, as: 'client'},
-                { model: employee, as: 'employee', include:
-                    {model:photo, as:'photo'}}
+                { model: employee, as: 'employee', include: {model:photo, as:'photo'}}
             ]
         }
         return await order.findOne(option)

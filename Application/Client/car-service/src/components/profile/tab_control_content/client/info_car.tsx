@@ -11,7 +11,7 @@ export default function InfoCar({ edit }: { edit: () => void }) {
   return (
     <div className="card">
       {((client.id && client.car?.photo))?
-        <Image src={`${process.env.BASE_URL}/photo/${client.car?.photo?.id}${client.car?.photo?.extension}`} height={250} width={300} className={`card-img-top`} alt="Фото авто"/>
+        <Image src={`${process.env.BASE_URL}/photo/${client.car?.photo?.id}${client.car?.photo?.extension}`} priority height={250} width={300} style={{'height':'auto', 'width':'auto'}} className={`card-img-top`} alt="Фото авто"/>
       :<></>}
       <div className="card-body">
         {((client.id && client.car)||(!client.id)) ?
@@ -97,7 +97,7 @@ export default function InfoCar({ edit }: { edit: () => void }) {
           <div>
             <h5 className='fw-bold text-center'>Необходимо добавить информацию о транспортном средстве</h5>
             <div className="row m-4">
-              <button className="btn btn-secondary btn-block" onClick={edit}>Добавить информацию</button>
+              <button className="btn btn-secondary btn-block" id='AddInfoBnt' onClick={edit}>Добавить информацию</button>
             </div>
           </div>
           </>

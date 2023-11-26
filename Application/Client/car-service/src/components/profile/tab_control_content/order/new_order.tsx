@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import ApiService from '@/service/api';
 import { AuthContext } from '@/components/profile/context';
 import type ErrorsForm from '@/interface/errors.form';
@@ -41,11 +41,13 @@ export default function NewOrder() {
             <ErrorsShow errorsForm={errorsForm}/>
                 <div className="form-outline m-2">
                     <label className='fw-bold'>Дата</label>
-                    <input type='date' className="form-control" max="2024-12-31" onChange={
+                    <input id='DateOrder' type='date' className="form-control" max="2024-12-31" onChange={
                         async (e) =>{
                             if(e.target.value != ''){
                                 setDate(e.target.value);
-                                if(new Date(e.target.value) > new Date()){
+                                const select_date = new Date(e.target.value)
+                                const current_date = new Date()
+                                if(select_date > current_date && select_date <= new Date(`${current_date.getFullYear()+1}-12-31`)){
                                     setIsVisibleMessage(false)
                                     setIsVisibleComment(false);
                                     setTime('')
@@ -56,7 +58,7 @@ export default function NewOrder() {
                             } else remove()
                         }
 
-                    } value={date} />
+                    } defaultValue={date} />
                 </div>
                 {isVisibleMessage ? <div>На этот день нельзя записаться</div>:<></>}
                 {isVisibleTime?
@@ -70,7 +72,7 @@ export default function NewOrder() {
                                 <label htmlFor={item} onClick={(e)=>{
                                     setTime(item)
                                     setIsVisibleComment(true)
-                                }} className="btn btn-outline-info">{item}</label>
+                                }} className="btn btn-outline-info TimeOrder">{item}</label>
                             </div>
                         )}
                     </div>
@@ -78,9 +80,9 @@ export default function NewOrder() {
                 {isVisibleComment?<>
                 <div className="form-outline m-2">
                     <label className='fw-bold'>Комментарий</label>
-                    <textarea className="form-control" rows={4} onChange={(e) => setComment(e.target.value)} value={comment} />
+                    <textarea id='Comment' className="form-control" rows={4} onChange={(e) => setComment(e.target.value)} value={comment} />
                 </div>
-                <button className="m-2 btn btn-secondary btn-block" onClick={async () => {
+                <button id='OrderNewBnt' className="m-2 btn btn-secondary btn-block" onClick={async () => {
                     const body: Order = {
                         client_id:client.id,
                         date,
@@ -99,9 +101,9 @@ export default function NewOrder() {
                     }else{
                         setErrorsForm(empty_error)
                         await fetchData()
-                        location.href = '/profile'
+                        location.href = '/profile?select=history';
                     }
-                }}>Добавить</button></>:
+                }}>Оформить</button></>:
                 <></>}
             </div>
         </div>

@@ -21,7 +21,7 @@ export default function Header() {
                         <Link href={'/'}><h3>Wheely</h3></Link>
                     </div>
                     <form action={formAction} className={`col p-2 pe-4 d-flex justify-content-end`}>
-                        <button type='submit' className="btn btn-outline-danger">Выйти</button>
+                        <button id='LogoutBnt' type='submit' className="btn btn-outline-danger">Выйти</button>
                     </form>
                 </div>
             </div>

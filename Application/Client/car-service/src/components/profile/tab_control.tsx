@@ -1,18 +1,23 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, usePathname } from 'next/navigation'
 import { useEffect,useContext, useState } from 'react';
 import ClientInfo from './tab_control_content/client/client_base';
-import style from '@/components/style/profile/tab.control.module.css'
 import ListHistory from './tab_control_content/history/list';
 import NewOrder from './tab_control_content/order/new_order';
 import { AuthContext } from "@/components/profile/context";
 
 export default function TabControl() {
   const params = useSearchParams()
+  const pathname = usePathname()
   const [select,setSelect] = useState(params.get('select'))
   const {client} = useContext(AuthContext);
   useEffect(() => {
+    const url = pathname + params.toString()
+    console.log(url)
+    }, [pathname, params])
+  useEffect(() => {
     import('bootstrap/dist/js/bootstrap');
+    console.log('Update')
   }, []);
   return (
     <div>

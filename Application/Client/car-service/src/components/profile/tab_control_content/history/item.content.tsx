@@ -19,13 +19,14 @@ export default function ItemContent({ order }: { order: Order }) {
                                         <h6 className='fw-bold d-inline-block'>Цена:</h6>
                                         <h6 className='fw-light d-inline-block ms-2'>{item.price.price}</h6>
                                     </div>
+                                    {item.time!=null?
                                     <div>
                                         <h6 className='fw-bold d-inline-block'>Время выполнения:</h6>
                                         <h6 className='fw-light d-inline-block ms-2'>{item.time}</h6>
-                                    </div>
+                                    </div>:<></>}
                                     <div>
                                         <h6 className='fw-bold d-inline-block'>Итоговая стоимость:</h6>
-                                        <h6 className='fw-light d-inline-block ms-2'>{item.price.is_time_based ? item.price.price * item.time : item.price.price}</h6>
+                                        <h6 className='fw-light d-inline-block ms-2'>{(item.price.is_time_based && item.time!=null) ? item.price.price * item.time : item.price.price}</h6>
                                     </div>
                                 </div>
                             )}

@@ -1,14 +1,13 @@
 'use client'
 import { useState } from 'react'
-import { useSearchParams } from 'next/navigation'
-import type ErrorValidate from '@/interface/model/error_validate';
+import { useSearchParams, useRouter } from 'next/navigation'
 import LoginAction from '@/action/auth/login';
 import type ErrorsForm from '@/interface/errors.form';
 import ErrorsShow from '../errors.show';
 
 export default function Authorization() {
-  const params = useSearchParams()
-  const url = params.get('url')
+  const { push } = useRouter();
+  const url = useSearchParams().get('url')
   const [email, setEmail] = useState<string>('')//1234@yandex.ru
   const [password, setPassword] = useState<string>('')//123
   const [remember, setRemember] = useState<boolean>(true)
@@ -24,7 +23,7 @@ export default function Authorization() {
         list:error!.errors || []
       })
     }else{
-      location.href = url || '/profile'
+      push(url||'/profile')
     }
   }
   

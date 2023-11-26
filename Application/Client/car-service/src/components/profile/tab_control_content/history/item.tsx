@@ -37,7 +37,7 @@ export default function ItemList({ order, fetchData }: { order: Order, fetchData
                             <button onClick={async (e) => {
                                 await ApiService.order_delete(order.id!);
                                 await fetchData()
-                            }} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Отменить заказ</button>
+                            }} id={`CancelBnt-${order.id}`} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Отменить заказ</button>
                         </div> :
                         <></>}
                 </div>

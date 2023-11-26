@@ -29,30 +29,30 @@ export default function EditClient({ cancel }: { cancel: () => void }) {
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Фамилия</label>
-          <input className="form-control" onChange={(e) => setSurname(e.target.value)} value={surname} />
+          <input id='Surname' className="form-control" onChange={(e) => setSurname(e.target.value)} value={surname} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Имя</label>
-          <input className="form-control" onChange={(e) => setFirstname(e.target.value)} value={firstname} />
+          <input id='Firstname' className="form-control" onChange={(e) => setFirstname(e.target.value)} value={firstname} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Отчество</label>
-          <input className="form-control" onChange={(e) => setLastname(e.target.value)} value={lastname} />
+          <input id='Lastname' className="form-control" onChange={(e) => setLastname(e.target.value)} value={lastname} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Дата рождения</label>
-          <input className="form-control" type='date' onChange={(e) => setBirthDate(new Date(e.target.value))} value={birth_date?.toLocaleDateString('en-CA')} />
+          <input id='BirthDate' className="form-control" type='date' onChange={(e) => setBirthDate(new Date(e.target.value))} defaultValue={birth_date?.toLocaleDateString('en-CA')} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Почта</label>
-          <input className="form-control" onChange={(e) => setEmail(e.target.value)} value={email} />
+          <input id='Email' className="form-control" onChange={(e) => setEmail(e.target.value)} value={email} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Телефон</label>
-          <input className="form-control" onChange={(e) => setPhone(e.target.value)} value={phone} />
+          <input id='Phone' className="form-control" onChange={(e) => setPhone(e.target.value)} value={phone} />
         </div>
         <div className="row m-4">
-          <button className="btn btn-secondary btn-block mb-4" onClick={async () => {
+          <button id='EditClientBnt' className="btn btn-secondary btn-block mb-4" onClick={async () => {
             const body: Client = {
               birth_date: birth_date?.toLocaleDateString('en-CA'),
               email,

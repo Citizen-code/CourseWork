@@ -13,7 +13,7 @@ export default function InfoClient({ edit }: { edit: () => void }) {
       <div className="card-body">
         <div className='d-flex justify-content-between'>
           <h5 className='fw-bold d-inline-block d-inline-block'>Информация о пользователе</h5>
-          <button type="button" onClick={edit} className="p-0 btn">
+          <button id='EditClientBnt' type="button" onClick={edit} className="p-0 btn">
             <Image src={iconEdit} alt="EditSVG" width={30} height={30} />
           </button>
         </div>

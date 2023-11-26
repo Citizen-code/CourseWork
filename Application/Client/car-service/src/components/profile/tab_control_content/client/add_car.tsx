@@ -36,31 +36,31 @@ export default function AddCar({ cancel }: { cancel: () => void }) {
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Наименование</label>
-          <input className="form-control" onChange={(e) => setName(e.target.value)} value={name} />
+          <input id='CarName' className="form-control" onChange={(e) => setName(e.target.value)} value={name} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Номер</label>
-          <input className="form-control" onChange={(e) => setNumber(e.target.value)} value={number} />
+          <input id='CarNumber' className="form-control" onChange={(e) => setNumber(e.target.value)} value={number} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Год выпуска</label>
-          <input type='number' className="form-control" onChange={(e) => setReleaseYear(parseInt(e.target.value))} value={release_year} />
+          <input id='CarReleaseYear' type='number' className="form-control" onChange={(e) => setReleaseYear(parseInt(e.target.value))} value={release_year} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Цвет</label>
-          <input className="form-control" onChange={(e) => setColor(e.target.value)} value={color} />
+          <input id='CarColor' className="form-control" onChange={(e) => setColor(e.target.value)} value={color} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Пробег</label>
-          <input className="form-control" onChange={(e) => setMileage(e.target.value)} value={mileage} />
+          <input id='CarMileage' className="form-control" onChange={(e) => setMileage(e.target.value)} value={mileage} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>VIN</label>
-          <input className="form-control" onChange={(e) => setVin(e.target.value)} value={vin} />
+          <input id='CarVin' className="form-control" onChange={(e) => setVin(e.target.value)} value={vin} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Тип двигателя</label>
-          <select onChange={(e)=>{setEngineId(e.target.value=='-1'?undefined:parseInt(e.target.value))}} className="form-select">
+          <select id='CarEngine' onChange={(e)=>{setEngineId(e.target.value=='-1'?undefined:parseInt(e.target.value))}} className="form-select">
             <option value={'-1'} hidden selected={engine_id==undefined}>Выберите...</option>
             {engines.map(item =>
               <option selected={engine_id == item.id} value={item.id}>{item.name}</option>
@@ -69,11 +69,11 @@ export default function AddCar({ cancel }: { cancel: () => void }) {
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Фото</label>
-          <input type='file' className="form-control" onChange={(e) => {if(e.target.files != null) setPhoto(e.target.files[0])}} />
+          <input id='CarPhoto' type='file' className="form-control" onChange={(e) => {if(e.target.files != null) setPhoto(e.target.files[0])}} />
         </div>
 
         <div className="row m-4">
-          <button className="btn btn-secondary btn-block mb-4" onClick={async () => {
+          <button id='CarAddBnt' className="btn btn-secondary btn-block mb-4" onClick={async () => {
             const body: Car = {
               client_id: client.id,
               color,

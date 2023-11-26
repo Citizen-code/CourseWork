@@ -31,7 +31,6 @@ export default function ListHistory(){
     const click_page =(item:number) => {
         if(page == item) return;
         setPage(item);
-        //fetchData(item)
     }
     const create_pages = ()=>{
         let pages = [] as number[];
@@ -51,37 +50,37 @@ export default function ListHistory(){
     },[isActive, isCancel, isFinally, page])
     return (
         <>
-                <div className="w-100 d-flex align-items-center justify-content-between">
-                    <div className="p-4  d-none d-sm-block">
-                        <h5 className="m-0">Добро пожаловать</h5>
-                        {(client.surname!=undefined||client.firstname!=undefined)?
-                        <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
-                    </div>
+            <div className="w-100 d-flex align-items-center justify-content-between">
+                <div className="p-4  d-none d-sm-block">
+                    <h5 className="m-0">Добро пожаловать</h5>
+                    {(client.surname!=undefined||client.firstname!=undefined)?
+                    <h4>{`${client.firstname} ${client.surname}`}</h4>: <></>}
+                </div>
                     <div className="p-4">
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isActive} onChange={()=>{
+                            <input className="form-check-input" type="checkbox" id="SwitchActive" defaultChecked={isActive} onChange={()=>{
                                 setIsActive(!isActive)
                             }}/>
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать активные заказы</label>
+                            <label className="form-check-label" htmlFor="SwitchActive">Показывать активные заказы</label>
                         </div>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isFinally} onChange={()=>{
+                            <input className="form-check-input" type="checkbox" id="SwitchFinally" defaultChecked={isFinally} onChange={()=>{
                                 setIsFinally(!isFinally)
                             }}/>
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать завешенные заказы</label>
+                            <label className="form-check-label" htmlFor="SwitchFinally">Показывать завешенные заказы</label>
                         </div>
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={isCancel} onChange={() => {
+                            <input className="form-check-input" type="checkbox" id="SwitchCancel" defaultChecked={isCancel} onChange={() => {
                                 setIsCancel(!isCancel)
                             }}/>
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Показывать отмененные заказы</label>
+                            <label className="form-check-label" htmlFor="SwitchCancel">Показывать отмененные заказы</label>
                         </div>
                     </div>
                 </div>
                 {listOrders.length != 0?<>
                     <div className="list-group">
                         {listOrders.map(item =>
-                            <button key={item.id} data-bs-toggle="modal" data-bs-target={`#id-${item.id}`} className="list-group-item list-group-item-action" aria-current="true">
+                            <button key={item.id} data-bs-toggle="modal" data-bs-target={`#id-${item.id}`} className={`list-group-item list-group-item-action history-item status-${item.status_id}`} aria-current="true">
                                 <div className="d-flex w-100 justify-content-between">
                                     <h5 className='fw-bold d-inline-block pt-2'>{item.status?.name}</h5>
                                     <div>
