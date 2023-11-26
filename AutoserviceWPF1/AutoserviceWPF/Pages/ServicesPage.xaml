@@ -39,6 +39,8 @@
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                     <TextBlock Text="{Binding Price.Price}"/>
+                                    <materialDesign:PackIcon x:Name="UpdateService" Kind="Pencil" MouseLeftButtonDown="UpdateService_Click"/>
+                                    <materialDesign:PackIcon x:Name="DeleteService" Kind="Trash" MouseLeftButtonDown="DeleteService_MouseLeftButtonDown"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -46,8 +48,8 @@
                 </ListView.ItemTemplate>
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="UpdateService" Header="{materialDesign:PackIcon Kind=Pencil}" Click="UpdateService_Click"/>
-                        <MenuItem x:Name="DeleteService" Header="{materialDesign:PackIcon Kind=Trash}" Click="MenuItem_Click"/>
+                        <MenuItem />
+                        <MenuItem />
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>

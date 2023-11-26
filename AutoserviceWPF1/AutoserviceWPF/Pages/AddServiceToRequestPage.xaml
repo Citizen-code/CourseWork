@@ -82,6 +82,7 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
+        <TextBox x:Name="TimeTextBox" Grid.Row="2" Width="200" VerticalAlignment="Top" Margin="5" Text="{Binding Service.Time}" materialDesign:HintAssist.Hint="Время (ч.)" Background="White" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
         <Button x:Name="SaveButton" Grid.Row="2" Grid.ColumnSpan="2" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
     </Grid>
 </Page>

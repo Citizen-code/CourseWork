@@ -74,10 +74,21 @@ namespace AutoserviceWPF.Pages
 
         private void AddService_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Добавить TextBox для ввода времени услуги.
-            _listService = new ListService() { ServiceId = ((Service)ServicesListView.SelectedItem).Id, Service = (Service)ServicesListView.SelectedItem, PriceId = ((Service)ServicesListView.SelectedItem).PriceId };
-            _listServices.Add(_listService);
-            ServicesToRequestListView.Items.Add(_listService);
+            try
+            {
+                //TODO: Добавить TextBox для ввода времени услуги.
+                _listService = new ListService() { ServiceId = ((Service)ServicesListView.SelectedItem).Id, Service = (Service)ServicesListView.SelectedItem, PriceId = ((Service)ServicesListView.SelectedItem).PriceId, Time = Convert.ToDecimal(TimeTextBox.Text) };
+                _listServices.Add(_listService);
+                ServicesToRequestListView.Items.Add(_listService);
+            }
+            catch when (TimeTextBox.Text == null)
+            {
+                MessageBox.Show("Введите время выполнения услуги.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteService_Click(object sender, RoutedEventArgs e)

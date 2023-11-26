@@ -43,6 +43,8 @@
                                 <TextBlock Text="{Binding Phone}"/>
                                 <TextBlock Text="{Binding Car.Number}" Margin="0 5 0 0"/>
                                 <TextBlock Text="{Binding Car.Name}"/>
+                                <materialDesign:PackIcon x:Name="ClientInfo" Kind="Info" MouseLeftButtonDown="ClientInfo_Click"/>
+                                <materialDesign:PackIcon x:Name="UpdateClient" Kind="Pencil" MouseLeftButtonDown="UpdateClient_Click"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -54,8 +56,8 @@
                 </ListView.ItemsPanel>
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="UpdateClient" Header="{materialDesign:PackIcon Kind=Pencil}" Click="UpdateClient_Click"/>
-                        <MenuItem x:Name="ClientInfo" Header="{materialDesign:PackIcon Kind=Info}" Click="ClientInfo_Click"/>
+                        <MenuItem />
+                        <MenuItem />
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>

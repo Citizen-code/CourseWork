@@ -57,16 +57,12 @@
                                         <TextBlock Text="{Binding Employee.Firstname}"/>
                                         <TextBlock Text="{Binding Employee.Lastname}"/>
                                         <TextBlock Text="{Binding Date}" Margin="0 20 0 0"/>
+                                        <materialDesign:PackIcon x:Name="AddServiceToRequest" Height="30" Width="30" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem x:Name="AddServiceToRequest" Header="{materialDesign:PackIcon Kind=Plus}" Click="AddServiceToRequest_Click"/>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
                 </ListView>
             </ScrollViewer>
             <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="3" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">

@@ -132,7 +132,20 @@ namespace AutoserviceWPF.Pages
             e.Handled = true;
         }
 
-        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void UpdateService_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServicesListView.SelectedItem != null)
+            {
+                Service currentService = (Service)ServicesListView.SelectedItem;
+                NavigationService.Navigate(new ServiceAddPage(currentService));
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private async void DeleteService_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -146,19 +159,6 @@ namespace AutoserviceWPF.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void UpdateService_Click(object sender, RoutedEventArgs e)
-        {
-            if (ServicesListView.SelectedItem != null)
-            {
-                Service currentService = (Service)ServicesListView.SelectedItem;
-                NavigationService.Navigate(new ServiceAddPage(currentService));
-            }
-            else
-            {
-                return;
             }
         }
     }
