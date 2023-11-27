@@ -1,6 +1,6 @@
 const {Builder,By, until} = require("selenium-webdriver");
 const assert = require("assert");
-const base_url = 'http://localhost:3000'
+const base_url = 'http://185.252.146.21' || 'http://localhost:3000'
 let email = '9@yandex.ru'//'1234@yandex.ru'
 let password = '123'
 let stop_time = 1500

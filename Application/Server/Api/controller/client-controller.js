@@ -1,4 +1,5 @@
 const ApiError = require('../exception/error');
+const {Op} = require('../models/init-models')
 const {findOne,findAll, GetCount, update} = require('../services/client-service');
 const validateService = require('../services/validate-service')
 class ClientController{
@@ -29,10 +30,18 @@ class ClientController{
         try{
             validateService.validate(req)
             
-            const {include,pagination,page} = req.query;
-            let option = {
-                order:[['surname', 'ASC']]
-            }
+            const {include,pagination,page,text,order} = req.query;
+            
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({
+                [Op.or]:[
+                    {surname:{[Op.like]:`%${text}%`}},
+                    {firstname:{[Op.like]:`%${text}%`}},
+                    {lastname:{[Op.like]:`%${text}%`}},
+                ]
+            });
+            if(order != undefined) option.order.push(['surname', order])
+
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)
@@ -46,7 +55,17 @@ class ClientController{
 
     async get_count_clients(req,res,next){
         try{
-            const count = await GetCount({})
+            const {text} = req.query;
+
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({
+                [Op.or]:[
+                    {surname:{[Op.like]:`%${text}%`}},
+                    {firstname:{[Op.like]:`%${text}%`}},
+                    {lastname:{[Op.like]:`%${text}%`}},
+                ]
+            });
+            const count = await GetCount(option)
             res.json({
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))

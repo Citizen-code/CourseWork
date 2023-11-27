@@ -21,6 +21,8 @@ router.get('/',
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
     query('include').default(false).isBoolean(),
+    query('text').optional().isString(),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
     authMiddleWare(['employee','client']),
     ServiceController.get_services);
 

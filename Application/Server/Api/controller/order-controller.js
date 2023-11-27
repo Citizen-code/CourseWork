@@ -29,11 +29,17 @@ class OrderController{
         try{
             validateService.validate(req)
 
-            const {include, pagination, page, status} = req.query;
+            const {include, pagination, page, status, order, text, max_date, min_date} = req.query;
 
-            const option = {
-                where:status != undefined ? {status_id:status} : undefined,
-                order:[['date', 'ASC']]
+            const option = { where:[], order:[] }
+            if(status != undefined) option.where.push({status_id:status});
+            if(text != undefined) option.where.push({comment:{[Op.like]:`%${text}%`}});
+            if(order != undefined) option.order.push(['date', order])
+            if(max_date != undefined || min_date != undefined){
+                const data = []
+                if(max_date != undefined) data.push({[Op.lte]:max_date});
+                if(min_date != undefined) data.push({[Op.gte]:min_date});
+                option.where.push({date:{[Op.and]:data}})
             }
 
             if(pagination == "true"){
@@ -51,16 +57,22 @@ class OrderController{
             validateService.validate(req)
 
             const {id} = req.params
-            const {include, pagination, page, status} = req.query;
+            const {include, pagination, page, status, order, text, max_date, min_date} = req.query;
             const user = req.user;
 
-            const option = {
-                where:[
-                    user.type === 'client'?{client_id:user.id}:{client_id:id},
-                    status != undefined?{status_id:status}:undefined
-                ],
-                order:[['date', 'DESC']]
+            const option = { where:[], order:[] }
+            if(user.type === 'client') option.where.push({client_id:user.id})
+            else option.where.push({client_id:id})
+            if(status != undefined) option.where.push({status_id:status});
+            if(text != undefined) option.where.push({comment:{[Op.like]:`%${text}%`}});
+            if(order != undefined) option.order.push(['date', order])
+            if(max_date != undefined || min_date != undefined){
+                const data = []
+                if(max_date != undefined) data.push({[Op.lte]:max_date});
+                if(min_date != undefined) data.push({[Op.gte]:min_date});
+                option.where.push({date:{[Op.and]:data}})
             }
+            
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)
@@ -73,8 +85,18 @@ class OrderController{
 
     async get_count_orders(req,res,next){
         try{
-            const {status} = req.query;
-            const count = await GetCount({where:status != undefined?{status_id:status}:undefined})
+            const {status, text, max_date, min_date} = req.query;
+            const option = { where:[], order:[] }
+            if(status != undefined) option.where.push({status_id:status});
+            if(text != undefined) option.where.push({comment:{[Op.like]:`%${text}%`}});
+            if(max_date != undefined || min_date != undefined){
+                const data = []
+                if(max_date != undefined) data.push({[Op.lte]:max_date});
+                if(min_date != undefined) data.push({[Op.gte]:min_date});
+                option.where.push({date:{[Op.and]:data}})
+            }
+
+            const count = await GetCount(option)
             res.json({
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
@@ -88,12 +110,18 @@ class OrderController{
         try{
             const {id} = req.params
             const user = req.user;
-            const {status} = req.query;
-            const option = {
-                where:[
-                    user.type === 'client'?{client_id:user.id}:{client_id:id},
-                    status != undefined?{status_id:status}:undefined
-                ],
+            const {status, text, max_date, min_date} = req.query;
+            const option = { where:[], order:[] }
+            if(user.type === 'client') option.where.push({client_id:user.id})
+            else option.where.push({client_id:id})
+            if(status != undefined) option.where.push({status_id:status});
+            if(text != undefined) option.where.push({comment:{[Op.like]:`%${text}%`}});
+            if(status != undefined) option.where.push({status_id:status});
+            if(max_date != undefined || min_date != undefined){
+                const data = []
+                if(max_date != undefined) data.push({[Op.lte]:max_date});
+                if(min_date != undefined) data.push({[Op.gte]:min_date});
+                option.where.push({date:{[Op.and]:data}})
             }
             const count = await GetCount(option)
             res.json({

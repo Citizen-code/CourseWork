@@ -11,9 +11,12 @@ router.get('/',
     query('include').default(false).isBoolean(),
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
+    query('text').optional().isString(),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
     ClientController.get_clients);
 
 router.get('/count',
+    query('text').optional().isString(),
     authMiddleWare(['employee']),
     ClientController.get_count_clients);
 

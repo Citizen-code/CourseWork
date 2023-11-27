@@ -7,6 +7,9 @@ let router = Router();
 router.get('/count',
     query('status').optional().isArray(),
     query('status.*').isInt({max:4,min:1}),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
     authMiddleWare(['employee']),
     OrderController.get_count_orders);
 
@@ -16,6 +19,10 @@ router.get('/',
     query('page').default(1).isInt({min:1}),
     query('status').optional().isArray(),
     query('status.*').isInt({max:4,min:1}),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
     authMiddleWare(['employee']),
     OrderController.get_orders);
 
@@ -25,12 +32,19 @@ router.get('/client',
     query('page').default(1).isInt({min:1}),
     query('status').optional().isArray(),
     query('status.*').isInt({max:4,min:1}),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
     authMiddleWare(['client']),
     OrderController.get_orders_client);
 
 router.get('/client/count',
     query('status').optional().isArray(),
     query('status.*').isInt({max:4,min:1}),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
     authMiddleWare(['client']),
     OrderController.get_count_orders_client);
 
@@ -41,11 +55,21 @@ router.get('/client/:id',
     query('page').default(1).isInt({min:1}),
     query('status').optional().isArray(),
     query('status.*').isInt({max:4,min:1}),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
+
     authMiddleWare(['employee']),
     OrderController.get_orders_client);
 
 router.get('/client/count/:id',
     param('id').isUUID(),
+    query('status').optional().isArray(),
+    query('status.*').isInt({max:4,min:1}),
+    query('text').optional().isString(),
+    query('max_date').optional().isDate(),
+    query('min_date').optional().isDate(),
     authMiddleWare(['employee']),
     OrderController.get_count_orders_client);
 

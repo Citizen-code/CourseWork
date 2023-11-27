@@ -5,6 +5,7 @@ const authMiddleWare = require('../middlewares/auth-middleware');
 let router = Router();
 
 router.get('/count',
+    query('text').optional().isString(),
     authMiddleWare(['employee']),
     ConsumablePartController.get_count_consumable_parts);
 
@@ -18,6 +19,8 @@ router.get('/',
     query('pagination').default(false).isBoolean(),
     query('page').default(1).isInt({min:1}),
     query('include').default(false).isBoolean(),
+    query('text').optional().isString(),
+    query('order').optional().isIn(['ASC','DESC']).withMessage('В сортировке указывается только одно из значений (ASC,DESC)'),
     authMiddleWare(['employee']),
     ConsumablePartController.get_consumable_parts);
 

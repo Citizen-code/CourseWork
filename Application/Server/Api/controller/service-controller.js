@@ -1,5 +1,7 @@
 const {findOne,findAll,update, create, GetCount} = require('../services/service-service')
 const validateService = require('../services/validate-service')
+const {Op} = require('../models/init-models')
+
 
 class ServiceController{
     async get_service(req,res,next){
@@ -20,10 +22,12 @@ class ServiceController{
         try{
             validateService.validate(req)
 
-            const {all,pagination, page, include} = req.query;
-            let option = {
-                order:[['name', 'ASC']]
-            }
+            const {all,pagination, page, include, order, text} = req.query;
+
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
+            if(order != undefined) option.order.push(['name', order])
+
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)

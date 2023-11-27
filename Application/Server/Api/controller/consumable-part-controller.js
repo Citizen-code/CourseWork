@@ -1,5 +1,7 @@
 const {findOne,findAll,update, create, GetCount} = require('../services/consumable-part-service')
 const validateService = require('../services/validate-service')
+const {Op} = require('../models/init-models')
+
 
 class ConsumablePartController{
     async get_consumable_part(req,res,next){
@@ -19,11 +21,12 @@ class ConsumablePartController{
         try{
             validateService.validate(req)
 
-            const {include,pagination, page} = req.query;
+            const {include,pagination, page, text, order} = req.query;
 
-            let option = {
-                order:[['name', 'ASC']]
-            }
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
+            if(order != undefined) option.order.push(['name', order])
+
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)
                 option.offset = option.limit * (page - 1)
@@ -37,7 +40,12 @@ class ConsumablePartController{
 
     async get_count_consumable_parts(req,res,next){
         try{
-            const count = await GetCount({})
+            const {text} = req.query;
+
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
+            
+            const count = await GetCount(option)
             res.json({
                 count_items:count,
                 count_pages:Math.ceil(count / parseInt(process.env.COUNT_ITEM_ON_PAGE || 10))
