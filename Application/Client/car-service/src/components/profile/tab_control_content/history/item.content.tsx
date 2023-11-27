@@ -2,6 +2,7 @@ import type Order from "@/interface/model/order";
 import Image from 'next/image';
 
 export default function ItemContent({ order }: { order: Order }) {
+    console.log(order)
     return (<>
         <div className="modal-body">
             <div className="container-fluid">
@@ -38,26 +39,32 @@ export default function ItemContent({ order }: { order: Order }) {
                                 <h6 className='fw-bold d-inline-block pt-1'>Список расходных материалов:</h6>
                                 {order.list_consumable_parts?.map(item =>
                                     <div className="list-group-item list-group-item-action" key={item.id}>
-                                        <Image hidden={item.consumable_part.photo_id != undefined} src={`http://185.252.146.21/photo/${item.consumable_part.photo?.id}${item.consumable_part.photo?.extension}`} height={100} width={100} className={`card-img-top`} alt="Фото авто"/>
-                                        <div>
-                                            <h6 className='fw-bold d-inline-block'>Наименование:</h6>
-                                            <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.name}</h6>
-                                        </div>
-                                        <div>
-                                            <h6 className='fw-bold d-inline-block'>Цена:</h6>
-                                            <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.price}</h6>
-                                        </div>
-                                        <div>
-                                            <h6 className='fw-bold d-inline-block'>Бренд:</h6>
-                                            <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.brand}</h6>
-                                        </div>
-                                        <div>
-                                            <h6 className='fw-bold d-inline-block'>Артикль:</h6>
-                                            <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.article}</h6>
-                                        </div>
-                                        <div>
-                                            <h6 className='fw-bold d-inline-block'>Единица измерения:</h6>
-                                            <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.measure_unit}</h6>
+                                        <div className="row g-0">
+                                            <div className="col-auto me-3">
+                                                <Image hidden={item.consumable_part.photo_id == undefined} src={`http://185.252.146.21/photo/${item.consumable_part.photo?.id}${item.consumable_part.photo?.extension}`} height={200} width={200} className={`img-fluid rounded-start`} alt="Фото авто"/>
+                                            </div>
+                                            <div className="col">
+                                                <div>
+                                                    <h6 className='fw-bold d-inline-block'>Наименование:</h6>
+                                                    <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.name}</h6>
+                                                </div>
+                                                <div>
+                                                    <h6 className='fw-bold d-inline-block'>Цена:</h6>
+                                                    <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.price}</h6>
+                                                </div>
+                                                <div>
+                                                    <h6 className='fw-bold d-inline-block'>Бренд:</h6>
+                                                    <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.brand}</h6>
+                                                </div>
+                                                <div>
+                                                    <h6 className='fw-bold d-inline-block'>Артикль:</h6>
+                                                    <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.article}</h6>
+                                                </div>
+                                                <div>
+                                                    <h6 className='fw-bold d-inline-block'>Единица измерения:</h6>
+                                                    <h6 className='fw-light d-inline-block ms-2'>{item.consumable_part.measure_unit}</h6>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
