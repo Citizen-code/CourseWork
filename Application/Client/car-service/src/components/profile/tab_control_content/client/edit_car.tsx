@@ -55,7 +55,7 @@ export default function EditCar({ cancel }: { cancel: () => void }) {
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>Пробег</label>
-          <input id='CarMileage' className="form-control" onChange={(e) => setMileage(e.target.value)} value={mileage} />
+          <input id='CarMileage' type='number' className="form-control" onChange={(e) => setMileage(e.target.value)} value={mileage} />
         </div>
         <div className="form-outline m-2">
           <label className='fw-bold'>VIN</label>

@@ -34,7 +34,7 @@ export default function ListHistory(){
     }
     const create_pages = ()=>{
         let pages = [] as number[];
-        for (let index = 1; index <= countPage; index++) {
+        for (let index = page > 5?page-5:1; index <= (countPage>(page+5)?page+5:countPage); index++) {
             pages.push(index)
         }
         return <>

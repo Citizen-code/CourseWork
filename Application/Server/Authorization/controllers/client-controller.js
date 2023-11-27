@@ -9,6 +9,8 @@ class ClientController{
             validateService.validate(req)
 
             let {email,password, surname, firstname, lastname, birth_date, phone} = req.body
+            let current_date = new Date()
+            if(new Date(birth_date) > current_date.setFullYear(current_date.getFullYear()-18)) throw ApiError.BadRequest('Вы должны быть старше 18 лет')
             let data = await clientService.registration(email,password, surname, firstname, lastname, birth_date, phone)
 
             res.cookie('refreshToken',data.refreshToken,{maxAge:30*24*60*60*1000,httpOnly:true})

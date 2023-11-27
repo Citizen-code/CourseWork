@@ -3,7 +3,7 @@ const validateService = require('../services/validate-service')
 const { v4 } = require('uuid')
 const ApiError = require("../exception/error");
 const {photo} = require('../models/init-models')
-
+const extensions = ['.jpg','.jpeg','.png']
 
 class PhotoController{
     async upload_photo(req,res,next){
@@ -14,7 +14,9 @@ class PhotoController{
 
             const file = req.files.photo;
             const id = v4();
-            const extension = `.${file.name.split('.')[1]}`;
+            const str = file.name.split('.')
+            const extension = `.${str[str.length-1]}`;
+            if(!extensions.includes(extension)) throw ApiError.BadRequest('Неверный тип файла')
             const path_file =  `${__dirname}${process.env.FOLDER_PATH}${id}${extension}`;
             const data = await photo.create({id,extension})
 

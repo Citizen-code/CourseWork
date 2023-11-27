@@ -105,7 +105,7 @@ router.post('/:id',
     body('list_services.*.service_id').isUUID(),
     body('list_services.*.price_id').isUUID(),
     body('list_services.*.time').isDecimal(),
-    body('list_consumable_parts').optional().isArray(),
+    body('list_consumable_parts').optional().isArray(),                   
     body('list_consumable_parts.*.consumable_part_id').isUUID(),
     authMiddleWare(['employee']),
     OrderController.add_content_order);

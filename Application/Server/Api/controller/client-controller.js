@@ -81,6 +81,7 @@ class ClientController{
 
             const {id} = req.params;
             const {surname,firstname,lastname,birth_date,email,phone} = req.body
+            if(new Date(birth_date) > current_date.setFullYear(current_date.getFullYear()-18)) throw ApiError.BadRequest('Вы должны быть старше 18 лет')
             if(req.user.type == 'client' && id != req.user.id){
                 throw ApiError.Forbidden();
             }
