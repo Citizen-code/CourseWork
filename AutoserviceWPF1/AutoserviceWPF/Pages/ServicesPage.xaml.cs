@@ -36,12 +36,10 @@ namespace AutoserviceWPF.Pages
             {
                 ServicesListView.ItemsSource = null;
                 int pages = (await ApiRestClient.Api.Services.GetCountServices()).CountPages;
-                if (pagesCount != pages)
+                Pagination.Items.Clear();
+                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
-                    for (int i = 1; i < pages + 1; i++)
-                    {
-                        Pagination.Items.Add(i);
-                    }
+                    Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
                 ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(false, true, page, true);

@@ -21,8 +21,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <TextBox x:Name="SearchTextBox" Grid.Row="0" Grid.Column="0" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
-            <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ServicesListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -35,11 +36,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="AddService" Header="{materialDesign:PackIcon Kind=Plus}" Click="AddService_Click"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -57,12 +53,13 @@
             </ListBox>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5">
-            <ListView x:Name="ServicesToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="ServicesToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Cursor="">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <TextBlock Text="{Binding Service.Name}"/>
+                                <TextBlock Text="{Binding Time}"/>
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                 <TextBlock Text="{Binding Service.Price.Price}"/>
@@ -82,7 +79,10 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <TextBox x:Name="TimeTextBox" Grid.Row="2" Width="200" VerticalAlignment="Top" Margin="5" Text="{Binding Service.Time}" materialDesign:HintAssist.Hint="Время (ч.)" Background="White" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-        <Button x:Name="SaveButton" Grid.Row="2" Grid.ColumnSpan="2" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+            <TextBox x:Name="TimeTextBox" Width="200" VerticalAlignment="Top" Margin="5" Visibility="Collapsed" Text="{Binding Service.Time}" materialDesign:HintAssist.Hint="Время (ч.)" Background="White" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+            <Button x:Name="AddButton" Height="40" Width="120" Margin="40 0 0 0" IsEnabled="False" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="ДОБАВИТЬ" Cursor="Hand" Click="AddButton_Click"/>
+        </StackPanel>
+        <Button x:Name="SaveButton" Grid.Row="2" Grid.Column="1" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
     </Grid>
 </Page>

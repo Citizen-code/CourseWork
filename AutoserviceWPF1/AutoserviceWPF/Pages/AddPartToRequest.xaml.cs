@@ -82,8 +82,6 @@ namespace AutoserviceWPF.Pages
             try
             {
                 await ApiRestClient.Api.Orders.AddContentOrder(_order.Id, _listServices, _listParts);
-                MessageBox.Show($"{_listServices.Count}", "test");
-                MessageBox.Show($"{_listParts.Count}", "test");
                 NavigationService.Navigate(new RequestsPage());
             }
             catch (Exception ex) when (ex is ApiError error)

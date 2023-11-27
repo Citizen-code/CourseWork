@@ -37,15 +37,25 @@ namespace AutoserviceWPF.Pages
             {
                 PartsListView.ItemsSource = null;
                 int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts()).CountPages;
-                if (pagesCount != pages)
+                Pagination.Items.Clear();
+                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
-                    for (int i = 1; i < pages + 1; i++)
-                    {
-                        Pagination.Items.Add(i);
-                    }
+                    Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
                 PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page);
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {

@@ -26,6 +26,8 @@ namespace AutoserviceWPF.Pages
     {
         private readonly ConsumablePart _part;
         private readonly bool IsAdded = false;
+        private byte[] _data;
+        private string name;
 
         public PartAddWindows()
         {
@@ -40,6 +42,10 @@ namespace AutoserviceWPF.Pages
             InitializeComponent();
             _part = part;
             LoadPartData();
+            if (part.Photo !=  null)
+            {
+                PartPhoto.DataContext = part.Photo.Url;
+            }
         }
 
         public void LoadPartData()
@@ -58,6 +64,7 @@ namespace AutoserviceWPF.Pages
                 _part.Name = PartNameTextBox.Text;
                 _part.Price = Convert.ToDecimal(PartCostTextBox.Text);
                 _part.MeasureUnit = (String)PartMeasureUnitCombobox.SelectedItem;
+                _part.PhotoId = (await ApiRestClient.Api.Photo.PostPhoto(_data, name)).Id;
 
                 switch (IsAdded)
                 {
@@ -99,8 +106,11 @@ namespace AutoserviceWPF.Pages
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
+                _part.PhotoId = (await ApiRestClient.Api.Photo.PostPhoto(openFileDialog.FileName)).Id;
+                var h = openFileDialog.FileName.Split('/');
+                _data = File.ReadAllBytes(openFileDialog.FileName);
+                name = h[h.Length - 1];
                 PartPhoto.DataContext = File.ReadAllBytes(openFileDialog.FileName);
-                _part.Photo = await ApiRestClient.Api.Photo.PostPhoto(openFileDialog.FileName);
             }
         }
     }

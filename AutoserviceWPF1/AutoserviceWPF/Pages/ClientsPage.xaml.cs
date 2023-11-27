@@ -1,4 +1,5 @@
-﻿using AutoserviceWPF.Models.ModelsDB;
+﻿using AutoserviceWPF.Models;
+using AutoserviceWPF.Models.ModelsDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Pages
 {
@@ -35,16 +35,26 @@ namespace AutoserviceWPF.Pages
             try
             {
                 ClientList.ItemsSource = null;
-                int pages = (await Api.Client.GetCountClients()).CountPages;
-                if (pagesCount != pages)
+                int pages = (await ApiRestClient.Api.Client.GetCountClients()).CountPages;
+                Pagination.Items.Clear();
+                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
-                    for (int i = 1; i < pages + 1; i++)
-                    {
-                        Pagination.Items.Add(i);
-                    }
+                    Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                ClientList.ItemsSource = await Api.Client.GetClients(true, true, page);
+                ClientList.ItemsSource = await ApiRestClient.Api.Client.GetClients(true, true, page);
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {

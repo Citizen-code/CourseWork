@@ -72,25 +72,6 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-        private void AddService_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //TODO: Добавить TextBox для ввода времени услуги.
-                _listService = new ListService() { ServiceId = ((Service)ServicesListView.SelectedItem).Id, Service = (Service)ServicesListView.SelectedItem, PriceId = ((Service)ServicesListView.SelectedItem).PriceId, Time = Convert.ToDecimal(TimeTextBox.Text) };
-                _listServices.Add(_listService);
-                ServicesToRequestListView.Items.Add(_listService);
-            }
-            catch when (TimeTextBox.Text == null)
-            {
-                MessageBox.Show("Введите время выполнения услуги.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private void DeleteService_Click(object sender, RoutedEventArgs e)
         {   
             ListService currentListService = (ListService)ServicesToRequestListView.SelectedItem;
@@ -144,6 +125,54 @@ namespace AutoserviceWPF.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _listService = new ListService() { ServiceId = ((Service)ServicesListView.SelectedItem).Id, Service = (Service)ServicesListView.SelectedItem, PriceId = ((Service)ServicesListView.SelectedItem).PriceId };
+                if (_listService.Service.Price.IsTimeBased == true)
+                {
+                    if (String.IsNullOrEmpty(TimeTextBox.Text))
+                    {
+                        throw new Exception("Введите время выполнения услуги.");
+                    }
+                    if (!decimal.TryParse(TimeTextBox.Text, out Decimal number))
+                    {
+                        throw new Exception("Необходимо ввести число !");
+                    }
+                    _listService.Time = Convert.ToDecimal(TimeTextBox.Text);
+                }
+                _listServices.Add(_listService);
+                ServicesToRequestListView.Items.Add(_listService);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //TODO: Изменить.
+            if (ServicesListView.SelectedItem != null)
+            {
+                AddButton.IsEnabled = true;
+                Service currentService = (Service)ServicesListView.SelectedItem;
+                if (currentService.Price.IsTimeBased == true)
+                {
+                    TimeTextBox.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    TimeTextBox.Visibility = Visibility.Collapsed;
+                }
+            }
+            else 
+            {
+                AddButton.IsEnabled = false;
             }
         }
     }

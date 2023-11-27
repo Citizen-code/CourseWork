@@ -11,7 +11,7 @@
       Title="PartAddWindows">
 
     <Canvas>
-        <Image x:Name="PartPhoto" Canvas.Left="350" Canvas.Top="40" Height="100" Width="100" Source="{Binding Photo.Url}" MouseLeftButtonDown="PartPhoto_MouseLeftButtonDown"/>
+        <Image x:Name="PartPhoto" Canvas.Left="350" Canvas.Top="40" Height="100" Width="100" DataContext="\Resources\default.png" Source="{Binding}" MouseLeftButtonDown="PartPhoto_MouseLeftButtonDown"/>
         <TextBox x:Name="PartBrandTextBox" Canvas.Left="60" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Бренд" Background="White" Text="{Binding Brand}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
         <TextBox x:Name="PartVendorCodeTextBox" Canvas.Left="300" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Артикул" Background="White" Text="{Binding Article}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
         <TextBox x:Name="PartNameTextBox" Canvas.Right="60" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Наименование" Background="White" Text="{Binding Name}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>

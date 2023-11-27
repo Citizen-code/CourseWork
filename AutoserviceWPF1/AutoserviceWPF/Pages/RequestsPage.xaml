@@ -41,7 +41,7 @@
                 <ListView x:Name="RequestsListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border CornerRadius="10" Background="White" Cursor="">
+                            <Border Width="750" Padding="10" CornerRadius="10" Background="White">
                                 <StackPanel Orientation="Horizontal">
                                     <!--TODO: Заменить StackPanel на что-нибудь другое-->
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -56,8 +56,8 @@
                                         <TextBlock Text="{Binding Employee.Surname}"/>
                                         <TextBlock Text="{Binding Employee.Firstname}"/>
                                         <TextBlock Text="{Binding Employee.Lastname}"/>
-                                        <TextBlock Text="{Binding Date}" Margin="0 20 0 0"/>
-                                        <materialDesign:PackIcon x:Name="AddServiceToRequest" Height="30" Width="30" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click"/>
+                                        <TextBlock Text="{Binding DateFormat}" Margin="0 20 0 0"/>
+                                        <materialDesign:PackIcon x:Name="AddServiceToRequest" Height="30" Width="30" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click" Visibility="{Binding StatusVisibility}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

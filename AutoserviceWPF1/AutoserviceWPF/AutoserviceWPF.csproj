@@ -205,6 +205,7 @@
     <Compile Include="Models\ModelsDB\ServicePrice.cs" />
     <Compile Include="Models\ModelsDB\StatusOrder.cs" />
     <Compile Include="Models\ModelsPartial\Client.cs" />
+    <Compile Include="Models\ModelsPartial\Order.cs" />
     <Compile Include="Models\ModelsPartial\Photo.cs" />
     <Compile Include="Models\ModelsRequest\ServiceRequest.cs" />
     <Compile Include="Models\ModelsResponse\BaseResponse.cs" />
@@ -283,6 +284,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\evora.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
