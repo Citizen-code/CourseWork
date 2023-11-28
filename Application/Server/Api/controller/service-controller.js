@@ -43,10 +43,12 @@ class ServiceController{
         try{
             const {all} = req.query;
 
-            const option = {}
+            const option = { where:[], order:[] }
+            if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
+            if(order != undefined) option.order.push(['name', order])
+
             if(!all){
-                if(!option.where) option.where = {} 
-                option.where.is_active = true 
+                option.where.push({is_active:true})
             }
             const count = await GetCount(option)
             
