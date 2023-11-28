@@ -21,7 +21,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="SearchTextBox" Grid.Row="0" Grid.Column="0" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="SearchTextBox" Grid.Row="0" Grid.Column="0" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        </StackPanel>
         <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
             <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ServicesListView_SelectionChanged">
                 <ListView.ItemTemplate>
@@ -43,7 +45,7 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="2" Grid.Column="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <ScrollViewer VerticalAlignment="Bottom" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <ListBox SelectionChanged="Pagination_SelectionChanged" x:Name="Pagination">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -53,7 +55,7 @@
             </ListBox>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5">
-            <ListView x:Name="ServicesToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Cursor="">
+            <ListView x:Name="ServicesToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ServicesToRequestListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -67,11 +69,6 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="DeleteService" Header="{materialDesign:PackIcon Kind=Minus}" Click="DeleteService_Click"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>

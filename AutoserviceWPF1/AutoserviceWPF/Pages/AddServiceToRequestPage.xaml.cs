@@ -72,13 +72,6 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-        private void DeleteService_Click(object sender, RoutedEventArgs e)
-        {   
-            ListService currentListService = (ListService)ServicesToRequestListView.SelectedItem;
-            _listServices.Remove(currentListService);
-            ServicesToRequestListView.Items.Remove(currentListService);
-        }
-
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -156,23 +149,45 @@ namespace AutoserviceWPF.Pages
 
         private void ServicesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //TODO: Изменить.
-            if (ServicesListView.SelectedItem != null)
+            try
             {
-                AddButton.IsEnabled = true;
-                Service currentService = (Service)ServicesListView.SelectedItem;
-                if (currentService.Price.IsTimeBased == true)
+                if (ServicesListView.SelectedItem != null)
                 {
-                    TimeTextBox.Visibility = Visibility.Visible;
+                    AddButton.IsEnabled = true;
+                    Service currentService = (Service)ServicesListView.SelectedItem;
+                    switch (currentService.Price.IsTimeBased)
+                    {
+                        case true:
+                            TimeTextBox.Visibility = Visibility.Visible;
+                            break;
+                        case false:
+                            TimeTextBox.Visibility = Visibility.Collapsed;
+                            break;
+                    }
                 }
                 else
                 {
-                    TimeTextBox.Visibility = Visibility.Collapsed;
+                    AddButton.IsEnabled = false;
                 }
             }
-            else 
+            catch (Exception ex)
             {
-                AddButton.IsEnabled = false;
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+        private void ServicesToRequestListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ListService currentListService = (ListService)ServicesToRequestListView.SelectedItem;
+                _listServices.Remove(currentListService);
+                ServicesToRequestListView.Items.Remove(currentListService);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

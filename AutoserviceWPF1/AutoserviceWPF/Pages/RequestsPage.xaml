@@ -11,7 +11,7 @@
       Title="RequestsPage"
       Loaded="Page_Loaded">
     
-    <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="2" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+    <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel LastChildFill="False">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                     <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
                         <TextBlock Text="Дата" HorizontalAlignment="Center"/>
@@ -35,15 +35,14 @@
                 </StackPanel>
             </DockPanel>
             <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="1" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button Canvas.Right="20" Canvas.Top="2" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <ScrollViewer Grid.Row="1">
                 <ListView x:Name="RequestsListView">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border Width="750" Padding="10" CornerRadius="10" Background="White">
-                                <StackPanel Orientation="Horizontal">
-                                    <!--TODO: Заменить StackPanel на что-нибудь другое-->
+                            <Border Width="750" Padding="10 5 10 5" CornerRadius="10" Background="White">
+                                <DockPanel>
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Client.Surname}"/>
                                         <TextBlock Text="{Binding Client.Firstname}"/>
@@ -59,7 +58,7 @@
                                         <TextBlock Text="{Binding DateFormat}" Margin="0 20 0 0"/>
                                         <materialDesign:PackIcon x:Name="AddServiceToRequest" Height="30" Width="30" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click" Visibility="{Binding StatusVisibility}"/>
                                     </StackPanel>
-                                </StackPanel>
+                                </DockPanel>
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>

@@ -62,21 +62,6 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-
-        private void AddPart_Click(object sender, RoutedEventArgs e)
-        {
-            _listPart = new ListConsumablePart() { ConsumablePartId = ((ConsumablePart)PartsListView.SelectedItem).Id, ConsumablePart = (ConsumablePart)PartsListView.SelectedItem };
-            _listParts.Add(_listPart);
-            PartsToRequestListView.Items.Add(_listPart);
-        }
-
-        private void DeletePart_Click(object sender, RoutedEventArgs e)
-        {
-            ListConsumablePart currentListConsumablePart = (ListConsumablePart)PartsToRequestListView.SelectedItem;
-            _listParts.Remove(currentListConsumablePart);
-            PartsToRequestListView.Items.Remove(currentListConsumablePart);
-        }
-
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -133,6 +118,34 @@ namespace AutoserviceWPF.Pages
             try
             {
                 LoadParts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PartsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                _listPart = new ListConsumablePart() { ConsumablePartId = ((ConsumablePart)PartsListView.SelectedItem).Id, ConsumablePart = (ConsumablePart)PartsListView.SelectedItem };
+                _listParts.Add(_listPart);
+                PartsToRequestListView.Items.Add(_listPart);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void PartsToRequestListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ListConsumablePart currentListConsumablePart = (ListConsumablePart)PartsToRequestListView.SelectedItem;
+                _listParts.Remove(currentListConsumablePart);
+                PartsToRequestListView.Items.Remove(currentListConsumablePart);
             }
             catch (Exception ex)
             {

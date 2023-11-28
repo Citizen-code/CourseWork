@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
-            <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
@@ -39,11 +39,6 @@
                         <WrapPanel/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="AddPart" Header="{materialDesign:PackIcon Kind=Plus}" Click="AddPart_Click"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
             </ListView>
         </ScrollViewer>
         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="3" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
@@ -56,7 +51,7 @@
             </ListBox>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="5">
-            <ListView x:Name="PartsToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="PartsToRequestListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsToRequestListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
@@ -73,11 +68,6 @@
                         <WrapPanel/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem x:Name="DeletePart" Header="{materialDesign:PackIcon Kind=Minus}" Click="DeletePart_Click"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
             </ListView>
         </ScrollViewer>
         <Button x:Name="SaveButton" Grid.Row="2" Grid.ColumnSpan="2" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
