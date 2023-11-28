@@ -25,7 +25,7 @@ class ConsumablePartController{
 
             const option = { where:[], order:[] }
             if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
-            if(order != undefined) option.order.push(['name', order])
+            if(order != undefined) option.order.push(['price', order])
 
             if(pagination == "true"){
                 option.limit = parseInt(process.env.COUNT_ITEM_ON_PAGE || 10)

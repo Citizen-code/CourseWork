@@ -34,7 +34,10 @@ class OrderController{
             const option = { where:[], order:[] }
             if(status != undefined) option.where.push({status_id:status});
             if(text != undefined) option.where.push({comment:{[Op.like]:`%${text}%`}});
-            if(order != undefined) option.order.push(['date', order])
+            if(order != undefined) {
+                option.order.push(['date', order])
+                option.order.push(['time', order])
+            }
             if(max_date != undefined || min_date != undefined){
                 const data = []
                 if(max_date != undefined) data.push({[Op.lte]:max_date});
