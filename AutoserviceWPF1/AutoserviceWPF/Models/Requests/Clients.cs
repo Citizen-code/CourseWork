@@ -10,18 +10,22 @@ namespace AutoserviceWPF.Models.Requests
 {
     internal class Clients
     {
-        public async Task<List<Client>> GetClients(bool include = true, bool pagination = false, int page = 1)
+        public async Task<List<Client>> GetClients(bool include = true, bool pagination = false, int page = 1, OrderType sort = OrderType.None, string findText = "")
         {
             var request = new RestRequest("api/client", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("pagination", pagination ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("page", $"{page}", ParameterType.QueryString);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
             return await ExecuteAsync<List<Client>>(request);
         }
 
-        public async Task<GetCountResponse> GetCountClients()
+        public async Task<GetCountResponse> GetCountClients(OrderType sort = OrderType.None, string findText = "")
         {
             var request = new RestRequest("api/client/count", Method.Get);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
             return await ExecuteAsync<GetCountResponse>(request);
         }
 

@@ -20,14 +20,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="100 5 0 0">
-            <TextBlock Text="Стоимость" HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="PriceAscendingRadioButton" Content="По возрастанию"/>
-                <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+        <DockPanel LastChildFill="False">
+            <TextBox x:Name="SearchTextBox" Width="200" DockPanel.Dock="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchTextBox_TextChanged"/>
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="10 5 0 0">
+                <TextBlock Text="Наименование" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="PriceAscendingRadioButton" Content="По возрастанию" Checked="PriceAscendingRadioButton_Checked"/>
+                    <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0" Checked="PriceDescendingRadioButton_Checked"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+            <CheckBox Checked="AllVisibleCheckBox_Checked" Unchecked="AllVisibleCheckBox_Checked" x:Name="AllVisibleCheckBox" Margin="10" Content="Показывать отмененные"/>
+        </DockPanel>
         <ScrollViewer Grid.Row="1">
             <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>

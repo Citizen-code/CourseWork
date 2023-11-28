@@ -10,12 +10,16 @@ namespace AutoserviceWPF.Models.Requests
 {
     class Orders
     {
-        public async Task<List<ModelsDB.Order>> GetOrders(bool include = true, bool pagination = false, int page = 1)
+        public async Task<List<ModelsDB.Order>> GetOrders(bool include = true, bool pagination = false, int page = 1, OrderType sort = OrderType.None, string findText = "", List<int> status = null)
         {
             var request = new RestRequest("api/order", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("pagination", pagination ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("page", $"{page}", ParameterType.QueryString);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
+            if(status != null) foreach (var item in status)
+                    request.AddParameter("status[]", $"{item}", ParameterType.QueryString);
             return await ExecuteAsync<List<ModelsDB.Order>>(request);
         }
 
@@ -27,9 +31,13 @@ namespace AutoserviceWPF.Models.Requests
             return await ExecuteAsync<List<Order>>(request);
         }
 
-        public async Task<GetCountResponse> GetCountOrders()
+        public async Task<GetCountResponse> GetCountOrders(OrderType sort = OrderType.None, string findText = "", List<int> status = null)
         {
             var request = new RestRequest("api/order/count", Method.Get);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
+            if (status != null) foreach (var item in status)
+                    request.AddParameter("status[]", $"{item}", ParameterType.QueryString);
             return await ExecuteAsync<GetCountResponse>(request);
         }
 

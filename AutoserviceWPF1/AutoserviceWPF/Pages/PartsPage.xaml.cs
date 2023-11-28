@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Pages
 {
@@ -25,6 +25,7 @@ namespace AutoserviceWPF.Pages
     {
         int page = 1;
         int pagesCount = 1;
+        OrderType sortSelect = OrderType.None;
 
         public PartsPage()
         {
@@ -36,14 +37,15 @@ namespace AutoserviceWPF.Pages
             try
             {
                 PartsListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts()).CountPages;
+                int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts(findText: SearchTextBox.Text, sort: sortSelect)).CountPages;
+                if (pages < page) page = pages==0?1:pages;
                 Pagination.Items.Clear();
-                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
+                for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
                     Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page);
+                PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page, findText: SearchTextBox.Text, sort: sortSelect);
             }
             catch (Exception ex) when (ex is ApiError error)
             {
@@ -142,6 +144,34 @@ namespace AutoserviceWPF.Pages
             {
                 return;
             }
+        }
+
+        public async Task<bool> InputEnd(TextBox textBox)
+        {
+            var text = textBox.Text;
+            await Task.Delay(500);
+            return text == textBox.Text;
+
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (await InputEnd(SearchTextBox))
+            {
+                LoadParts();
+            }
+        }
+
+        private void AscendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Ascending;
+            LoadParts();
+        }
+
+        private void DescendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Descending;
+            LoadParts();
         }
     }
 }

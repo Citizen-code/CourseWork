@@ -14,6 +14,10 @@ namespace AutoserviceWPF.Models
         public static Uri Url { get; private set; }
         private static RestClient RestClient { get; set; }
         private static Authenticator Authenticator { get; set; }
+        public enum OrderType
+        {
+            Ascending = 1, Descending = 2, None = 3,
+        }
 
         public static async Task<T> ExecuteAsync<T>(RestRequest request, RestClient client = null) where T : new()
         {

@@ -23,13 +23,18 @@
             </Grid.ColumnDefinitions>
             <DockPanel LastChildFill="False">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    <ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>
+                    <TextBox x:Name="SearchTextBox" VerticalAlignment="Center" TextChanged="SearchTextBox_TextChanged" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <!--<ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>-->
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="CancelCheckBox" Content="Показывать отмененые" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                        <CheckBox x:Name="FinallyCheckBox" Content="Показывать завершеные" Checked="CheckBox_Checked"  Unchecked="CheckBox_Checked"/>
+                        <CheckBox x:Name="ActiveCheckBox"  Content="Показывать активные" Checked="CheckBox_Checked"  Unchecked="CheckBox_Checked"/>
+                    </StackPanel>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
                         <TextBlock Text="Дата" HorizontalAlignment="Center"/>
                         <StackPanel Orientation="Horizontal">
-                            <RadioButton x:Name="DateAscendingRadioButton" Content="По возрастанию"/>
-                            <RadioButton x:Name="DateDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+                            <RadioButton x:Name="DateAscendingRadioButton" Checked="AscendingRadioButton_Checked" Content="По возрастанию"/>
+                            <RadioButton x:Name="DateDescendingRadioButton" Checked="DescendingRadioButton_Checked" Content="По убыванию" Margin="10 0 0 0"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

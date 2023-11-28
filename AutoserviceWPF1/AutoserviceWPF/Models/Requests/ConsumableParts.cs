@@ -10,18 +10,22 @@ namespace AutoserviceWPF.Models.Requests
 {
     class ConsumableParts
     {
-        public async Task<List<ConsumablePart>> GetConsumableParts(bool include = true, bool pagination = false, int page = 1)
+        public async Task<List<ConsumablePart>> GetConsumableParts(bool include = true, bool pagination = false, int page = 1, OrderType sort = OrderType.None, string findText = "")
         {
             var request = new RestRequest("api/consumable-part", Method.Get)
                 .AddParameter("include", include ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("pagination", pagination ? "true" : "false", ParameterType.QueryString)
                 .AddParameter("page", $"{page}", ParameterType.QueryString);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
             return await ExecuteAsync<List<ConsumablePart>>(request);
         }
 
-        public async Task<GetCountResponse> GetCountConsumableParts()
+        public async Task<GetCountResponse> GetCountConsumableParts(OrderType sort = OrderType.None, string findText = "")
         {
             var request = new RestRequest("api/consumable-part/count", Method.Get);
+            if (sort != OrderType.None) request.AddParameter("order", $"{(sort == OrderType.Ascending ? "ASC" : "DESC")}", ParameterType.QueryString);
+            if (findText != string.Empty) request.AddParameter("text", $"{findText}", ParameterType.QueryString);
             return await ExecuteAsync<GetCountResponse>(request);
         }
 

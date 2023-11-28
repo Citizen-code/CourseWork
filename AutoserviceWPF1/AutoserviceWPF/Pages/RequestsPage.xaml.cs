@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Pages
 {
@@ -25,6 +26,7 @@ namespace AutoserviceWPF.Pages
         private readonly Order _order;
 
         int page = 1;
+        OrderType sortSelect = OrderType.None;
         int pagesCount = 1;
 
         public RequestsPage()
@@ -36,15 +38,20 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
+                var status = new List<int>();
+                if(CancelCheckBox.IsChecked == true) status.Add(4);
+                if(FinallyCheckBox.IsChecked == true) status.Add(1);
+                if (ActiveCheckBox.IsChecked == true) status.Add(2);
                 RequestsListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.Orders.GetCountOrders()).CountPages;
+                int pages = (await ApiRestClient.Api.Orders.GetCountOrders(findText: SearchTextBox.Text, sort: sortSelect, status: status)).CountPages;
+                if (pages < page) page = pages==0?1:pages;
                 Pagination.Items.Clear();
-                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
+                for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
                     Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                RequestsListView.ItemsSource = await ApiRestClient.Api.Orders.GetOrders(true, true, page);
+                RequestsListView.ItemsSource = await ApiRestClient.Api.Orders.GetOrders(pagination: true, page: page, include: true, findText: SearchTextBox.Text, sort: sortSelect, status: status);
             }
             catch (Exception ex) when (ex is ApiError error)
             {
@@ -138,6 +145,39 @@ namespace AutoserviceWPF.Pages
             {
                 return;
             }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadRequests();
+        }
+
+        public async Task<bool> InputEnd(TextBox textBox)
+        {
+            var text = textBox.Text;
+            await Task.Delay(500);
+            return text == textBox.Text;
+
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (await InputEnd(SearchTextBox))
+            {
+                LoadRequests();
+            }
+        }
+
+        private void AscendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Ascending;
+            LoadRequests();
+        }
+
+        private void DescendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Descending;
+            LoadRequests();
         }
     }
 }

@@ -20,12 +20,12 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBox x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            <TextBox x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="100 5 0 0">
-                <TextBlock Text="Год выпуска" HorizontalAlignment="Center"/>
+                <TextBlock Text="Фамилии клиентов" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton x:Name="ReleaseAscendingRadioButton" Content="По возрастанию"/>
-                    <RadioButton x:Name="ReleaseDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
+                    <RadioButton Checked="AscendingRadioButton_Checked" x:Name="ReleaseAscendingRadioButton" Content="По возрастанию"/>
+                    <RadioButton Checked="DescendingRadioButton_Checked" x:Name="ReleaseDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

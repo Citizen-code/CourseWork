@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static AutoserviceWPF.Models.ApiRestClient;
 
 namespace AutoserviceWPF.Pages
 {
@@ -24,6 +25,7 @@ namespace AutoserviceWPF.Pages
     {
         int page = 1;
         int pagesCount = 1;
+        OrderType sortSelect = OrderType.None;
 
         public ServicesPage()
         {
@@ -35,14 +37,15 @@ namespace AutoserviceWPF.Pages
             try
             {
                 ServicesListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.Services.GetCountServices()).CountPages;
+                int pages = (await ApiRestClient.Api.Services.GetCountServices(all: AllVisibleCheckBox.IsChecked == true, findText: SearchTextBox.Text, sort: sortSelect)).CountPages;
+                if (pages < page) page = pages==0?1:pages;
                 Pagination.Items.Clear();
-                for (int i = page > 5 ? page - 5 : 1; i < (((page + 5) < pages) ? page + 5 : pages); i++)
+                for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
                     Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(false, true, page, true);
+                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(all: AllVisibleCheckBox.IsChecked == true, pagination:true, page:page, include:true, findText:SearchTextBox.Text, sort:sortSelect);
             }
             catch (Exception ex) when (ex is ApiError error)
             {
@@ -158,6 +161,38 @@ namespace AutoserviceWPF.Pages
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public async Task<bool> InputEnd(TextBox textBox)
+        {
+            var text = textBox.Text;
+            await Task.Delay(500);
+            return text == textBox.Text;
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (await InputEnd(SearchTextBox))
+            {
+                LoadServices();
+            }
+        }
+
+        private void PriceAscendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Ascending;
+            LoadServices();
+        }
+
+        private void PriceDescendingRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            sortSelect = OrderType.Descending;
+            LoadServices();
+        }
+
+        private void AllVisibleCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadServices();
         }
     }
 }
