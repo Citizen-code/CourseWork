@@ -41,11 +41,10 @@ class ServiceController{
 
     async get_count_services(req,res,next){
         try{
-            const {all} = req.query;
+            const {all,text} = req.query;
 
             const option = { where:[], order:[] }
             if(text != undefined) option.where.push({name:{[Op.like]:`%${text}%`}});
-            if(order != undefined) option.order.push(['name', order])
 
             if(!all){
                 option.where.push({is_active:true})
