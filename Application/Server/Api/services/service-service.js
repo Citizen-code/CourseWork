@@ -7,8 +7,8 @@ class ServiceService{
             option.include = {model:service_price, as:'price'}
         }
         if(all!="true"){
-            if(!option.where) option.where = {} 
-            option.where.is_active = true 
+            if(!option.where) option.where = []
+            option.where.push({is_active:true})
         }
         return await service.findAll(option)
     }
@@ -18,8 +18,8 @@ class ServiceService{
             option.include = {model:service_price, as:'price'}
         }
         if(all!="true"){
-            if(!option.where) option.where = {} 
-            option.where.is_active = true 
+            if(!option.where) option.where = []
+            option.where.push({is_active:true})
         }
         return await service.findOne(option)
     }
