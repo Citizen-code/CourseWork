@@ -1,4 +1,4 @@
-const { order, list_services, service, status_order, consumable_part, list_consumable_parts, service_price, employee, photo, client } = require('../models/init-models')
+const {car, order, list_services, service, status_order, consumable_part, list_consumable_parts, service_price, employee, photo, client } = require('../models/init-models')
 
 class OrderService {
 
@@ -12,7 +12,7 @@ class OrderService {
                     { model: consumable_part, as: 'consumable_part', include:{model:photo, as:'photo'}}},
                 { model: status_order, as: 'status' }, 
                 { model: employee, as: 'employee', include:{model:photo, as:'photo'}},
-                { model: client, as: 'client'}
+                { model: client, as: 'client', include:{model:car, as:'car'}}
             ]
         }
         return await order.findAll(option)
