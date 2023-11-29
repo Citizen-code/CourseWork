@@ -77,11 +77,6 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-        private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new CarTasksPage());
-        }
-
         private void RequestsNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new RequestsPage());
@@ -193,6 +188,34 @@ namespace AutoserviceWPF.Pages
         private void AllVisibleCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             LoadServices();
+        }
+
+        private void LoadData_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                SearchTextBox.Text = null;
+                PriceAscendingRadioButton.IsChecked = false;
+                PriceDescendingRadioButton.IsChecked = false;
+                AllVisibleCheckBox.IsChecked = false;
+                LoadServices();
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

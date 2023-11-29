@@ -45,16 +45,27 @@ namespace AutoserviceWPF.Pages
             try
             {
                 PartsListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts()).CountPages;
-                if (pagesCount != pages)
+                int pages = (await ApiRestClient.Api.ConsumableParts.GetCountConsumableParts(findText: SearchTextBox.Text)).CountPages;
+                if (pages < page) page = pages == 0 ? 1 : pages;
+                Pagination.Items.Clear();
+                for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
-                    for (int i = 1; i < pages + 1; i++)
-                    {
-                        Pagination.Items.Add(i);
-                    }
+                    Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page);
+                PartsListView.ItemsSource = await ApiRestClient.Api.ConsumableParts.GetConsumableParts(true, true, page, findText: SearchTextBox.Text);
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {
@@ -150,6 +161,27 @@ namespace AutoserviceWPF.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        public async Task<bool> InputEnd(TextBox textBox)
+        {
+            var text = textBox.Text;
+            await Task.Delay(500);
+            return text == textBox.Text;
+
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (await InputEnd(SearchTextBox))
+            {
+                LoadParts();
             }
         }
     }

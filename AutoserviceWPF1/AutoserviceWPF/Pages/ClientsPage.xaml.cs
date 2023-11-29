@@ -103,11 +103,6 @@ namespace AutoserviceWPF.Pages
             }
         }
 
-        private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new CarTasksPage());
-        }
-
         private void RequestsNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new RequestsPage());
@@ -180,6 +175,34 @@ namespace AutoserviceWPF.Pages
         {
             sortSelect = OrderType.Descending;
             LoadClients();
+        }
+
+        private void LoadData_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                SearchTextBox.Text = null;
+                ReleaseAscendingRadioButton.IsChecked = false;
+                ReleaseDescendingRadioButton.IsChecked = false;
+                sortSelect = OrderType.None;
+                LoadClients();
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

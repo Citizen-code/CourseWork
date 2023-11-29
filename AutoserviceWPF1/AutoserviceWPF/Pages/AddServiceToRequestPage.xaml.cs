@@ -43,16 +43,15 @@ namespace AutoserviceWPF.Pages
             try
             {
                 ServicesListView.ItemsSource = null;
-                int pages = (await ApiRestClient.Api.Services.GetCountServices()).CountPages;
-                if (pagesCount != pages)
+                int pages = (await ApiRestClient.Api.Services.GetCountServices(findText: SearchTextBox.Text)).CountPages;
+                if (pages < page) page = pages == 0 ? 1 : pages;
+                Pagination.Items.Clear();
+                for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
-                    for (int i = 1; i < pages + 1; i++)
-                    {
-                        Pagination.Items.Add(i);
-                    }
+                    Pagination.Items.Add(i);
                 }
                 pagesCount = pages;
-                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(false, true, page, true);
+                ServicesListView.ItemsSource = await ApiRestClient.Api.Services.GetServices(false, true, page, true, findText: SearchTextBox.Text);
             }
             catch (Exception ex) when (ex is ApiError error)
             {
@@ -188,6 +187,27 @@ namespace AutoserviceWPF.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        public async Task<bool> InputEnd(TextBox textBox)
+        {
+            var text = textBox.Text;
+            await Task.Delay(500);
+            return text == textBox.Text;
+
+        }
+
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (await InputEnd(SearchTextBox))
+            {
+                LoadServices();
             }
         }
     }

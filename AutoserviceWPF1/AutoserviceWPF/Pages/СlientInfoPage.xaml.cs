@@ -21,7 +21,6 @@ namespace AutoserviceWPF.Pages
     /// </summary>
     public partial class СlientInfoPage : Page
     {
-        //TODO: Изменить разметку.
         public СlientInfoPage(Client client)
         {
             InitializeComponent();

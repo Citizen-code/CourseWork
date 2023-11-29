@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\
 AutoserviceWPF
 none
 false
 DEBUG;TRACE
-C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\App.xaml
-13-727769082
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\App.xaml
+13-2058993961
 
-49545045680
-37-53860506
-MainWindow.xaml;Pages\AddPartToRequest.xaml;Pages\AddServiceToRequestPage.xaml;Pages\AuthPage.xaml;Pages\CarTasksPage.xaml;Pages\CarUpdatePage.xaml;Pages\ClientsPage.xaml;Pages\PartAddWindows.xaml;Pages\PartsPage.xaml;Pages\RequestsPage.xaml;Pages\ServiceAddPage.xaml;Pages\ServicesPage.xaml;Pages\СlientInfoPage.xaml;
+49-1674168149
+46293496693
+MainWindow.xaml;Pages\AddPartToRequest.xaml;Pages\AddServiceToRequestPage.xaml;Pages\AuthPage.xaml;Pages\CarUpdatePage.xaml;Pages\ClientsPage.xaml;Pages\PartAddWindows.xaml;Pages\PartsPage.xaml;Pages\RequestInfoPage.xaml;Pages\RequestsPage.xaml;Pages\ServiceAddPage.xaml;Pages\ServicesPage.xaml;Pages\СlientInfoPage.xaml;
 
 False
 

@@ -30,8 +30,8 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
-                await ApiRestClient.Login(new Uri("http://185.252.146.21/"), LoginTextBox.Text, PasswordBox.Password);
-                NavigationService.Navigate(new CarTasksPage());
+                await ApiRestClient.Login(new Uri("http://185.252.146.21/"), LoginTextBox.Text, PasswordTextBox.Password);
+                NavigationService.Navigate(new RequestsPage());
             }
             catch (Exception ex) when (ex is ApiError error)
             {

@@ -42,9 +42,10 @@ namespace AutoserviceWPF.Pages
                 if(CancelCheckBox.IsChecked == true) status.Add(4);
                 if(FinallyCheckBox.IsChecked == true) status.Add(1);
                 if (ActiveCheckBox.IsChecked == true) status.Add(2);
+
                 RequestsListView.ItemsSource = null;
                 int pages = (await ApiRestClient.Api.Orders.GetCountOrders(findText: SearchTextBox.Text, sort: sortSelect, status: status)).CountPages;
-                if (pages < page) page = pages==0?1:pages;
+                if (pages < page) page = pages == 0 ? 1 : pages;
                 Pagination.Items.Clear();
                 for (int i = page > 5 ? page - 5 : 1; i <= (((page + 5) < pages) ? page + 5 : pages); i++)
                 {
@@ -95,11 +96,6 @@ namespace AutoserviceWPF.Pages
                 scrollViewer.LineLeft();
             }
             e.Handled = true;
-        }
-
-        private void TasksNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new CarTasksPage());
         }
 
         private void ServicesNavigationItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -178,6 +174,49 @@ namespace AutoserviceWPF.Pages
         {
             sortSelect = OrderType.Descending;
             LoadRequests();
+        }
+
+        private void RequestInfo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (RequestsListView.SelectedItem != null)
+            {
+                Order currentOrder = (Order)RequestsListView.SelectedItem;
+                NavigationService.Navigate(new RequestInfoPage(currentOrder));
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void LoadData_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                SearchTextBox.Text = null;
+                CancelCheckBox.IsChecked = false;
+                FinallyCheckBox.IsChecked = false;
+                ActiveCheckBox.IsChecked = false;
+                DateAscendingRadioButton.IsChecked = false;
+                DateDescendingRadioButton.IsChecked = false;
+                LoadRequests();
+            }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

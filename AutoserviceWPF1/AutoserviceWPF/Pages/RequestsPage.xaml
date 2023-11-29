@@ -24,8 +24,7 @@
             <DockPanel LastChildFill="False">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="SearchTextBox" VerticalAlignment="Center" TextChanged="SearchTextBox_TextChanged" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    <!--<ComboBox x:Name="DateComboBox" Width="200" VerticalAlignment="Bottom" Margin="30 0 30 0" materialDesign:HintAssist.Hint="Статус" materialDesign:TextFieldAssist.HasClearButton="True" ItemsSource="{Binding}"/>-->
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="30 0 30 0">
                         <CheckBox x:Name="CancelCheckBox" Content="Показывать отмененые" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
                         <CheckBox x:Name="FinallyCheckBox" Content="Показывать завершеные" Checked="CheckBox_Checked"  Unchecked="CheckBox_Checked"/>
                         <CheckBox x:Name="ActiveCheckBox"  Content="Показывать активные" Checked="CheckBox_Checked"  Unchecked="CheckBox_Checked"/>
@@ -37,10 +36,11 @@
                             <RadioButton x:Name="DateDescendingRadioButton" Checked="DescendingRadioButton_Checked" Content="По убыванию" Margin="10 0 0 0"/>
                         </StackPanel>
                     </StackPanel>
+                    <materialDesign:PackIcon x:Name="LoadData" VerticalAlignment="Center" Kind="Update" MouseLeftButtonDown="LoadData_MouseLeftButtonDown" Margin="20 0 0 0"/>
                 </StackPanel>
             </DockPanel>
             <Canvas>
-                <Button Canvas.Right="20" Canvas.Top="2" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
+                <Button x:Name="OpenDrawerButton" Canvas.Right="20" Canvas.Top="2" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
             <ScrollViewer Grid.Row="1">
                 <ListView x:Name="RequestsListView">
@@ -55,13 +55,17 @@
                                         <TextBlock Text="{Binding Client.Email}"/>
                                         <TextBlock Text="{Binding Client.Phone}"/>
                                     </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding CommentVisibility}"/>
+                                    </StackPanel>
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <TextBlock Text="{Binding Status.Name}"/>
                                         <TextBlock Text="{Binding Employee.Surname}"/>
                                         <TextBlock Text="{Binding Employee.Firstname}"/>
                                         <TextBlock Text="{Binding Employee.Lastname}"/>
                                         <TextBlock Text="{Binding DateFormat}" Margin="0 20 0 0"/>
-                                        <materialDesign:PackIcon x:Name="AddServiceToRequest" Height="30" Width="30" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click" Visibility="{Binding StatusVisibility}"/>
+                                        <materialDesign:PackIcon x:Name="RequestInfo" Kind="Info" MouseLeftButtonDown="RequestInfo_MouseLeftButtonDown"/>
+                                        <materialDesign:PackIcon x:Name="AddServiceToRequest" Kind="Plus" MouseLeftButtonDown="AddServiceToRequest_Click" Visibility="{Binding StatusVisibility}"/>
                                     </StackPanel>
                                 </DockPanel>
                             </Border>
@@ -83,12 +87,11 @@
             <StackPanel Width="170" Margin="16">
                 <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
                 <StackPanel HorizontalAlignment="Left" Margin="5">
-                    <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     <TextBlock x:Name="ServicesNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Услуги" FontSize="18" PreviewMouseLeftButtonDown="ServicesNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                 </StackPanel>
-                <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
+                <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 170 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
             </StackPanel>
         </materialDesign:DrawerHost.RightDrawerContent>
     </materialDesign:DrawerHost>

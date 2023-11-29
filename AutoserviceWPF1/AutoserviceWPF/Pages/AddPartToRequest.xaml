@@ -11,9 +11,9 @@
       Background="#9191E9"
       Loaded="Page_Loaded">
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
@@ -21,7 +21,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5">
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="SearchTextBox" Grid.Row="0" Grid.Column="0" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchTextBox_TextChanged"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Margin="5 5 5 25">
             <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -41,7 +44,7 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="3" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+        <ScrollViewer VerticalAlignment="Bottom" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
             <ListBox SelectionChanged="Pagination_SelectionChanged" x:Name="Pagination">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -70,6 +73,9 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <Button x:Name="SaveButton" Grid.Row="2" Grid.ColumnSpan="2" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="SaveButton" Height="40" Width="120" Margin="0 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
+            <Button x:Name="BackButton" Height="40" Width="120" Margin="60 0 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="НАЗАД" Cursor="Hand" Click="BackButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

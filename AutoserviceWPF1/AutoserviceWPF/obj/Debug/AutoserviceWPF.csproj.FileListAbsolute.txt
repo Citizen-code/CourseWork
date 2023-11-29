@@ -170,7 +170,6 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\AutoserviceWPF.csproj.AssemblyReference.cache
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\MainWindow.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AuthPage.g.cs
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarTasksPage.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\ClientsPage.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\PartAddWindows.g.cs
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\PartsPage.g.cs
@@ -183,7 +182,6 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\App.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\MainWindow.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AuthPage.baml
-C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarTasksPage.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\ClientsPage.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\PartAddWindows.baml
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\PartsPage.baml
@@ -390,3 +388,12 @@ C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\D
 C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\AddServiceToRequestPage.baml
 C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\CarUpdatePage.baml
 C:\Users\Citizen\Desktop\desktop\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\СlientInfoPage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestInfoPage.g.cs
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\obj\Debug\Pages\RequestInfoPage.baml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\FlaUI.Core.dll
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\FlaUI.UIA3.dll
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\Interop.UIAutomationClient.dll
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\FlaUI.Core.xml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\FlaUI.UIA3.xml
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\Xceed.Document.NET.dll
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceWPF\bin\Debug\Xceed.Words.NET.dll

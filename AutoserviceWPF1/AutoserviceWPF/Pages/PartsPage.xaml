@@ -10,7 +10,7 @@
       Background="#9191E9"
       Title="PartsPage" Loaded="Page_Loaded">
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -21,19 +21,20 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBox TextChanged="SearchTextBox_TextChanged" x:Name="SearchTextBox" Width="200" HorizontalAlignment="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="0 5 0 0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="30 5 0 0">
                 <TextBlock Text="Стоимость" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="PriceAscendingRadioButton" Checked="AscendingRadioButton_Checked" Content="По возрастанию"/>
                     <RadioButton x:Name="PriceDescendingRadioButton" Checked="DescendingRadioButton_Checked" Content="По убыванию" Margin="10 0 0 0"/>
                 </StackPanel>
             </StackPanel>
+            <materialDesign:PackIcon x:Name="LoadData" VerticalAlignment="Center" Kind="Update" MouseLeftButtonDown="LoadData_MouseLeftButtonDown" Margin="210 0 0 0"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1">
             <ListView x:Name="PartsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="PartsList_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="10" Background="White">
+                        <Border Padding="10 5 10 5" CornerRadius="10" Background="White">
                             <StackPanel Orientation="Vertical" Margin="5">
                                 <TextBlock Text="{Binding Brand}"/>
                                 <Image Height="200" Width="200" Stretch="Fill" Source="{Binding Photo.Url}"/>
@@ -51,7 +52,7 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 20" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
+        <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 10" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
             <materialDesign:PackIcon Height="20" Width="20" Kind="Add"/>
         </Button>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
@@ -62,12 +63,11 @@
                 <StackPanel Width="170" Margin="16">
                     <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
                     <StackPanel HorizontalAlignment="Left" Margin="5">
-                        <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="RequestsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Заявки" FontSize="18" PreviewMouseLeftButtonDown="RequestsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="ServicesNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Услуги" FontSize="18" PreviewMouseLeftButtonDown="ServicesNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     </StackPanel>
-                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
+                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 170 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
         </materialDesign:DrawerHost>

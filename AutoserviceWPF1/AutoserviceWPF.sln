@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoserviceWPF", "AutoserviceWPF\AutoserviceWPF.csproj", "{3AC25316-60B7-4DE2-8B13-69AE963B971D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoserviceTests", "AutoserviceTests\AutoserviceTests.csproj", "{E715C0F0-CE85-4BB5-882C-11F5FDFD2017}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3AC25316-60B7-4DE2-8B13-69AE963B971D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AC25316-60B7-4DE2-8B13-69AE963B971D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AC25316-60B7-4DE2-8B13-69AE963B971D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E715C0F0-CE85-4BB5-882C-11F5FDFD2017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E715C0F0-CE85-4BB5-882C-11F5FDFD2017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E715C0F0-CE85-4BB5-882C-11F5FDFD2017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E715C0F0-CE85-4BB5-882C-11F5FDFD2017}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

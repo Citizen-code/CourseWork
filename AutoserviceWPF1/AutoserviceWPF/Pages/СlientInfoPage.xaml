@@ -12,9 +12,9 @@
 
     <Grid>
         <Canvas>
-            <Border Canvas.Left="240" Canvas.Top="140" Height="150" Width="330" CornerRadius="10" Background="White">
+            <Border Canvas.Left="230" Canvas.Top="140" Height="150" Width="350" Padding="10 0 10 0" CornerRadius="10" Background="White">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <StackPanel Orientation="Vertical" Margin="5 0 0 0">
+                    <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Surname}"/>
                         <TextBlock Text="{Binding Firstname}"/>
                         <TextBlock Text="{Binding Lastname}"/>
@@ -22,7 +22,7 @@
                         <TextBlock Text="{Binding Email}"/>
                         <TextBlock Text="{Binding Phone}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="30 0 0 0">
+                    <StackPanel Orientation="Vertical" Margin="10 0 0 0">
                         <TextBlock Text="{Binding Car.Name}"/>
                         <TextBlock Text="{Binding Car.Number}"/>
                         <TextBlock Text="{Binding Car.ReleaseYear}"/>

@@ -11,7 +11,7 @@
       Title="ServicesPage"
       Loaded="Page_Loaded">
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -22,45 +22,44 @@
         </Grid.ColumnDefinitions>
         <DockPanel LastChildFill="False">
             <TextBox x:Name="SearchTextBox" Width="200" DockPanel.Dock="Left" Margin="20 0 0 0" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="SearchTextBox_TextChanged"/>
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="10 5 0 0">
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Margin="30 5 30 0">
                 <TextBlock Text="Наименование" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="PriceAscendingRadioButton" Content="По возрастанию" Checked="PriceAscendingRadioButton_Checked"/>
                     <RadioButton x:Name="PriceDescendingRadioButton" Content="По убыванию" Margin="10 0 0 0" Checked="PriceDescendingRadioButton_Checked"/>
                 </StackPanel>
             </StackPanel>
-            <CheckBox Checked="AllVisibleCheckBox_Checked" Unchecked="AllVisibleCheckBox_Checked" x:Name="AllVisibleCheckBox" Margin="10" Content="Показывать отмененные"/>
+            <CheckBox Checked="AllVisibleCheckBox_Checked" Unchecked="AllVisibleCheckBox_Checked" x:Name="AllVisibleCheckBox" Content="Показывать отмененные"/>
+            <materialDesign:PackIcon x:Name="LoadData" VerticalAlignment="Center" Kind="Update" MouseLeftButtonDown="LoadData_MouseLeftButtonDown" Margin="20 0 0 0"/>
         </DockPanel>
         <ScrollViewer Grid.Row="1">
             <ListView x:Name="ServicesListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="10" Background="White">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                    <TextBlock Text="{Binding Name}"/>
+                        <Border Width="750" Padding="10 5 10 5" CornerRadius="10" Background="White">
+                            <DockPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Price.Price}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                        <materialDesign:PackIcon x:Name="UpdateService" Kind="Pencil" MouseLeftButtonDown="UpdateService_Click" Margin="0 0 10 0"/>
+                                        <materialDesign:PackIcon x:Name="DeleteService" Kind="Trash" MouseLeftButtonDown="DeleteService_MouseLeftButtonDown"/>
+                                    </StackPanel>
                                 </StackPanel>
-                                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                    <TextBlock Text="{Binding Price.Price}"/>
-                                    <materialDesign:PackIcon x:Name="UpdateService" Kind="Pencil" MouseLeftButtonDown="UpdateService_Click"/>
-                                    <materialDesign:PackIcon x:Name="DeleteService" Kind="Trash" MouseLeftButtonDown="DeleteService_MouseLeftButtonDown"/>
-                                </StackPanel>
-                            </StackPanel>
+                            </DockPanel>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem />
-                        <MenuItem />
-                    </ContextMenu>
-                </ListView.ContextMenu>
             </ListView>
         </ScrollViewer>
-        <Button x:Name="AddServiceButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 20" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddServiceButton_Click" Cursor="Hand">
+        <Button x:Name="AddServiceButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 10" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddServiceButton_Click" Cursor="Hand">
             <materialDesign:PackIcon Height="20" Width="20" Kind="Add"/>
         </Button>
-        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="2" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
+        <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">
             <Canvas>
                 <Button Canvas.Right="20" Canvas.Top="2" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}" Content="{materialDesign:PackIcon Kind=Menu}" Background="#C2AFF0" Foreground="Black" Cursor="Hand"/>
             </Canvas>
@@ -68,12 +67,11 @@
                 <StackPanel Width="170" Margin="16">
                     <TextBlock Margin="4" HorizontalAlignment="Center" Text="Wheely" FontSize="20"/>
                     <StackPanel HorizontalAlignment="Left" Margin="5">
-                        <TextBlock x:Name="TasksNavigationItem" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Календарь" FontSize="18" PreviewMouseLeftButtonDown="TasksNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="RequestsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Заявки" FontSize="18" PreviewMouseLeftButtonDown="RequestsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="ClientsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Клиенты" FontSize="18" PreviewMouseLeftButtonDown="ClientsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                         <TextBlock x:Name="PartsNavigationItem" Margin="0 15 0 0" HorizontalAlignment="Left" Text="Расходники" FontSize="18" PreviewMouseLeftButtonDown="PartsNavigationItem_PreviewMouseLeftButtonDown" Cursor="Hand"/>
                     </StackPanel>
-                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 160 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
+                    <Button x:Name="ExitButton" HorizontalAlignment="Center" Height="40" Width="120" Margin="0 170 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="ВЫЙТИ" Cursor="Hand" Click="ExitButton_Click"/>
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
         </materialDesign:DrawerHost>
