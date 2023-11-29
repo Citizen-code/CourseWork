@@ -52,7 +52,7 @@
                 </ListView.ItemsPanel>
             </ListView>
         </ScrollViewer>
-        <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 10" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
+        <Button x:Name="AddPartButton" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20 0 0 10" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionMiniButton" Click="AddPartButton_Click">
             <materialDesign:PackIcon Height="20" Width="20" Kind="Add"/>
         </Button>
         <materialDesign:DrawerHost x:Name="DrawerHost" Grid.RowSpan="3" BorderBrush="{DynamicResource MaterialDesignDivider}" BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}" BottomDrawerCornerRadius="20 20 0 0">

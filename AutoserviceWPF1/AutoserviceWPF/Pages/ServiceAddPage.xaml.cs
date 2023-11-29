@@ -44,7 +44,7 @@ namespace AutoserviceWPF.Pages
             this.DataContext = _service;
         }
 
-        private async void AddServiceButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {

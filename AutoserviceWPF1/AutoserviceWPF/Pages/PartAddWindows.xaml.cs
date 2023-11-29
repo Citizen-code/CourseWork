@@ -55,7 +55,7 @@ namespace AutoserviceWPF.Pages
             PartMeasureUnitCombobox.Items.Add("л");
         }
 
-        private async void AddPartButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {

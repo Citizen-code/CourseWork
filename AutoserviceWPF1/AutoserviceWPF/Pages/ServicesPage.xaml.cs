@@ -152,6 +152,18 @@ namespace AutoserviceWPF.Pages
                     LoadServices();
                 }
             }
+            catch (Exception ex) when (ex is ApiError error)
+            {
+                if (error.Error.Errors.Count > 0)
+                {
+                    string errorList = string.Join("\n", error.Error.Errors);
+                    MessageBox.Show(errorList, error.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
