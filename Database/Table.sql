@@ -75,7 +75,7 @@ CREATE TABLE "order"(
 	"time" TIME NOT NULL,
 	"comment" VARCHAR(500) NULL,
 	"client_id" UUID REFERENCES "client"("id") NOT NULL,
-	"employee_id" UUID REFERENCES "employee"("id") NOT NULL,
+	"employee_id" UUID REFERENCES "employee"("id") NULL,
 	"status_id" INT REFERENCES "status_order"("id") NOT NULL
 );
 
