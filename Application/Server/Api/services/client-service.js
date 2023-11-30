@@ -1,4 +1,5 @@
 const {client,car, engine, photo} = require('../models/init-models')
+const ApiError = require('../exception/error')
 
 class ClientService{
 
