@@ -21,9 +21,11 @@ class ClientService{
     }
 
     async update(option,where){
-        const candidate = await client.findOne({where:{email}})
-        if(candidate){
-            throw ApiError.BadRequest(`Клиент с таким ${email} уже существует`)
+        if(option.email != undefined){
+            const candidate = await client.findOne({where:{email:option.email}})
+            if(candidate){
+                throw ApiError.BadRequest(`Клиент с таким ${email} уже существует`)
+            }
         }
         return await client.update(option,where)
     }
