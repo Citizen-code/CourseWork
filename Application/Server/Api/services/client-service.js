@@ -25,7 +25,7 @@ class ClientService{
         if(option.email != undefined){
             const candidate = await client.findOne({where:{email:option.email}})
             if(candidate){
-                throw ApiError.BadRequest(`Клиент с таким ${email} уже существует`)
+                throw ApiError.BadRequest(`Клиент с таким уже существует`)
             }
         }
         return await client.update(option,where)
