@@ -12,7 +12,7 @@ class ClientService{
             throw ApiError.BadRequest(`Клиент с таким ${email} уже существует`)
         }
         const hashPassword = await bcrypt.hash(password,parseInt(process.env.PASSWORD_SALT))
-        const activationLink = uuid.v4()
+        //const activationLink = uuid.v4()
 
         const client = await clients.create({
             email,

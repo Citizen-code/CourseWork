@@ -55,7 +55,7 @@ export default function EditClient({ cancel }: { cancel: () => void }) {
           <button id='EditClientBnt' className="btn btn-secondary btn-block mb-4" onClick={async () => {
             const body: Client = {
               birth_date: birth_date?.toLocaleDateString('en-CA'),
-              email,
+              email:client.email == email?'':email,
               firstname,
               lastname,
               phone,
