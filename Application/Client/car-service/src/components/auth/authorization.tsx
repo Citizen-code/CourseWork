@@ -31,10 +31,10 @@ export default function Authorization() {
     <form action={formAction} className='pt-2'>
       <ErrorsShow errorsForm={errorsForm}/>
       <div className="form-outline mb-4">
-        <input id='Email' className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
+        <input type='email' id='Email' className="form-control" onChange={e => setEmail(e.target.value)} placeholder='Email' value={email} />
       </div>
       <div className="form-outline mb-4">
-        <input id='Password' className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
+        <input type='password' id='Password' className="form-control" onChange={e => setPassword(e.target.value)} placeholder='Пароль' value={password} />
       </div>
 
       <div className="row m-1">
