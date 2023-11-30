@@ -43,6 +43,7 @@ namespace AutoserviceWPF.Pages
                 _client.Car.Color = CarColorTextBox.Text;
 
                 await ApiRestClient.Api.Cars.PutCar(_client.Car.Id, _client.Car);
+                MessageBox.Show("Успешное изменение информации о авто.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();
             }
             catch (Exception ex) when (ex is ApiError error)

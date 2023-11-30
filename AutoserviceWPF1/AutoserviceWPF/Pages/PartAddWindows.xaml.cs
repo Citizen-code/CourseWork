@@ -64,16 +64,20 @@ namespace AutoserviceWPF.Pages
                 _part.Name = PartNameTextBox.Text;
                 _part.Price = Convert.ToDecimal(PartCostTextBox.Text);
                 _part.MeasureUnit = (String)PartMeasureUnitCombobox.SelectedItem;
-                _part.PhotoId = (await ApiRestClient.Api.Photo.PostPhoto(_data, name)).Id;
-
+                if (_data != null)
+                {
+                    _part.PhotoId = (await ApiRestClient.Api.Photo.PostPhoto(_data, name)).Id;
+                }
                 switch (IsAdded)
                 {
                     case true:
                         await ApiRestClient.Api.ConsumableParts.PostConsumablePart(_part);
+                        MessageBox.Show("Успешное добавление запчасти.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                         NavigationService.GoBack();
                         break;
                     case false:
                         await ApiRestClient.Api.ConsumableParts.PutConsumablePart(_part.Id, _part);
+                        MessageBox.Show("Успешное изменение запчасти.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                         NavigationService.GoBack();
                         break;
                 }

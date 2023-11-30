@@ -13,7 +13,7 @@
     <Canvas>
         <TextBox x:Name="ServiceNameTextBox" Canvas.Left="180" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Название" Background="White" Text="{Binding Name}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
         <TextBox x:Name="ServicePriceTextBox" Canvas.Right="180" Canvas.Top="160" Width="200" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Цена" Background="White" Text="{Binding Price.Price}" AcceptsReturn="True" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-        <CheckBox x:Name="IsHourlyTextBox" Canvas.Left="260" Canvas.Top="220" Content="Почасовая" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Background="#457EAC" IsChecked="{Binding Price.IsTimeBased}" Cursor="Hand"/>
+        <CheckBox x:Name="IsHourlyCheckBox" Canvas.Left="260" Canvas.Top="220" Content="Почасовая" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Background="#457EAC" IsChecked="{Binding Price.IsTimeBased}" Cursor="Hand"/>
         <Button x:Name="SaveButton" Canvas.Left="260" Canvas.Top="270" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#C2AFF0" Content="СОХРАНИТЬ" Cursor="Hand" Click="SaveButton_Click"/>
         <Button x:Name="BackButton" Canvas.Right="260" Canvas.Top="270" Height="40" Width="120" Margin="0 10 0 0" materialDesign:ButtonAssist.CornerRadius="5" Style="{StaticResource MaterialDesignRaisedLightButton}" Background="#E23A3A" Content="НАЗАД" Cursor="Hand" Click="BackButton_Click"/>
     </Canvas>

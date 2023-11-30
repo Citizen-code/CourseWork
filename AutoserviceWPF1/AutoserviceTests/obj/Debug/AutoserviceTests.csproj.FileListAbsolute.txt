@@ -24,3 +24,5 @@ C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\obj\Debu
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\obj\Debug\AutoserviceTests.csproj.CopyComplete
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\obj\Debug\AutoserviceTests.dll
 C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\obj\Debug\AutoserviceTests.pdb
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\bin\Debug\Xceed.Document.NET.dll
+C:\Users\yegor\source\repos\CourseWork\AutoserviceWPF1\AutoserviceTests\bin\Debug\Xceed.Words.NET.dll

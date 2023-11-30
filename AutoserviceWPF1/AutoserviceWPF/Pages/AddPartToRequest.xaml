@@ -30,7 +30,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="{Binding Brand}"/>
-                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding Photo.Url}"/>
+                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding PhotoUrl}"/>
                             <TextBlock Text="{Binding Article}"/>
                             <TextBlock Text="{Binding Name}"/>
                             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Price}"/>
@@ -59,7 +59,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="{Binding ConsumablePart.Brand}"/>
-                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding ConsumablePart.Photo.Url}"/>
+                            <Image Height="200" Width="200" Stretch="Fill" Source="{Binding ConsumablePart.PhotoUrl}"/>
                             <TextBlock Text="{Binding ConsumablePart.Article}"/>
                             <TextBlock Text="{Binding ConsumablePart.Name}"/>
                             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="{Binding ConsumablePart.Price}"/>

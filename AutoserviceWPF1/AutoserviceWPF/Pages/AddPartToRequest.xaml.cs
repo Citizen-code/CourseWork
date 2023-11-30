@@ -78,6 +78,7 @@ namespace AutoserviceWPF.Pages
             try
             {
                 await ApiRestClient.Api.Orders.AddContentOrder(_order.Id, _listServices, _listParts);
+                MessageBox.Show("Успешное добавление содержимого в заявку.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new RequestsPage());
             }
             catch (Exception ex) when (ex is ApiError error)

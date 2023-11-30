@@ -1,5 +1,6 @@
 ﻿using AutoserviceWPF.Models;
 using AutoserviceWPF.Models.ModelsDB;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,10 +146,11 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
-                Service currentService = (Service)ServicesListView.SelectedItem;
+                Service currentService = ((PackIcon)sender).DataContext as Service;
                 if (MessageBox.Show("Вы хотите удалить услугу ?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     await ApiRestClient.Api.Services.DeleteService(currentService.Id);
+                    MessageBox.Show("Успешное удаление услуги.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadServices();
                 }
             }

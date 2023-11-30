@@ -32,7 +32,7 @@ namespace AutoserviceWPF.Pages
             _service = new Service();
             _service.Price = new ServicePrice();
             IsAdded = true;
-            IsHourlyTextBox.IsChecked = false;
+            IsHourlyCheckBox.IsChecked = false;
             this.DataContext = _service;
         }
 
@@ -40,7 +40,7 @@ namespace AutoserviceWPF.Pages
         {
             InitializeComponent();
             _service = service;
-            IsHourlyTextBox.IsChecked = false;
+            IsHourlyCheckBox.IsChecked = false;
             this.DataContext = _service;
         }
 
@@ -48,17 +48,19 @@ namespace AutoserviceWPF.Pages
         {
             try
             {
+                _service.Name = ServiceNameTextBox.Text;
+                _service.Price.Price = Convert.ToDecimal(ServicePriceTextBox.Text);
+                _service.Price.IsTimeBased = IsHourlyCheckBox.IsChecked == true;
                 switch (IsAdded)
                 {
                     case true:
-                        _service.Name = ServiceNameTextBox.Text;
-                        _service.Price.Price = Convert.ToDecimal(ServicePriceTextBox.Text);
-                        _service.Price.IsTimeBased = IsHourlyTextBox.IsChecked;
                         await ApiRestClient.Api.Services.PostService(new ServiceRequest() { Name = _service.Name, Price = _service.Price.Price, IsTimeBased = _service.Price.IsTimeBased });
+                        MessageBox.Show("Успешное добавление услуги.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                         NavigationService.GoBack();
                         break;
                     case false:
                         await ApiRestClient.Api.Services.PutService(_service.Id, new ServiceRequest() { Name = _service.Name, Price = _service.Price.Price, IsTimeBased = _service.Price.IsTimeBased });
+                        MessageBox.Show("Успешное изменение услуги.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                         NavigationService.GoBack();
                         break;
                 }
