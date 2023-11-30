@@ -11,7 +11,10 @@ export default async function middleware(req: NextRequest) {
             const responseNext = NextResponse.next()
             const response = await Refresh(responseNext)
             if (response == undefined) return responseNext;
-            else return NextResponse.redirect(new URL(`/login?url=${url}`, req.url))
+            else {
+                if(req.nextUrl.pathname.includes('/login')) return;
+                else return NextResponse.redirect(new URL(`/login?url=${url}`, req.url))
+            }
         }
         else if(client === 401){
             if(req.nextUrl.pathname.includes('/login')) return;
