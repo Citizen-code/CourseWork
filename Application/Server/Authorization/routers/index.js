@@ -12,7 +12,7 @@ router.post('/registration',
     body('surname').isString().isLength({max:20}).withMessage('Фамилия должна не превышать 30 символов'),
     body('firstname').isString().isLength({max:20}).withMessage('Имя должно не превышать 30 символов'),
     body('lastname').optional().isString().isLength({max:20}).withMessage('Отчество должно не превышать 30 символов'),
-    body('phone').optional().matches('^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$').withMessage('Неверный формат пароля').isLength({max:20}).withMessage('Телефон должен не превышать 30 символов'),
+    body('phone').optional().matches('^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$').withMessage('Неверный формат телефона').isLength({max:20}).withMessage('Телефон должен не превышать 30 символов'),
     ClientController.registration)
 
 router.post('/login/client',
