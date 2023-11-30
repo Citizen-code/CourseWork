@@ -74,7 +74,7 @@ async function NewOrderTest(){
     try{
         await driver.get(`${base_url}/profile?select=service`);
         await Login(driver)
-        await driver.wait(until.elementLocated(By.id('DateOrder')),5000).sendKeys("28-11-2023");
+        await driver.wait(until.elementLocated(By.id('DateOrder')),5000).sendKeys("04-12-2023");
         await driver.wait(until.elementLocated(By.className('TimeOrder')),5000)
         const times = await driver.findElements(By.className('TimeOrder'));
         if(times.length == 0) assert.fail();
