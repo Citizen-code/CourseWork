@@ -147,7 +147,7 @@
 [issues-shield]: https://img.shields.io/github/issues/Citizen-code/CourseWork.svg?style=for-the-badge
 [issues-url]: https://github.com/Citizen-code/CourseWork/issues
 [license-shield]: https://img.shields.io/github/license/Citizen-code/CourseWork.svg?style=for-the-badge
-[license-url]: https://github.com/Citizen-code/CourseWork/blob/master/LICENSE.txt
+[license-url]: https://github.com/Citizen-code/CourseWork/blob/master/LICENSE
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [C#]: https://img.shields.io/badge/c%23%20-%23239120.svg?&style=for-the-badge&logo=c-sharp&logoColor=white
